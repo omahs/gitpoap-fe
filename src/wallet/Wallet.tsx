@@ -1,9 +1,8 @@
-import { useContext } from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
 import { Gray3, Gray1, Slate1 } from '../colors';
 import { WalletStatus } from './WalletStatus';
-import { Web3Context } from './Web3ContextProvider';
+import { useWeb3Context } from './Web3ContextProvider';
 
 const ConnectWalletButton = styled.div`
   display: flex;
@@ -24,24 +23,19 @@ const ConnectWalletButton = styled.div`
 `;
 
 export const Wallet = () => {
-  const web3Context = useContext(Web3Context);
-
-  const active = web3Context?.onChainProvider.isConnected;
-  const account = web3Context?.onChainProvider.address;
+  const { isConnected, address, connect, disconnect } = useWeb3Context();
 
   return (
     <>
-      {!active && !account && (
-        <ConnectWalletButton onClick={() => web3Context?.onChainProvider.connect()}>
-          {'Connect Wallet'}
-        </ConnectWalletButton>
+      {!isConnected && !address && (
+        <ConnectWalletButton onClick={() => connect()}>{'Connect Wallet'}</ConnectWalletButton>
       )}
-      {active && account && (
+      {isConnected && address && (
         <WalletStatus
           onClick={() => {
-            web3Context.onChainProvider.disconnect();
+            disconnect();
           }}
-          account={account}
+          account={address}
         />
       )}
     </>
