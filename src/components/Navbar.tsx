@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 import { Gray6, Slate1 } from '../colors';
 import { GitPOAPLogo } from './icons/GitPOAPLogo';
 import { BREAKPOINTS } from '../constants';
-import { Wallet } from '../wallet/Wallet';
+import { Wallet } from './wallet/Wallet';
 
 const Nav = styled(Grid)`
   border-bottom: 1px solid ${Gray6};

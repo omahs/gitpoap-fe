@@ -2,7 +2,7 @@ import React, { useContext, useState, useCallback, createContext, useMemo, useEf
 import Web3Modal from 'web3modal';
 import { JsonRpcProvider, Web3Provider } from '@ethersproject/providers';
 import WalletConnectProvider from '@walletconnect/web3-provider';
-import { NETWORKS } from '../constants';
+import { NETWORKS } from '../../constants';
 
 type Props = {
   children: React.ReactNode;

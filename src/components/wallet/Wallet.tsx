@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { rem } from 'polished';
-import { Gray3, Gray1, Slate1 } from '../colors';
+import { Gray3, Gray1, Slate1 } from '../../colors';
 import { WalletStatus } from './WalletStatus';
 import { useWeb3Context } from './Web3ContextProvider';
 

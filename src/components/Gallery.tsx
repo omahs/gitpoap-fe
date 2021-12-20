@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import useSWR from 'swr';
-import { useWeb3Context } from '../wallet/Web3ContextProvider';
+import { useWeb3Context } from './wallet/Web3ContextProvider';
 import { POAPItem, POAP } from './POAPItem';
 
 const Container = styled.div`

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { rem } from 'polished';
-import { shortenAddress } from '../helpers';
-import { Gray3, DarkBlue2, Slate1 } from '../colors';
+import { shortenAddress } from '../../helpers';
+import { Gray3, DarkBlue2, Slate1 } from '../../colors';
 import { Jazzicon as JazzIconReact } from '@ukstv/jazzicon-react';
 
 type Props = {
