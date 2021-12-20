@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { StyledEngineProvider } from '@mui/material/styles';
 import { Navbar } from '../components/Navbar';
+import { Gallery } from '../components/Gallery';
 
 const Home: NextPage = () => {
   return (
@@ -13,6 +14,7 @@ const Home: NextPage = () => {
       </Head>
       <StyledEngineProvider injectFirst>
         <Navbar />
+        <Gallery />
       </StyledEngineProvider>
     </div>
   );
