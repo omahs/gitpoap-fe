@@ -1,12 +1,12 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { StyledEngineProvider } from '@mui/material/styles';
-import { Navbar } from '../components/Navbar';
-import { Gallery } from '../components/Gallery';
-import { GHLogin } from '../components/github/GHLogin';
-import { GHLogoutButton } from '../components/github/GHLogoutButton';
+import { Navbar } from '../../components/Navbar';
+import { Gallery } from '../../components/Gallery';
+import { GHLogin } from '../../components/github/GHLogin';
+import { GHLogoutButton } from '../../components/github/GHLogoutButton';
 
-const Home: NextPage = () => {
+const Claim: NextPage = () => {
   return (
     <div>
       <Head>
@@ -24,4 +24,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Claim;
