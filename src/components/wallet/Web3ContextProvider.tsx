@@ -101,7 +101,7 @@ export const Web3ContextProvider = (props: Props) => {
     }
 
     return true;
-  }, [web3Modal?.cachedProvider]);
+  }, [web3Modal]);
 
   const connect = useCallback(async () => {
     const provider = await web3Modal.connect();
@@ -117,6 +117,7 @@ export const Web3ContextProvider = (props: Props) => {
     return web3Provider;
   }, [web3Modal, addListeners]);
 
+  /* Hook to check whether a cached provider exists. If it does, connect to provider */
   useEffect(() => {
     const isCached = hasCachedProvider();
 
