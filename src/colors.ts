@@ -1,4 +1,8 @@
-export const PrimaryBlue = '#3567B1';
+/* -------- Standard Colors ------------*/
+export const White = '#FFFFFF';
+
+/* ----------Legacy Colors------------- */
+export const PrimaryBlue = '#307AE8';
 export const PrimaryBlueHover = '#255092';
 export const PrimaryBlueDark = '#174BE6';
 
@@ -18,3 +22,12 @@ export const Gray3 = '#DCDDFA';
 export const Gray4 = '#ACBED4';
 export const Gray5 = '#E8EDFA';
 export const Gray6 = '#E3EBF6';
+
+/* -------- DeepWork Colors ------------*/
+export const MidnightBlue = '#10111E';
+
+export const BackgroundPanel = '#1E1F2E';
+
+export const TextLight = '#E2E2EE';
+export const TextAccent = PrimaryBlue;
+export const TextGray = '#838495';
