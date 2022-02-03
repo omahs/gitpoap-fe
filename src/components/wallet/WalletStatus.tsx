@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { rem } from 'polished';
 import { shortenAddress } from '../../helpers';
-import { Gray3, DarkBlue2, Slate1 } from '../../colors';
+import { Gray3, DarkBlue2, White } from '../../colors';
 import { Jazzicon as JazzIconReact } from '@ukstv/jazzicon-react';
 
 type Props = {
@@ -24,7 +24,7 @@ const Container = styled.div`
   border-radius: ${rem(40)};
   padding: ${rem(5)} ${rem(5)} ${rem(5)} ${rem(15)};
   cursor: pointer;
-  color: ${Slate1};
+  color: ${White};
   transition: 200ms color ease, 200ms border ease;
 
   &:hover {
