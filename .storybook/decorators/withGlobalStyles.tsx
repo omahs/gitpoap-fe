@@ -1,14 +1,14 @@
 import React from 'react';
 import { GlobalStyles } from '../../src/styles/globalStyles';
-import { StyledEngineProvider } from '@mui/material/styles';
+import { MantineProvider } from '@mantine/core';
 
 export const withGlobalStyles = (storyFn: any) => {
   return (
     <>
-      <StyledEngineProvider injectFirst>
+      <MantineProvider theme={{ colorScheme: 'dark' }}>
         <GlobalStyles />
         {storyFn()}
-      </StyledEngineProvider>
+      </MantineProvider>
     </>
   );
 };

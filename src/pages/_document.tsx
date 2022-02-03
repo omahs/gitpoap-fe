@@ -21,9 +21,18 @@ class MyDocument extends Document {
           <link
             rel="preload"
             as="style"
+            href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap"
+          />
+          <link
+            rel="preload"
+            as="style"
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
           />
 
+          <link
+            href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap"
+            rel="stylesheet"
+          />
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&display=swap"
