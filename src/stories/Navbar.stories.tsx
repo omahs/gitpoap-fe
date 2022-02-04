@@ -5,6 +5,7 @@ import { Navbar as NavbarComponent } from '../components/Navbar';
 export default {
   title: 'Layout/Navbar',
   component: NavbarComponent,
+  argTypes: {},
 } as ComponentMeta<typeof NavbarComponent>;
 
 export const Navbar: ComponentStory<typeof NavbarComponent> = (args: any) => {

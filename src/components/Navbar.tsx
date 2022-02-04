@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { rem } from 'polished';
 import { Group, Space } from '@mantine/core';
-import { TextGray, TextLight } from '../colors';
+import { TextDarkGray, TextGray, TextLight } from '../colors';
 import { BREAKPOINTS } from '../constants';
 import { GitPOAPLogo } from './icons/GitPOAPLogoWhite';
 import { Wallet } from './wallet/Wallet';
@@ -56,6 +56,14 @@ const StyledLink = styled.a`
   text-transform: uppercase;
   color: ${TextGray};
   margin-right: ${rem(25)};
+  transition: 150ms color ease;
+
+  &:hover {
+    color: ${TextLight};
+  }
+  &:active {
+    color: ${TextDarkGray};
+  }
 `;
 
 const ClaimButton = styled(Button)`
@@ -87,7 +95,7 @@ export const Navbar = () => {
             <NavLink href="/contributors">Contributors</NavLink>
             <NavLink href="/docs">Docs</NavLink>
           </Links>
-          <ClaimButton leftIcon={<GoMarkGithub size={16} />}>CLAIM POAPS</ClaimButton>
+          <ClaimButton leftIcon={<GoMarkGithub size={16} />}>{'CLAIM POAPS'}</ClaimButton>
           <Wallet />
         </ContentRight>
       </Container>
