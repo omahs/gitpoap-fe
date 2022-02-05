@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import GithubIcon from 'mdi-react/GithubIcon';
+import { GoMarkGithub } from 'react-icons/go';
 import { useGHAuthContext } from './GHAuthContext';
 import { REACT_APP_PROXY_URL, REACT_APP_CLIENT_ID, REACT_APP_REDIRECT_URI } from '../../constants';
 import { useRouter } from 'next/router';
@@ -118,7 +118,7 @@ export const GHLogin = () => {
               setData({ ...data, errorMessage: '' });
             }}
           >
-            <GithubIcon />
+            <GoMarkGithub />
             <span>Login with GitHub</span>
           </LoginLink>
         </LoginContainer>
