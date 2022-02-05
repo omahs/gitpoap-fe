@@ -14,13 +14,13 @@ const Template: ComponentStory<typeof Button> = (args) => {
 };
 
 export const Primary = Template.bind({});
-Primary.args = { children: 'Connect Wallet' };
+Primary.args = { children: 'Claim All' };
 
 export const PrimaryDisabled = Template.bind({});
-PrimaryDisabled.args = { children: 'Connect Wallet', disabled: true };
+PrimaryDisabled.args = { children: 'Claim All', disabled: true };
 
 export const Outline = Template.bind({});
-Outline.args = { children: 'Connect Wallet', variant: 'outline' };
+Outline.args = { children: 'Claim All', variant: 'outline' };
 
 export const OutlineDisabled = Template.bind({});
-OutlineDisabled.args = { children: 'Connect Wallet', variant: 'outline', disabled: true };
+OutlineDisabled.args = { children: 'Claim All', variant: 'outline', disabled: true };
