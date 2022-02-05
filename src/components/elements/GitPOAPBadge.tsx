@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
-import { TextLight, MidnightBlue } from '../../colors';
+import { TextLight, MidnightBlue, ExtraHover, ExtraPressed, TextGray } from '../../colors';
 
 type Props = {
   imgUrl: string;
+  disabled?: boolean;
 };
 
 type HexProps = {
@@ -13,25 +14,8 @@ type HexProps = {
 };
 
 const Hexagon = styled.div`
+  transition: 150ms background-color ease-in-out, 150ms opacity ease-in-out;
   clip-path: polygon(5% 25%, 50% 0, 95% 25%, 95% 75%, 50% 100%, 5% 75%);
-`;
-
-const HexOuterBorder = styled(Hexagon)<HexProps>`
-  position: relative;
-  --s: ${(props) => rem(props.size + 4 * props.borderSize)};
-  width: var(--s);
-  height: calc(var(--s) * 1);
-  background-color: ${TextLight};
-`;
-const HexInnerBorder = styled(Hexagon)<HexProps>`
-  --s: ${(props) => rem(props.size + 2 * props.borderSize)};
-  position: absolute;
-  top: ${(props) => rem(props.borderSize)};
-  left: ${(props) => rem(props.borderSize)};
-
-  width: var(--s);
-  height: calc(var(--s) * 1);
-  background: ${MidnightBlue};
 `;
 
 const HexBadge = styled(Hexagon)<{ url: string } & HexProps>`
@@ -48,11 +32,52 @@ const HexBadge = styled(Hexagon)<{ url: string } & HexProps>`
   background-size: cover;
 `;
 
-export const GitPOAPBadge = ({ imgUrl }: Props) => {
+const HexOuterBorder = styled(Hexagon)<{ disabled?: boolean } & HexProps>`
+  position: relative;
+  --s: ${(props) => rem(props.size + 4 * props.borderSize)};
+  width: var(--s);
+  height: calc(var(--s) * 1);
+  background-color: ${TextLight};
+  cursor: pointer;
+
+  &:hover:not([disabled]) {
+    background-color: ${ExtraHover};
+    ${HexBadge} {
+      opacity: 0.7;
+    }
+  }
+  &:active:not([disabled]) {
+    background-color: ${ExtraPressed};
+    ${HexBadge} {
+      opacity: 0.5;
+    }
+  }
+  &[disabled] {
+    cursor: not-allowed;
+    background-color: ${TextGray};
+    ${HexBadge} {
+      background: ${MidnightBlue};
+    }
+  }
+`;
+
+const HexInnerBorder = styled(Hexagon)<HexProps>`
+  --s: ${(props) => rem(props.size + 2 * props.borderSize)};
+  position: absolute;
+  top: ${(props) => rem(props.borderSize)};
+  left: ${(props) => rem(props.borderSize)};
+
+  width: var(--s);
+  height: calc(var(--s) * 1);
+  background: ${MidnightBlue};
+`;
+
+export const GitPOAPBadge = ({ imgUrl, disabled }: Props) => {
   const size = 200;
   const borderSize = 4;
+
   return (
-    <HexOuterBorder size={size} borderSize={borderSize}>
+    <HexOuterBorder size={size} borderSize={borderSize} disabled={disabled}>
       <HexInnerBorder size={size} borderSize={borderSize}>
         <HexBadge url={imgUrl} size={size} borderSize={borderSize} />
       </HexInnerBorder>

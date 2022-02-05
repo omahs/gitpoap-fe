@@ -16,3 +16,6 @@ const Template: ComponentStory<typeof GitPOAPBadge> = (args: any) => {
 
 export const Default = Template.bind({});
 Default.args = { imgUrl: url };
+
+export const Disabled = Template.bind({});
+Disabled.args = { imgUrl: url, disabled: true };
