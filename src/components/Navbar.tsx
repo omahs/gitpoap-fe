@@ -7,7 +7,7 @@ import { TextDarkGray, TextGray, TextLight } from '../colors';
 import { BREAKPOINTS } from '../constants';
 import { GitPOAPLogo } from './icons/GitPOAPLogoWhite';
 import { Wallet } from './wallet/Wallet';
-import { Button } from './shared/Button';
+import { Button } from './elements/Button';
 import { GoMarkGithub } from 'react-icons/go';
 
 const Nav = styled(Group)`
