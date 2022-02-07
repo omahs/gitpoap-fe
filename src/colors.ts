@@ -29,6 +29,7 @@ export const DarkGray = '#393A51';
 export const MidnightBlue = '#10111E';
 
 export const BackgroundPanel = '#1E1F2E';
+export const BackgroundPanel2 = '#292B3D';
 
 export const TextLight = '#E2E2EE';
 export const TextAccent = PrimaryBlue;
@@ -38,3 +39,4 @@ export const TextDarkGray = DarkGray;
 export const ExtraHover = '#5596F6';
 export const ExtraActive = '#1761CF';
 export const ExtraPressed = '#1761CF';
+export const ExtraRed = '#F77070';
