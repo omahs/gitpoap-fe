@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { rem } from 'polished';
 import { Group, Space } from '@mantine/core';
-import { TextDarkGray, TextGray, TextLight } from '../colors';
+import { ExtraHover, ExtraPressed, TextDarkGray, TextGray, TextLight } from '../colors';
 import { BREAKPOINTS } from '../constants';
 import { GitPOAPLogo } from './icons/GitPOAPLogoWhite';
 import { Wallet } from './wallet/Wallet';
@@ -58,10 +58,13 @@ const StyledLink = styled.a`
   margin-right: ${rem(25)};
   transition: 150ms color ease;
 
-  &:hover {
-    color: ${TextLight};
+  &:hover:not([disabled]) {
+    color: ${ExtraHover};
   }
-  &:active {
+  &:active:not([disabled]) {
+    color: ${ExtraPressed};
+  }
+  &[disabled] {
     color: ${TextDarkGray};
   }
 `;
