@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
-import { TextAccent, TextLight, ExtraHover, ExtraPressed } from '../../colors';
-import { Twitter } from '../icons/social/Twitter';
-import { GitHub } from '../icons/social/GitHub';
-import { GitPOAP } from '../icons/social/GitPOAP';
-import { InfoHexBase, Body } from './InfoHexBase';
+import { TextAccent, TextLight, ExtraHover, ExtraPressed } from '../colors';
+import { Twitter } from './icons/social/Twitter';
+import { GitHub } from './icons/social/GitHub';
+import { GitPOAP } from './icons/social/GitPOAP';
+import { InfoHexBase, Body } from './elements/InfoHexBase';
 
 type Props = {
   imgSrc: string;

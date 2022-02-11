@@ -14,7 +14,7 @@ const StyledInput = styled(Input)`
   min-width: ${rem(300)};
 `;
 
-const Template: ComponentStory<typeof Input> = (args: any) => {
+const Template: ComponentStory<typeof Input> = (args) => {
   const [value, setValue] = useState('');
   return (
     <StyledInput

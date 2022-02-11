@@ -8,7 +8,7 @@ export default {
   argTypes: {},
 } as ComponentMeta<typeof ClaimBlock>;
 
-const Template: ComponentStory<typeof ClaimBlock> = (args: any) => {
+const Template: ComponentStory<typeof ClaimBlock> = (args) => {
   return <ClaimBlock {...args}>{'AAVE Core Contributor'}</ClaimBlock>;
 };
 

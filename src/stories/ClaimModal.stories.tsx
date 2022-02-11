@@ -60,7 +60,7 @@ export default {
   argTypes: {},
 } as ComponentMeta<typeof ClaimModal>;
 
-const Template: ComponentStory<typeof ClaimModal> = (args: any) => {
+const Template: ComponentStory<typeof ClaimModal> = (args) => {
   return <ClaimModal {...args} />;
 };
 

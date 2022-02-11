@@ -1,8 +1,8 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { InfoHexBase } from '../components/elements/InfoHexBase';
-import { InfoHexMetric } from '../components/elements/InfoHexMetric';
-import { InfoHexProfile } from '../components/elements/InfoHexProfile';
+import { InfoHexMetric } from '../components/InfoHexMetric';
+import { InfoHexProfile } from '../components/InfoHexProfile';
 import { People } from '../components/icons/People';
 
 export default {

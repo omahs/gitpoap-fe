@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
-import { TextAccent, TextGray, TextLight } from '../../colors';
-import { InfoHexBase } from './InfoHexBase';
+import { TextAccent, TextGray, TextLight } from '../colors';
+import { InfoHexBase } from './elements/InfoHexBase';
 
 type Props = {
   children: React.ReactNode;

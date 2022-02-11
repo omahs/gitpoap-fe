@@ -13,7 +13,7 @@ const StyledTitle = styled(Title)`
   width: 170px;
 `;
 
-const Template: ComponentStory<typeof Title> = (args: any) => {
+const Template: ComponentStory<typeof Title> = (args) => {
   return <StyledTitle {...args}>{'AAVE Core Contributor'}</StyledTitle>;
 };
 
