@@ -6,11 +6,23 @@ import { TextLight, MidnightBlue, ExtraHover, ExtraPressed, TextGray } from '../
 type Props = {
   imgUrl: string;
   disabled?: boolean;
+  size: Sizes;
+};
+
+type Sizes = 'sm' | 'md';
+
+type Dimensions = {
+  sm: { width: number; borderSize: number };
+  md: { width: number; borderSize: number };
 };
 
 type HexProps = {
-  size: number;
-  borderSize: number;
+  size: Sizes;
+};
+
+const dimensions: Dimensions = {
+  sm: { width: 150, borderSize: 3 },
+  md: { width: 200, borderSize: 4 },
 };
 
 const Hexagon = styled.div`
@@ -18,23 +30,23 @@ const Hexagon = styled.div`
   clip-path: polygon(5% 25%, 50% 0, 95% 25%, 95% 75%, 50% 100%, 5% 75%);
 `;
 
-const HexBadge = styled(Hexagon)<{ url: string } & HexProps>`
-  --s: ${(props) => rem(props.size)};
+const HexBadge = styled(Hexagon)<Props>`
+  --s: ${(props) => rem(dimensions[props.size].width)};
   position: absolute;
-  top: ${(props) => rem(props.borderSize)};
-  left: ${(props) => rem(props.borderSize)};
+  top: ${(props) => rem(dimensions[props.size].borderSize)};
+  left: ${(props) => rem(dimensions[props.size].borderSize)};
 
   width: var(--s);
   height: calc(var(--s) * 1);
   display: inline-block;
   font-size: initial; /* we reset the font-size if we want to add some content */
-  background: url('${(props) => props.url}') no-repeat center center;
+  background: url('${(props) => props.imgUrl}') no-repeat center center;
   background-size: cover;
 `;
 
-const HexOuterBorder = styled(Hexagon)<{ disabled?: boolean } & HexProps>`
+const HexOuterBorder = styled(Hexagon)<HexProps & { disabled?: boolean }>`
   position: relative;
-  --s: ${(props) => rem(props.size + 4 * props.borderSize)};
+  --s: ${(props) => rem(dimensions[props.size].width + 4 * dimensions[props.size].borderSize)};
   width: var(--s);
   height: calc(var(--s) * 1);
   background-color: ${TextLight};
@@ -62,24 +74,22 @@ const HexOuterBorder = styled(Hexagon)<{ disabled?: boolean } & HexProps>`
 `;
 
 const HexInnerBorder = styled(Hexagon)<HexProps>`
-  --s: ${(props) => rem(props.size + 2 * props.borderSize)};
+  --s: ${(props) => rem(dimensions[props.size].width + 2 * dimensions[props.size].borderSize)};
   position: absolute;
-  top: ${(props) => rem(props.borderSize)};
-  left: ${(props) => rem(props.borderSize)};
+  top: ${(props) => rem(dimensions[props.size].borderSize)};
+  left: ${(props) => rem(dimensions[props.size].borderSize)};
 
   width: var(--s);
   height: calc(var(--s) * 1);
   background: ${MidnightBlue};
 `;
 
-export const GitPOAPBadge = ({ imgUrl, disabled }: Props) => {
-  const size = 200;
-  const borderSize = 4;
-
+export const GitPOAPBadge = ({ imgUrl, disabled, size }: Props) => {
+  console.log(size);
   return (
-    <HexOuterBorder size={size} borderSize={borderSize} disabled={disabled}>
-      <HexInnerBorder size={size} borderSize={borderSize}>
-        <HexBadge url={imgUrl} size={size} borderSize={borderSize} />
+    <HexOuterBorder size={size} disabled={disabled}>
+      <HexInnerBorder size={size}>
+        <HexBadge imgUrl={imgUrl} size={size} />
       </HexInnerBorder>
     </HexOuterBorder>
   );

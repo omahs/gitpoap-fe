@@ -10,12 +10,15 @@ export default {
   argTypes: {},
 } as ComponentMeta<typeof GitPOAPBadge>;
 
-const Template: ComponentStory<typeof GitPOAPBadge> = (args: any) => {
+const Template: ComponentStory<typeof GitPOAPBadge> = (args) => {
   return <GitPOAPBadge {...args} />;
 };
 
 export const Default = Template.bind({});
-Default.args = { imgUrl: url };
+Default.args = { imgUrl: url, size: 'md' };
+
+export const DefaultSmall = Template.bind({});
+DefaultSmall.args = { imgUrl: url, size: 'sm' };
 
 export const Disabled = Template.bind({});
-Disabled.args = { imgUrl: url, disabled: true };
+Disabled.args = { imgUrl: url, size: 'md', disabled: true };
