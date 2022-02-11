@@ -30,6 +30,7 @@ export const MidnightBlue = '#10111E';
 
 export const BackgroundPanel = '#1E1F2E';
 export const BackgroundPanel2 = '#292B3D';
+export const BackgroundPanel3 = '#464968';
 
 export const TextLight = '#E2E2EE';
 export const TextAccent = PrimaryBlue;
