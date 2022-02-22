@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ProjectHex } from '../components/compounds/ProjectHex';
 
 export default {
-  title: 'Composites/ProjectHex',
+  title: 'Compounds/ProjectHex',
   component: ProjectHex,
 } as ComponentMeta<typeof ProjectHex>;
 

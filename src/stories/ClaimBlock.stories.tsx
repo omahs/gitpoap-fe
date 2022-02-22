@@ -4,7 +4,7 @@ import { ClaimBlock } from '../components/ClaimBlock';
 import badgeImg from './assets/badge1.png';
 
 export default {
-  title: 'Composites/ClaimBlock',
+  title: 'Compounds/ClaimBlock',
   component: ClaimBlock,
 } as ComponentMeta<typeof ClaimBlock>;
 
