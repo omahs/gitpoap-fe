@@ -10,7 +10,6 @@ export default {
 
 const Template: ComponentStory<typeof Select> = (args) => {
   const [value, setValue] = useState('total');
-  console.log(value);
   return <Select {...args} value={value} onChange={(value: string) => setValue(value)} />;
 };
 

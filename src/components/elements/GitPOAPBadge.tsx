@@ -85,7 +85,6 @@ const HexInnerBorder = styled(Hexagon)<HexProps>`
 `;
 
 export const GitPOAPBadge = ({ imgUrl, disabled, size }: Props) => {
-  console.log(size);
   return (
     <HexOuterBorder size={size} disabled={disabled}>
       <HexInnerBorder size={size}>

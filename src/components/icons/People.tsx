@@ -9,6 +9,7 @@ export const People = forwardRef((props: SVGAttributes<SVGSVGElement>, ref: Ref<
     fill="none"
     viewBox="0 0 78 65"
     ref={ref}
+    {...props}
   >
     <path
       fill="#838495"

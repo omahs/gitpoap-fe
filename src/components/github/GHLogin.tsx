@@ -60,8 +60,6 @@ export const GHLogin = () => {
         const tokenRes = await res.json();
         const access_token = tokenRes.token;
 
-        console.log(access_token);
-
         const userRes = await fetch(`https://api.github.com/user`, {
           headers: {
             Authorization: `token ${access_token}`,
