@@ -3,6 +3,7 @@ import Head from 'next/head';
 import styled from '@emotion/styled';
 import { Navbar } from '../components/Navbar';
 import { MidnightBlue } from '../colors';
+import { Header } from '../components/shared/elements/Header';
 
 const App = styled.div`
   background-color: ${MidnightBlue};
@@ -24,6 +25,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
+      <Header>{'Issue POAPs to your GitHub contributors'}</Header>
     </App>
   );
 };
