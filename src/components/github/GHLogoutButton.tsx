@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useGHAuthContext } from './GHAuthContext';
-import { Button } from '../elements/Button';
+import { Button } from '../shared/elements/Button';
 
 const TempContent = styled.div`
   display: flex;

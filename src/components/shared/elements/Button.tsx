@@ -9,7 +9,7 @@ import {
   ExtraActive,
   DarkGray,
   ExtraPressed,
-} from '../../colors';
+} from '../../../colors';
 
 type Props = {
   children: React.ReactNode;

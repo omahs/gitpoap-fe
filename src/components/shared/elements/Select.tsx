@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
 import { Select as SelectUI } from '@mantine/core';
-import { TextGray, BackgroundPanel2, TextDarkGray, TextLight, ExtraHover } from '../../colors';
-import { CaretDown } from '../icons/CaretDown';
-import { CaretUp } from '../icons/CaretUp';
+import { TextGray, BackgroundPanel2, TextDarkGray, TextLight, ExtraHover } from '../../../colors';
+import { CaretDown } from './icons/CaretDown';
+import { CaretUp } from './icons/CaretUp';
 
 interface Props extends React.ComponentProps<typeof SelectUI> {}
 

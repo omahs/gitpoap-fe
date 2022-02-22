@@ -7,7 +7,7 @@ import {
   ExtraHover,
   ExtraPressed,
   TextAccent,
-} from '../../colors';
+} from '../../../colors';
 
 export const Radio = styled(RadioUI)`
   .mantine-Radio-radio {

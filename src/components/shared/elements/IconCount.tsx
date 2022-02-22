@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { rem } from 'polished';
-import { ExtraHover, ExtraPressed, TextGray, TextLight } from '../../colors';
+import { ExtraHover, ExtraPressed, TextGray, TextLight } from '../../../colors';
 
 type Props = {
   icon: React.ReactNode;

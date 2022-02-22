@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TextGray, ExtraHover, ExtraPressed } from '../../../colors';
+import { TextGray, ExtraHover, ExtraPressed } from '../../../../colors';
 
 export const Icon = styled.svg`
   path {

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { rem } from 'polished';
 import { Modal, Center } from '@mantine/core';
 import { BackgroundPanel, TextGray, TextLight } from '../colors';
-import { Button } from './elements/Button';
+import { Button } from './shared/elements/Button';
 import { Claim } from '../types';
 import { ClaimBlock } from './ClaimBlock';
 

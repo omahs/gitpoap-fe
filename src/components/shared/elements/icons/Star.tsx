@@ -1,5 +1,5 @@
 import { forwardRef, Ref, SVGAttributes } from 'react';
-import { Icon } from './social/BaseIcon';
+import { Icon } from './BaseIcon';
 
 export const Star = forwardRef((props: SVGAttributes<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
   <Icon

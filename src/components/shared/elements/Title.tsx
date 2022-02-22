@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { rem } from 'polished';
-import { ExtraHover, ExtraPressed, TextAccent, TextDarkGray } from '../../colors';
+import { ExtraHover, ExtraPressed, TextAccent, TextDarkGray } from '../../../colors';
 
 export const Title = styled.span`
   display: inline-block;

@@ -8,7 +8,7 @@ import {
   TextLight,
   BackgroundPanel2,
   ExtraRed,
-} from '../../colors';
+} from '../../../colors';
 import { TextInput } from '@mantine/core';
 
 type Props = {

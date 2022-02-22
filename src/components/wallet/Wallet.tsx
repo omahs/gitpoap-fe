@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { rem } from 'polished';
 import { WalletStatus } from './WalletStatus';
 import { useWeb3Context } from './Web3ContextProvider';
-import { Button } from '../elements/Button';
+import { Button } from '../shared/elements/Button';
 
 const ConnectWalletButton = styled(Button)`
   border-radius: ${rem(8)};

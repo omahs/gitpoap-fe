@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
-import { TextLight, MidnightBlue, ExtraHover, ExtraPressed, TextGray } from '../../colors';
+import { TextLight, MidnightBlue, ExtraHover, ExtraPressed, TextGray } from '../../../colors';
 
 type Props = {
   imgUrl: string;

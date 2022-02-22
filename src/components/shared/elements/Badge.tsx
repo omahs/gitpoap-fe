@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { rem } from 'polished';
-import { BackgroundPanel3, TextLight } from '../../colors';
+import { BackgroundPanel3, TextLight } from '../../../colors';
 
 export const Badge = styled.div`
   display: inline-flex;

@@ -1,9 +1,9 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { InfoHexBase } from '../components/elements/InfoHexBase';
+import { InfoHexBase } from '../components/shared/elements/InfoHexBase';
 import { InfoHexMetric } from '../components/InfoHexMetric';
 import { InfoHexProfile } from '../components/InfoHexProfile';
-import { People } from '../components/icons/People';
+import { People } from '../components/shared/elements/icons/People';
 import profileImg from './assets/profile1.png';
 
 export default {

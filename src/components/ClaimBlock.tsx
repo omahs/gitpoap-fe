@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
-import { GitPOAPBadge } from './elements/GitPOAPBadge';
-import { Title } from './elements/Title';
-import { Button } from './elements/Button';
+import { GitPOAPBadge } from './shared/elements/GitPOAPBadge';
+import { Title } from './shared/elements/Title';
+import { Button } from './shared/elements/Button';
 import { TextLight } from '../colors';
 
 type Props = {

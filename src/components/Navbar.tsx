@@ -5,9 +5,9 @@ import { rem } from 'polished';
 import { Group, Space } from '@mantine/core';
 import { ExtraHover, ExtraPressed, TextDarkGray, TextGray, TextLight } from '../colors';
 import { BREAKPOINTS } from '../constants';
-import { GitPOAPLogo } from './icons/GitPOAPLogoWhite';
+import { GitPOAPLogo } from './shared/elements/icons/GitPOAPLogoWhite';
 import { Wallet } from './wallet/Wallet';
-import { Button } from './elements/Button';
+import { Button } from './shared/elements/Button';
 import { GoMarkGithub } from 'react-icons/go';
 
 const Nav = styled(Group)`

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { rem } from 'polished';
 import styled from 'styled-components';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { Input } from '../components/elements/Input';
+import { Input } from '../components/shared/elements/Input';
 
 export default {
   title: 'Elements/Input',

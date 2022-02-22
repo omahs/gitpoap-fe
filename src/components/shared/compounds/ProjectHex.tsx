@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import { rem } from 'polished';
 import { Badge } from '../elements/Badge';
 import { Title } from '../elements/Title';
-import { TextAccent } from '../../colors';
-import { Star } from '../icons/Star';
+import { TextAccent } from '../../../colors';
+import { Star } from '../elements/icons/Star';
 import { IconCount } from '../elements/IconCount';
-import { People } from '../icons/People';
-import { GitPOAP } from '../icons/social/GitPOAP';
+import { People } from '../elements/icons/People';
+import { GitPOAP } from '../elements/icons/GitPOAP';
 import ProjectHexBackground from './ProjectHexBackground.svg';
 
 type Props = {

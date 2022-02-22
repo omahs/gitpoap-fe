@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
 import { TextAccent, TextLight, ExtraHover, ExtraPressed } from '../colors';
-import { Twitter } from './icons/social/Twitter';
-import { GitHub } from './icons/social/GitHub';
-import { GitPOAP } from './icons/social/GitPOAP';
-import { InfoHexBase, Body } from './elements/InfoHexBase';
+import { Twitter } from './shared/elements/icons/Twitter';
+import { GitHub } from './shared/elements/icons/GitHub';
+import { GitPOAP } from './shared/elements/icons/GitPOAP';
+import { InfoHexBase, Body } from './shared/elements/InfoHexBase';
 
 type Props = {
   imgSrc: string;

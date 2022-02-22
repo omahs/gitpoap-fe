@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
-import { BackgroundPanel, BackgroundPanel2 } from '../../colors';
+import { BackgroundPanel, BackgroundPanel2 } from '../../../colors';
 
 type Props = {
   children: React.ReactNode;
