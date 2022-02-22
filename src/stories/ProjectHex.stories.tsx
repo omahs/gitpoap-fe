@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { ProjectHex } from '../components/composites/ProjectHex';
+import { ProjectHex } from '../components/compounds/ProjectHex';
 
 export default {
   title: 'Composites/ProjectHex',
