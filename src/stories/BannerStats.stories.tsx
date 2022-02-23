@@ -12,7 +12,7 @@ const Template: ComponentStory<typeof BannerStats> = (args) => {
   return <BannerStats />;
 };
 
-const stats: Stats[] = [
+export const stats: Stats[] = [
   {
     value: '17545',
     unit: 'contributors',
