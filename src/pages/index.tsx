@@ -1,10 +1,11 @@
-import type { NextPage } from 'next';
+import React from 'react';
+import styled from 'styled-components';
+import { rem } from 'polished';
 import Head from 'next/head';
-import styled from '@emotion/styled';
-import { Navbar } from '../components/Navbar';
-import { MidnightBlue } from '../colors';
-import { Header } from '../components/shared/elements/Header';
+import { MidnightBlue, TextLight } from '../colors';
 import { BannerStats } from '../components/home/BannerStats';
+import { Layout } from '../components/Layout';
+import { Page } from './_app';
 
 const App = styled.div`
   background-color: ${MidnightBlue};
@@ -17,19 +18,36 @@ const App = styled.div`
   overflow-x: hidden;
 `;
 
-const Home: NextPage = () => {
+const HeaderStyled = styled.span`
+  font-family: PT Mono;
+  font-style: normal;
+  font-weight: bold;
+  font-size: ${rem(24)};
+  line-height: ${rem(30)};
+  text-align: center;
+  letter-spacing: ${rem(1)};
+  color: ${TextLight};
+
+  margin-bottom: ${rem(60)};
+`;
+
+const Home: Page = () => {
   return (
     <App>
       <Head>
-        <title>App | GitPOAP</title>
+        <title>{'App | GitPOAP'}</title>
         <meta name="description" content="GitPOAP Frontend App" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Navbar />
-      <Header>{'Issue POAPs to your GitHub contributors'}</Header>
+      <HeaderStyled>{'Issue POAPs to your GitHub contributors'}</HeaderStyled>
       <BannerStats />
     </App>
   );
+};
+
+/* Custom layout function for this Home page */
+Home.getLayout = (page: React.ReactNode) => {
+  return <Layout>{page}</Layout>;
 };
 
 export default Home;

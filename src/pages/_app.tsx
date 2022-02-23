@@ -4,24 +4,39 @@ import { MantineProvider } from '@mantine/core';
 import { GlobalStyles } from '../styles/globalStyles';
 import { Web3ContextProvider } from '../components/wallet/Web3ContextProvider';
 import { GHAuthProvider } from '../components/github/GHAuthContext';
+import { NextPage } from 'next';
+import { Layout } from '../components/Layout';
 
 const client = createClient({
   url: 'http://localhost:3001/graphql',
 });
 
-function MyApp({ Component, pageProps }: AppProps) {
+export type Page<P = unknown> = NextPage<P> & {
+  getLayout?: (page: React.ReactNode) => React.ReactNode;
+};
+
+type Props = AppProps & {
+  Component: Page;
+};
+
+const App = ({ Component, pageProps }: Props) => {
+  /* Use custom page-specific layout once / if needed */
+  const getLayout = Component.getLayout || ((page: React.ReactNode) => page);
+
   return (
-    <MantineProvider theme={{ colorScheme: 'dark' }}>
-      <URQLProvider value={client}>
-        <Web3ContextProvider>
+    <Web3ContextProvider>
+      <MantineProvider theme={{ colorScheme: 'dark' }}>
+        <URQLProvider value={client}>
           <GHAuthProvider>
             <GlobalStyles />
-            <Component {...pageProps} />
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
           </GHAuthProvider>
-        </Web3ContextProvider>
-      </URQLProvider>
-    </MantineProvider>
+        </URQLProvider>
+      </MantineProvider>
+    </Web3ContextProvider>
   );
-}
+};
 
-export default MyApp;
+export default App;
