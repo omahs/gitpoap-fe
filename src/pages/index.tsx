@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { Navbar } from '../components/Navbar';
 import { MidnightBlue } from '../colors';
 import { Header } from '../components/shared/elements/Header';
+import { BannerStats } from '../components/home/BannerStats';
 
 const App = styled.div`
   background-color: ${MidnightBlue};
@@ -26,6 +27,7 @@ const Home: NextPage = () => {
       </Head>
       <Navbar />
       <Header>{'Issue POAPs to your GitHub contributors'}</Header>
+      <BannerStats />
     </App>
   );
 };

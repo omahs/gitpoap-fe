@@ -1,5 +1,5 @@
 import Home from '../../pages/index';
-import { ComponentMeta } from '@storybook/react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 export default {
   title: 'Pages/Home',
@@ -7,3 +7,10 @@ export default {
 } as ComponentMeta<typeof Home>;
 
 export const HomePage = () => <Home />;
+
+const Template: ComponentStory<typeof Home> = (args) => {
+  return <Home {...args} />;
+};
+
+export const Default = Template.bind({});
+Default.args = {};
