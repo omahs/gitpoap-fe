@@ -5,11 +5,11 @@ import { TextAccent, TextGray, TextLight } from '../colors';
 import { InfoHexBase } from './shared/elements/InfoHexBase';
 
 type Props = {
-  children: React.ReactNode;
   value: string;
   rate: string;
   unit: string;
   icon: React.ReactNode;
+  className?: string;
 };
 
 const Content = styled.div`
@@ -17,7 +17,7 @@ const Content = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: ${rem(200)};
+  height: ${rem(230)};
 `;
 
 const Icon = styled.div`
@@ -59,9 +59,9 @@ const Rate = styled.div`
   color: ${TextLight};
 `;
 
-export const InfoHexMetric = ({ rate, value, unit, icon }: Props) => {
+export const InfoHexMetric = ({ className, rate, value, unit, icon }: Props) => {
   return (
-    <InfoHexBase>
+    <InfoHexBase className={className}>
       <Content>
         <Icon>{icon}</Icon>
         <Value>{value}</Value>
