@@ -6,6 +6,7 @@ import { Twitter } from './shared/elements/icons/Twitter';
 import { GitHub } from './shared/elements/icons/GitHub';
 import { GitPOAP } from './shared/elements/icons/GitPOAP';
 import { InfoHexBase, Body } from './shared/elements/InfoHexBase';
+import { Avatar as AvatarUI } from '../components/shared/elements/Avatar';
 
 type Props = {
   imgSrc: string;
@@ -26,10 +27,7 @@ const Content = styled.div`
   padding: 0 ${rem(17)};
 `;
 
-const Avatar = styled.img`
-  height: ${rem(80)};
-  width: ${rem(80)};
-  border-radius: 50%;
+const Avatar = styled(AvatarUI)`
   margin-bottom: ${rem(14)};
 
   flex: none;
