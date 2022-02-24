@@ -8,7 +8,7 @@ export type Claim = {
   gitPoap?: GitPoap;
 };
 
-type GitPoap = {
+export type GitPoap = {
   id: string;
   name: string;
   description: string;

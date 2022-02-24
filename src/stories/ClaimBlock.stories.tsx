@@ -9,7 +9,7 @@ export default {
 } as ComponentMeta<typeof ClaimBlock>;
 
 const Template: ComponentStory<typeof ClaimBlock> = (args) => {
-  return <ClaimBlock {...args}>{'AAVE Core Contributor'}</ClaimBlock>;
+  return <ClaimBlock {...args} />;
 };
 
 export const Default = Template.bind({});
