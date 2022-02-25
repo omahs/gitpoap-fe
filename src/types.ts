@@ -21,3 +21,12 @@ export enum ClaimStatus {
   PENDING = 'PENDING',
   CLAIMED = 'CLAIMED',
 }
+
+export type Project = {
+  id: string;
+  category: string;
+  name: string;
+  memberCount: number;
+  gitPoapCount: number;
+  stars: number;
+};
