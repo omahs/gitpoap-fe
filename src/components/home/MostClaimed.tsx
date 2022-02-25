@@ -4,6 +4,8 @@ import { rem } from 'polished';
 import { Header } from '../shared/elements/Header';
 import { GitPoap } from '../../types';
 import { GitPOAP as GitPOAPUI } from '../shared/compounds/GitPOAP';
+import { Button } from '../shared/elements/Button';
+import { FaArrowRight } from 'react-icons/fa';
 
 type Props = {
   title: string;
@@ -13,6 +15,8 @@ type Props = {
 const Container = styled.div`
   display: inline-flex;
   flex-direction: column;
+  align-items: flex-start;
+  padding: ${rem(10)};
 `;
 
 const Poaps = styled.div`
@@ -21,6 +25,7 @@ const Poaps = styled.div`
   max-width: ${rem(1000)};
   flex-wrap: wrap;
   margin-top: ${rem(50)};
+  margin-bottom: ${rem(50)};
 `;
 
 const GitPOAP = styled(GitPOAPUI)`
@@ -32,6 +37,7 @@ export const MostClaimed = ({ poaps }: Props) => {
   return (
     <Container>
       <Header>{'Most claimed POAPs last week'}</Header>
+
       <Poaps>
         {poaps.map((gitPoap) => {
           return (
@@ -44,6 +50,9 @@ export const MostClaimed = ({ poaps }: Props) => {
           );
         })}
       </Poaps>
+      <Button variant="outline" rightIcon={<FaArrowRight />}>
+        {'ALL POAPS'}
+      </Button>
     </Container>
   );
 };
