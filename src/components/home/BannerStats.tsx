@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
+import { useQuery } from 'urql';
 import { InfoHexMetric } from '../InfoHexMetric';
 import { GitPOAP } from '../shared/elements/icons/GitPOAP';
 import { People } from '../shared/elements/icons/People';
 import { Project } from '../shared/elements/icons/Project';
-import { useQuery } from 'urql';
 
 export type Stats = {
   value: string;

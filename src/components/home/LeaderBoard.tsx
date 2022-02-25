@@ -40,7 +40,7 @@ const AvatarStyled = styled(Avatar)`
 `;
 
 const Item = styled.div`
-  display: inline-flex;
+  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -49,7 +49,7 @@ const Item = styled.div`
 
 const HeaderStyled = styled(Header)`
   font-size: ${rem(30)};
-  line-height: ${rem(30)};
+  line-height: ${rem(48)};
 `;
 
 const UserInfo = styled.div`
@@ -64,6 +64,10 @@ const Divider = styled(DividerUI)`
   &:last-child {
     display: none;
   }
+`;
+
+const List = styled.div`
+  margin-top: ${rem(30)};
 `;
 
 const LeaderBoardItem = ({ name, imgSrc, count }: LeaderBoardItemProps) => {
@@ -85,9 +89,11 @@ export const LeaderBoard = ({ title, data }: Props) => {
   return (
     <Wrapper>
       <HeaderStyled>{title}</HeaderStyled>
-      {data.map((item: LeaderBoardItemProps) => (
-        <LeaderBoardItem key={item.name} {...item} />
-      ))}
+      <List>
+        {data.map((item: LeaderBoardItemProps) => (
+          <LeaderBoardItem key={item.name} {...item} />
+        ))}
+      </List>
     </Wrapper>
   );
 };
