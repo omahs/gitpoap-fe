@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button as MButton } from '@mantine/core';
+import { Button as ButtonUI } from '@mantine/core';
 import { rem } from 'polished';
 import {
   PrimaryBlue,
@@ -16,13 +16,14 @@ type Props = {
   className?: string;
   onClick?: React.MouseEventHandler;
   disabled?: boolean;
-  leftIcon?: React.ComponentProps<typeof MButton>['leftIcon'];
-  size?: React.ComponentProps<typeof MButton>['size'];
+  leftIcon?: React.ComponentProps<typeof ButtonUI>['leftIcon'];
+  rightIcon?: React.ComponentProps<typeof ButtonUI>['rightIcon'];
+  size?: React.ComponentProps<typeof ButtonUI>['size'];
   variant?: 'filled' | 'outline';
 };
 
-const StyledButton = styled(MButton)`
-  display: flex;
+const StyledButton = styled(ButtonUI)`
+  display: inline-flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -82,6 +83,7 @@ export const Button = ({
   onClick,
   disabled,
   leftIcon,
+  rightIcon,
   variant,
   size,
 }: Props) => {
@@ -92,6 +94,7 @@ export const Button = ({
       disabled={disabled}
       onClick={onClick}
       leftIcon={leftIcon}
+      rightIcon={rightIcon}
       variant={variant}
     >
       {children}
