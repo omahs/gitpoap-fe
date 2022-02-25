@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { rem } from 'polished';
 import { TextLight } from '../../../colors';
 
-export const Header = styled.div`
+export const Header = styled.span`
   font-family: VT323;
   font-style: normal;
   font-weight: normal;
