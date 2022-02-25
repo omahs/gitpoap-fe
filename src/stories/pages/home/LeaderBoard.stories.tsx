@@ -1,11 +1,11 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { LeaderBoard } from '../components/home/LeaderBoard';
-import profile1 from './assets/profile1.png';
-import profile2 from './assets/profile2.png';
-import profile3 from './assets/profile3.png';
-import profile4 from './assets/profile4.png';
-import profile5 from './assets/profile5.png';
+import { LeaderBoard } from '../../../components/home/LeaderBoard';
+import profile1 from '../../assets/profile1.png';
+import profile2 from '../../assets/profile2.png';
+import profile3 from '../../assets/profile3.png';
+import profile4 from '../../assets/profile4.png';
+import profile5 from '../../assets/profile5.png';
 
 export default {
   title: 'Home/LeaderBoard',

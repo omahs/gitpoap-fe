@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { MostClaimed } from '../components/home/MostClaimed';
-import { poaps } from './data';
+import { MostClaimed } from '../../../components/home/MostClaimed';
+import { poaps } from '../../data';
 
 export default {
   title: 'Home/MostClaimed',

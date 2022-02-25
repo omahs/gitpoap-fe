@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { graphql } from 'msw';
-import { BannerStats, Stats } from '../components/home/BannerStats';
+import { BannerStats, Stats } from '../../../components/home/BannerStats';
 
 export default {
   title: 'Home/BannerStats',

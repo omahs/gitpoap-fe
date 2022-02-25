@@ -1,8 +1,8 @@
-import Home from '../../pages/index';
+import Home from '../../../pages/index';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { graphql } from 'msw';
-import { stats } from '../BannerStats.stories';
-import { Layout } from '../../components/Layout';
+import { stats } from './BannerStats.stories';
+import { Layout } from '../../../components/Layout';
 
 export default {
   title: 'Pages/Home',
