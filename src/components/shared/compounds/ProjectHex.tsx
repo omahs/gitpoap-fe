@@ -4,13 +4,14 @@ import { rem } from 'polished';
 import { Badge } from '../elements/Badge';
 import { Title } from '../elements/Title';
 import { TextAccent } from '../../../colors';
-import { Star } from '../elements/icons/Star';
 import { IconCount } from '../elements/IconCount';
+import { Star } from '../elements/icons/Star';
 import { People } from '../elements/icons/People';
 import { GitPOAP } from '../elements/icons/GitPOAP';
 import ProjectHexBackground from './ProjectHexBackground.svg';
 
 type Props = {
+  className?: string;
   category: string;
   name: string;
   memberCount: number;
@@ -24,7 +25,8 @@ const Content = styled.div`
   justify-content: center;
   align-items: center;
   background: url(${ProjectHexBackground}) no-repeat center;
-  padding: ${rem(25)} ${rem(45)};
+  padding: ${rem(25)} ${rem(25)};
+  width: ${rem(220)};
 `;
 
 const Icons = styled.div`
@@ -32,6 +34,7 @@ const Icons = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
   > *:not(:last-child) {
     margin-right: ${rem(10)};
   }
@@ -52,9 +55,16 @@ const BadgeStyled = styled(Badge)`
   margin-top: ${rem(7)};
 `;
 
-export const ProjectHex = ({ category, name, memberCount, gitPoapCount, stars }: Props) => {
+export const ProjectHex = ({
+  className,
+  category,
+  name,
+  memberCount,
+  gitPoapCount,
+  stars,
+}: Props) => {
   return (
-    <Content>
+    <Content className={className}>
       <TitleStyled>{name}</TitleStyled>
       <Icons>
         <IconCount count={memberCount} icon={<People width="13" height="11" />} />
