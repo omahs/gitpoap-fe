@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
-import { TextAccent, TextGray, TextLight } from '../colors';
-import { InfoHexBase } from './shared/elements/InfoHexBase';
+import { TextAccent, TextGray, TextLight } from '../../colors';
+import { InfoHexBase } from '../shared/elements/InfoHexBase';
 
 type Props = {
   value: string;

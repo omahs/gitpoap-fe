@@ -5,7 +5,7 @@ import { Modal, Center } from '@mantine/core';
 import { BackgroundPanel, TextGray, TextLight } from '../colors';
 import { Button } from './shared/elements/Button';
 import { Claim } from '../types';
-import { ClaimBlock } from './ClaimBlock';
+import { ClaimBlock } from './shared/compounds/ClaimBlock';
 
 type Props = {
   isOpen: boolean;

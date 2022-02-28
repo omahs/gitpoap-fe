@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
-import { Button } from './shared/elements/Button';
-import { GitPOAP } from './shared/compounds/GitPOAP';
+import { Button } from '../elements/Button';
+import { GitPOAP } from './GitPOAP';
 
 type Props = {
   imgSrc: string;
