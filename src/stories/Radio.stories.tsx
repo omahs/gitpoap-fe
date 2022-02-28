@@ -1,6 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { Radio } from '../components/shared/elements/Radio';
+import { RadioGroup } from '../components/shared/elements/Radio';
+import { Radio } from '@mantine/core';
 
 export default {
   title: 'Elements/Radio',
@@ -9,7 +10,15 @@ export default {
 } as ComponentMeta<typeof Radio>;
 
 const Template: ComponentStory<typeof Radio> = (args) => {
-  return <Radio {...args}>{'Contributor'}</Radio>;
+  const [value, setValue] = React.useState('react');
+
+  return (
+    <RadioGroup {...args} defaultValue="react" value={value} onChange={setValue}>
+      <Radio {...args} value="contributor">
+        {'Contributor'}
+      </Radio>
+    </RadioGroup>
+  );
 };
 
 export const Default = Template.bind({});

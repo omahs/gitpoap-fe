@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { rem } from 'polished';
-import { Radio as RadioUI } from '@mantine/core';
+import { RadioGroup as RadioGroupUI } from '@mantine/core';
 import {
   BackgroundPanel,
   BackgroundPanel2,
@@ -9,8 +9,8 @@ import {
   TextAccent,
 } from '../../../colors';
 
-export const Radio = styled(RadioUI)`
-  .mantine-Radio-radio {
+export const RadioGroup = styled(RadioGroupUI)`
+  .mantine-RadioGroup-radio {
     transition: 150ms border-color ease;
     background-color: ${BackgroundPanel};
     border: ${rem(1)} solid ${BackgroundPanel2};
@@ -20,7 +20,7 @@ export const Radio = styled(RadioUI)`
     }
   }
 
-  .mantine-Radio-label {
+  .mantine-RadioGroup-label {
     transition: 150ms color ease;
     font-family: PT Mono;
     font-style: normal;
@@ -29,16 +29,16 @@ export const Radio = styled(RadioUI)`
     line-height: ${rem(18)};
     letter-spacing: ${rem(0.2)};
 
-    &:hover:not(.mantine-Radio-labelDisabled) {
+    &:hover:not(.mantine-RadioGroup-labelDisabled) {
       color: ${ExtraHover};
-      .mantine-Radio-radio {
+      .mantine-RadioGroup-radio {
         border-color: ${ExtraHover};
       }
     }
 
-    &:active:not(.mantine-Radio-labelDisabled) {
+    &:active:not(.mantine-RadioGroup-labelDisabled) {
       color: ${ExtraPressed};
-      .mantine-Radio-radio {
+      .mantine-RadioGroup-radio {
         border-color: ${ExtraPressed};
         &::before {
           background-color: ${ExtraPressed};
