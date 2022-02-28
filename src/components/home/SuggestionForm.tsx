@@ -3,11 +3,13 @@ import styled from 'styled-components';
 import { rem } from 'polished';
 import { Radio, InputWrapper as InputWrapperUI } from '@mantine/core';
 import { validate } from 'email-validator';
-import { DarkBlue2 } from '../../colors';
+import { BackgroundPanel2, DarkBlue2 } from '../../colors';
 import { Input, TextInputLabelStyles } from '../shared/elements/Input';
 import { Button } from '../shared/elements/Button';
 import { BREAKPOINTS } from '../../constants';
 import { RadioGroup } from '../shared/elements/Radio';
+import { Header } from '../shared/elements/Header';
+import { Text } from '../shared/elements/Text';
 
 enum UserType {
   Contributor = 'Contributor',
@@ -19,6 +21,29 @@ type SuggestionFormData = {
   repoUrl: string;
   userType: UserType;
 };
+
+const FormContainer = styled.div`
+  display: inline-flex;
+  flex-direction: column;
+  max-width: ${rem(525)};
+  padding: ${rem(10)};
+  margin-bottom: ${rem(150)};
+`;
+
+const FormContent = styled.form`
+  display: inline-flex;
+  flex-direction: column;
+  padding: ${rem(30)};
+
+  border: ${rem(1)} solid ${BackgroundPanel2};
+  box-sizing: border-box;
+  border-radius: ${rem(10)};
+
+  @media (max-width: ${BREAKPOINTS.sm}px) {
+    padding: ${rem(32)} ${rem(16)} ${rem(48)};
+    width: 100%;
+  }
+`;
 
 const FormStatus = styled.div`
   min-height: ${rem(10)};
@@ -37,20 +62,8 @@ const InputWrapper = styled(InputWrapperUI)`
   }
 `;
 
-const FormContainer = styled.form`
-  display: inline-flex;
-  flex-direction: column;
-  border-radius: ${rem(30)};
-  padding: ${rem(48)} ${rem(35)};
-
-  @media (max-width: ${BREAKPOINTS.sm}px) {
-    padding: ${rem(32)} ${rem(16)} ${rem(48)};
-    width: 100%;
-  }
-`;
-
 const RepoUrlInput = styled(Input)`
-  min-width: ${rem(400)};
+  width: 100%;
 
   @media (max-width: ${BREAKPOINTS.sm}px) {
     min-width: 100%;
@@ -68,7 +81,9 @@ const UserTypeSection = styled.div`
 `;
 
 const RepoUrlSection = styled.div`
+  display: flex;
   margin-bottom: ${rem(30)};
+  width: 100%;
 
   @media (max-width: ${BREAKPOINTS.sm}px) {
     margin-bottom: ${rem(16)};
@@ -76,6 +91,7 @@ const RepoUrlSection = styled.div`
 `;
 
 const Email = styled.div`
+  display: flex;
   margin-bottom: ${rem(40)};
 
   @media (max-width: ${BREAKPOINTS.sm}px) {
@@ -85,6 +101,7 @@ const Email = styled.div`
 
 const EmailInput = styled(Input)`
   min-width: ${rem(400)};
+  flex: 1;
 
   @media (max-width: ${BREAKPOINTS.sm}px) {
     min-width: 100%;
@@ -97,6 +114,7 @@ const SubmitButton = styled(Button)`
 
 const SubmitContainer = styled.div`
   position: relative;
+  align-self: center;
 `;
 
 const FormStatusStyled = styled(FormStatus)`
@@ -163,48 +181,54 @@ export const SuggestionForm = () => {
 
   return (
     <FormContainer>
-      <RepoUrlSection>
-        <RepoUrlInput
-          value={repoUrl}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRepoURL(e.target.value)}
-          placeholder="github.com/stake-house/wagyu"
-          error={repoUrl.length > 3 && repoUrl.match(repoUrlRegex) === null}
-          label="GitHub Repo URL"
-        />
-      </RepoUrlSection>
+      <Header style={{ marginBottom: rem(24) }}>{'Want to suggest a project?'}</Header>
+      <Text style={{ marginBottom: rem(32) }}>
+        {'Suggest any project that you would like to see supported on GitPOAP.'}
+      </Text>
+      <FormContent>
+        <RepoUrlSection>
+          <RepoUrlInput
+            value={repoUrl}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRepoURL(e.target.value)}
+            placeholder="github.com/stake-house/wagyu"
+            error={repoUrl.length > 3 && repoUrl.match(repoUrlRegex) === null}
+            label="GitHub Repo URL"
+          />
+        </RepoUrlSection>
 
-      <UserTypeSection>
-        <InputWrapper label={'I am a..'}>
-          <RadioGroup value={userType} onChange={(value: UserType) => setUserType(value)}>
-            <Radio value={UserType.Contributor}>{'Contributor'}</Radio>
-            <Radio value={UserType.Owner}>{'Repo owner'}</Radio>
-          </RadioGroup>
-        </InputWrapper>
-      </UserTypeSection>
+        <UserTypeSection>
+          <InputWrapper label={'I am a..'}>
+            <RadioGroup value={userType} onChange={(value: UserType) => setUserType(value)}>
+              <Radio value={UserType.Contributor}>{'Contributor'}</Radio>
+              <Radio value={UserType.Owner}>{'Repo owner'}</Radio>
+            </RadioGroup>
+          </InputWrapper>
+        </UserTypeSection>
 
-      <Email>
-        <EmailInput
-          value={email}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-          placeholder="Email"
-          error={!(validate(email) || email.length < 3)}
-          label="Your Email"
-        />
-      </Email>
-      <SubmitContainer>
-        <SubmitButton
-          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
-            e.preventDefault();
-            if (isFormValid) {
-              submitForm();
-            }
-          }}
-          disabled={!(isFormValid || isFormEmpty)}
-        >
-          {'Submit'}
-        </SubmitButton>
-        <FormStatusStyled>{formStatus}</FormStatusStyled>
-      </SubmitContainer>
+        <Email>
+          <EmailInput
+            value={email}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+            placeholder="Email"
+            error={!(validate(email) || email.length < 3)}
+            label="Your Email"
+          />
+        </Email>
+        <SubmitContainer>
+          <SubmitButton
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+              e.preventDefault();
+              if (isFormValid) {
+                submitForm();
+              }
+            }}
+            disabled={!(isFormValid || isFormEmpty)}
+          >
+            {'Submit'}
+          </SubmitButton>
+          <FormStatusStyled>{formStatus}</FormStatusStyled>
+        </SubmitContainer>
+      </FormContent>
     </FormContainer>
   );
 };

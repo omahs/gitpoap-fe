@@ -17,6 +17,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: ${rem(10)};
+  margin-bottom: ${rem(150)};
 `;
 
 const Poaps = styled.div`
