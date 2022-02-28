@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { rem } from 'polished';
 import {
   TextGray,
@@ -20,21 +20,26 @@ type Props = {
   error?: React.ComponentProps<typeof TextInput>['error'];
   size?: React.ComponentProps<typeof TextInput>['size'];
   label?: React.ComponentProps<typeof TextInput>['label'];
+  required?: React.ComponentProps<typeof TextInput>['required'];
 };
+
+export const TextInputLabelStyles = css<{ disabled?: boolean }>`
+  font-family: 'PT Mono', monospace;
+  color: ${TextLight};
+  font-weight: 700;
+  font-size: ${rem(11)};
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  line-height: ${rem(18)};
+  margin-bottom: ${rem(11)};
+  ${(props) => props.disabled && `color: ${TextGray}`};
+`;
 
 const StyledInputBase = styled(TextInput)<{ disabled?: boolean }>`
   display: inline-block;
 
   .mantine-TextInput-label {
-    font-family: 'PT Mono', monospace;
-    color: ${TextLight};
-    font-weight: 700;
-    font-size: ${rem(11)};
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    line-height: ${rem(18)};
-    margin-bottom: ${rem(11)};
-    ${(props) => props.disabled && `color: ${TextGray}`};
+    ${TextInputLabelStyles};
   }
 
   .mantine-TextInput-input {
@@ -76,24 +81,6 @@ const StyledInputBase = styled(TextInput)<{ disabled?: boolean }>`
   }
 `;
 
-export const Input = ({
-  label,
-  className,
-  onChange,
-  placeholder,
-  disabled,
-  value,
-  error,
-}: Props) => {
-  return (
-    <StyledInputBase
-      className={className}
-      label={label}
-      onChange={onChange}
-      placeholder={placeholder}
-      disabled={disabled}
-      value={value}
-      error={error}
-    />
-  );
+export const Input = (props: Props) => {
+  return <StyledInputBase {...props} />;
 };
