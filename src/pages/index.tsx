@@ -2,23 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
 import Head from 'next/head';
-import { MidnightBlue, TextLight } from '../colors';
+import { Grid } from '@mantine/core';
+import { Page } from './_app';
+import { TextLight } from '../colors';
 import { BannerStats } from '../components/home/BannerStats';
 import { Layout } from '../components/Layout';
-import { Page } from './_app';
-
-const App = styled.div`
-  background-color: ${MidnightBlue};
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  font-family: 'PT Mono', monospace;
-  min-height: 100vh;
-  min-width: 300px;
-  overflow-x: hidden;
-`;
+import { MostClaimed } from '../components/home/MostClaimed';
+import { LeaderBoard } from '../components/home/LeaderBoard';
+import { RecentlyAdded } from '../components/home/RecentlyAdded';
+import { SuggestionForm } from '../components/home/SuggestionForm';
 
 const HeaderStyled = styled.span`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   font-family: PT Mono;
   font-style: normal;
   font-weight: bold;
@@ -27,21 +25,44 @@ const HeaderStyled = styled.span`
   text-align: center;
   letter-spacing: ${rem(1)};
   color: ${TextLight};
-
   margin-bottom: ${rem(60)};
 `;
 
 const Home: Page = () => {
   return (
-    <App>
+    <>
       <Head>
         <title>{'App | GitPOAP'}</title>
         <meta name="description" content="GitPOAP Frontend App" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <HeaderStyled>{'Issue POAPs to your GitHub contributors'}</HeaderStyled>
-      <BannerStats />
-    </App>
+      <Grid justify="center">
+        <Grid.Col span={8}>
+          <HeaderStyled>{'Issue POAPs to your GitHub contributors'}</HeaderStyled>
+        </Grid.Col>
+        <Grid.Col span={8}>
+          <BannerStats />
+        </Grid.Col>
+      </Grid>
+      <Grid justify="center" style={{ marginTop: rem(100), marginBottom: rem(100) }}>
+        <Grid.Col span={7}>
+          <MostClaimed />
+        </Grid.Col>
+        <Grid.Col span={3}>
+          <LeaderBoard />
+        </Grid.Col>
+      </Grid>
+      <Grid justify="center" style={{ marginBottom: rem(100) }}>
+        <Grid.Col span={10}>
+          <RecentlyAdded />
+        </Grid.Col>
+      </Grid>
+      <Grid justify="center" style={{ marginBottom: rem(100) }}>
+        <Grid.Col span={10}>
+          <SuggestionForm />
+        </Grid.Col>
+      </Grid>
+    </>
   );
 };
 
