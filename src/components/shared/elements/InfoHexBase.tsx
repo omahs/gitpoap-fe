@@ -6,9 +6,10 @@ import { BackgroundPanel, BackgroundPanel2 } from '../../../colors';
 type Props = {
   children: React.ReactNode;
   className?: string;
+  hoverEffects?: boolean;
 };
 
-export const Body = styled.div`
+export const Body = styled.div<{ hoverEffects?: boolean }>`
   margin-top: ${rem(50)};
   margin-bottom: ${rem(50)};
   background-color: ${BackgroundPanel};
@@ -36,23 +37,28 @@ export const Body = styled.div`
     transition: 150ms background-color ease;
   }
 
-  &:hover {
-    background-color: ${BackgroundPanel2};
-    cursor: pointer;
-    &::before,
-    &::after {
-      background-color: ${BackgroundPanel2};
-    }
-  }
+  ${(props) =>
+    props.hoverEffects &&
+    `
+      &:hover {
+        background-color: ${BackgroundPanel2};
+        cursor: pointer;
+        &::before,
+        &::after {
+          background-color: ${BackgroundPanel2};
+        }
+      }
 
-  &:active {
-    background-color: ${BackgroundPanel};
-    cursor: pointer;
-    &::before,
-    &::after {
-      background-color: ${BackgroundPanel};
-    }
-  }
+      &:active {
+        background-color: ${BackgroundPanel};
+        cursor: pointer;
+        &::before,
+        &::after {
+          background-color: ${BackgroundPanel};
+        }
+      }
+
+  `}
 `;
 
 const Hex = styled.div`
@@ -61,10 +67,10 @@ const Hex = styled.div`
   min-width: ${rem(250)};
 `;
 
-export const InfoHexBase = ({ className, children }: Props) => {
+export const InfoHexBase = ({ className, children, hoverEffects }: Props) => {
   return (
     <Hex className={className}>
-      <Body>{children}</Body>
+      <Body hoverEffects={hoverEffects}>{children}</Body>
     </Hex>
   );
 };
