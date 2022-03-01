@@ -27,7 +27,6 @@ const FormContainer = styled.div`
   flex-direction: column;
   max-width: ${rem(525)};
   padding: ${rem(10)};
-  margin-bottom: ${rem(150)};
 `;
 
 const FormContent = styled.form`
