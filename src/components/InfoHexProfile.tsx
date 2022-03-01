@@ -6,7 +6,7 @@ import { Twitter } from './shared/elements/icons/Twitter';
 import { GitHub } from './shared/elements/icons/GitHub';
 import { GitPOAP } from './shared/elements/icons/GitPOAP';
 import { InfoHexBase, Body } from './shared/elements/InfoHexBase';
-import { Avatar as AvatarUI } from '../components/shared/elements/Avatar';
+import { Avatar as AvatarUI } from './shared/elements/Avatar';
 
 type Props = {
   imgSrc: string;
@@ -126,7 +126,7 @@ export const InfoHexProfile = ({
   numGitPOAPs,
 }: Props) => {
   return (
-    <StyledInfoHex>
+    <StyledInfoHex hoverEffects>
       <Content>
         <Avatar src={imgSrc} />
         <Name>{name}</Name>
