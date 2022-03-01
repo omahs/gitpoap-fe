@@ -9,7 +9,7 @@ export const Title = styled(Text)`
   font-weight: 700;
   font-size: ${rem(13)};
   line-height: ${rem(17)};
-  letter-spacing: 0.5px;
+  letter-spacing: ${rem(0.5)};
   text-align: center;
   color: ${TextAccent};
   transition: color 150ms ease-in-out;
