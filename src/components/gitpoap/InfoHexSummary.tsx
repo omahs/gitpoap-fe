@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
-import { TextAccent, TextLight, ExtraHover, ExtraPressed } from '../colors';
-import { Twitter } from './shared/elements/icons/Twitter';
-import { GitHub } from './shared/elements/icons/GitHub';
-import { GitPOAP } from './shared/elements/icons/GitPOAP';
-import { InfoHexBase, Body } from './shared/elements/InfoHexBase';
-import { Avatar as AvatarUI } from './shared/elements/Avatar';
+import { TextAccent, TextLight, ExtraHover, ExtraPressed } from '../../colors';
+import { Twitter } from '../shared/elements/icons/Twitter';
+import { GitHub } from '../shared/elements/icons/GitHub';
+import { GitPOAP } from '../shared/elements/icons/GitPOAP';
+import { InfoHexBase, Body } from '../shared/elements/InfoHexBase';
+import { Avatar as AvatarUI } from '../shared/elements/Avatar';
 
 type Props = {
   imgSrc: string;
@@ -116,7 +116,7 @@ const getGitPOAPHref = (gitpoapId: string | number) => {
   return `https://gitpoap.io/@${gitpoapId}`;
 };
 
-export const InfoHexProfile = ({
+export const InfoHexSummary = ({
   imgSrc,
   name,
   blurb,
