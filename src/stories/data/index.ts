@@ -97,6 +97,30 @@ export const projectData: Project[] = [
     stars: 984,
     category: 'Exchanges',
   },
+  {
+    id: '9',
+    name: 'Polygon',
+    memberCount: 80,
+    gitPoapCount: 15,
+    stars: 1507,
+    category: 'Blockchain',
+  },
+  {
+    id: '10',
+    name: 'AAVE',
+    memberCount: 44,
+    gitPoapCount: 8,
+    stars: 973,
+    category: 'Blockchain',
+  },
+  {
+    id: '11',
+    name: 'Subspace',
+    memberCount: 6,
+    gitPoapCount: 2,
+    stars: 85,
+    category: 'DApp',
+  },
 ];
 
 export const leaderData = [
