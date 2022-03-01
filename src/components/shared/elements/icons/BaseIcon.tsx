@@ -7,6 +7,7 @@ export const Icon = styled.svg`
     fill: ${TextGray};
   }
   &:hover {
+    cursor: pointer;
     path {
       fill: ${ExtraHover};
     }
