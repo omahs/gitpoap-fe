@@ -1,15 +1,14 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { RecentlyAdded } from '../../../components/home/RecentlyAdded';
-import { projectData } from '../../data';
-import { graphql } from 'msw';
+import { RecentProjectsHandler } from '../../data/handlers';
 
 export default {
   title: 'Home/RecentlyAdded',
   component: RecentlyAdded,
 } as ComponentMeta<typeof RecentlyAdded>;
 
-const Template: ComponentStory<typeof RecentlyAdded> = (args) => {
+const Template: ComponentStory<typeof RecentlyAdded> = () => {
   return <RecentlyAdded />;
 };
 
@@ -20,16 +19,6 @@ Default.args = {
 
 Default.parameters = {
   msw: {
-    handlers: [
-      graphql.query('recentProjects', (req, res, ctx) => {
-        return res(
-          ctx.data({
-            recentProjects: {
-              projects: projectData,
-            },
-          }),
-        );
-      }),
-    ],
+    handlers: [RecentProjectsHandler],
   },
 };

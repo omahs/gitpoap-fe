@@ -1,17 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
+import { useQuery } from 'urql';
 import { Header } from '../shared/elements/Header';
 import { BackgroundPanel2, TextAccent } from '../../colors';
 import { Avatar } from '../shared/elements/Avatar';
 import { IconCount } from '../shared/elements/IconCount';
 import { GitPOAP } from '../shared/elements/icons/GitPOAP';
 import { Divider as DividerUI } from '@mantine/core';
-
-type Props = {
-  title: string;
-  data: LeaderBoardItemProps[];
-};
 
 type LeaderBoardItemProps = {
   imgSrc: string;
@@ -70,6 +66,16 @@ const List = styled.div`
   margin-top: ${rem(30)};
 `;
 
+const LeadersQuery = `
+query leaders {
+  users (orderBy: { count: desc }, first: 5) {
+    imgSrc
+    name
+    count
+  }
+}
+`;
+
 const LeaderBoardItem = ({ name, imgSrc, count }: LeaderBoardItemProps) => {
   return (
     <>
@@ -85,12 +91,20 @@ const LeaderBoardItem = ({ name, imgSrc, count }: LeaderBoardItemProps) => {
   );
 };
 
-export const LeaderBoard = ({ title, data }: Props) => {
+export const LeaderBoard = () => {
+  const [result] = useQuery<{
+    leaders: {
+      users: LeaderBoardItemProps[];
+    };
+  }>({
+    query: LeadersQuery,
+  });
+
   return (
     <Wrapper>
-      <HeaderStyled>{title}</HeaderStyled>
+      <HeaderStyled>{'Most honored contributors last week'}</HeaderStyled>
       <List>
-        {data.map((item: LeaderBoardItemProps) => (
+        {result.data?.leaders.users.map((item: LeaderBoardItemProps) => (
           <LeaderBoardItem key={item.name} {...item} />
         ))}
       </List>

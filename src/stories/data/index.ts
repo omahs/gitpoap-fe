@@ -1,6 +1,12 @@
 import { GitPoap } from '../../types';
 import badgeImg from '../assets/badge1.png';
 import { Project } from '../../types';
+import { Stats } from '../../components/home/BannerStats';
+import profile1 from '../assets/profile1.png';
+import profile2 from '../assets/profile2.png';
+import profile3 from '../assets/profile3.png';
+import profile4 from '../assets/profile4.png';
+import profile5 from '../assets/profile5.png';
 
 export const poaps: GitPoap[] = [
   {
@@ -90,5 +96,54 @@ export const projectData: Project[] = [
     gitPoapCount: 20,
     stars: 984,
     category: 'Exchanges',
+  },
+];
+
+export const leaderData = [
+  {
+    name: 'nd-certora',
+    imgSrc: profile1 as unknown as string,
+    count: 12,
+  },
+  {
+    name: 'matthewlilley',
+    imgSrc: profile2 as unknown as string,
+    count: 11,
+  },
+  {
+    name: 'chefnomi',
+    imgSrc: profile3 as unknown as string,
+    count: 9,
+  },
+  {
+    name: 'clearwood.eth',
+    imgSrc: profile4 as unknown as string,
+    count: 5,
+  },
+  {
+    name: 'levx-io',
+    imgSrc: profile5 as unknown as string,
+    count: 5,
+  },
+];
+
+export const stats: Stats[] = [
+  {
+    value: '17545',
+    unit: 'contributors',
+    rate: '+345 / past week ',
+    icon: 'people',
+  },
+  {
+    value: '1015',
+    unit: 'GitPOAPs',
+    rate: '+154 / past week ',
+    icon: 'gitPOAP',
+  },
+  {
+    value: '549',
+    unit: 'projects',
+    rate: '+17 / past week ',
+    icon: 'project',
   },
 ];

@@ -1,23 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
+import { useQuery } from 'urql';
 import { Header } from '../shared/elements/Header';
 import { GitPoap } from '../../types';
 import { GitPOAP as GitPOAPUI } from '../shared/compounds/GitPOAP';
 import { Button } from '../shared/elements/Button';
 import { FaArrowRight } from 'react-icons/fa';
 
-type Props = {
-  title: string;
-  poaps: GitPoap[];
-};
-
 const Container = styled.div`
   display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
   padding: ${rem(10)};
-  margin-bottom: ${rem(150)};
 `;
 
 const Poaps = styled.div`
@@ -34,13 +29,31 @@ const GitPOAP = styled(GitPOAPUI)`
   margin-bottom: ${rem(36)};
 `;
 
-export const MostClaimed = ({ poaps }: Props) => {
+const MostClaimedQuery = `
+query mostClaimedPoaps {
+  poaps (orderBy: { count: desc }, first: 5) {
+    imgSrc
+    name
+    count
+  }
+}
+`;
+
+export const MostClaimed = () => {
+  const [result] = useQuery<{
+    mostClaimedPoaps: {
+      poaps: GitPoap[];
+    };
+  }>({
+    query: MostClaimedQuery,
+  });
+
   return (
     <Container>
       <Header>{'Most claimed POAPs last week'}</Header>
 
       <Poaps>
-        {poaps.map((gitPoap) => {
+        {result.data?.mostClaimedPoaps.poaps.map((gitPoap) => {
           return (
             <GitPOAP
               key={gitPoap.id}
