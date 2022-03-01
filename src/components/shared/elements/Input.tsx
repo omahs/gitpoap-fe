@@ -29,7 +29,7 @@ export const TextInputLabelStyles = css<{ disabled?: boolean }>`
   font-weight: 700;
   font-size: ${rem(11)};
   text-transform: uppercase;
-  letter-spacing: 1.2px;
+  letter-spacing: ${rem(1.2)};
   line-height: ${rem(18)};
   margin-bottom: ${rem(11)};
   ${(props) => props.disabled && `color: ${TextGray}`};
@@ -49,10 +49,8 @@ const StyledInputBase = styled(TextInput)<{ disabled?: boolean }>`
     font-size: ${rem(14)};
     color: white;
     background-color: ${BackgroundPanel};
-    padding-top: ${rem(10)};
-    padding-bottom: ${rem(12)};
     transition: 150ms background-color ease;
-    letter-spacing: 0.2px;
+    letter-spacing: ${rem(0.2)};
 
     &:hover:not(:disabled):not(:focus) {
       background-color: ${BackgroundPanel2};
