@@ -40,15 +40,19 @@ const StyledButton = styled(ButtonUI)`
 
   &.mantine-Button-filled {
     background-color: ${PrimaryBlue};
+    border: ${rem(2)} solid ${PrimaryBlue};
     color: white;
     &:hover:not(:disabled) {
       background-color: ${ExtraHover};
+      border-color: ${ExtraHover};
     }
     &:active:not(:disabled) {
       background-color: ${ExtraActive};
+      border-color: ${ExtraActive};
     }
     &:disabled {
       background-color: ${DarkGray};
+      border-color: ${DarkGray};
       .mantine-Button-label {
         color: ${TextGray};
       }
@@ -56,7 +60,7 @@ const StyledButton = styled(ButtonUI)`
   }
 
   &.mantine-Button-outline {
-    border-color: ${TextGray};
+    border: ${rem(2)} solid ${TextGray};
     color: white;
     background-color: transparent;
     &:hover:not(:disabled) {
