@@ -1,23 +1,14 @@
-import styled from 'styled-components';
-import { rem } from 'polished';
+import React from 'react';
 import { WalletStatus } from './WalletStatus';
 import { useWeb3Context } from './Web3ContextProvider';
 import { Button } from '../shared/elements/Button';
-
-const ConnectWalletButton = styled(Button)`
-  border-radius: ${rem(8)};
-  transition: 250ms background ease;
-  cursor: pointer;
-`;
 
 export const Wallet = () => {
   const { isConnected, address, connect, disconnect } = useWeb3Context();
 
   return (
     <>
-      {!isConnected && !address && (
-        <ConnectWalletButton onClick={() => connect()}>{'Connect Wallet'}</ConnectWalletButton>
-      )}
+      {!isConnected && !address && <Button onClick={() => connect()}>{'Connect Wallet'}</Button>}
       {isConnected && address && (
         <WalletStatus
           onClick={() => {

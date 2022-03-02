@@ -3,6 +3,7 @@ import Web3Modal from 'web3modal';
 import { JsonRpcProvider, Web3Provider } from '@ethersproject/providers';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import { NETWORKS } from '../../constants';
+import { BackgroundPanel, BackgroundPanel2, TextLight, TextGray } from '../../colors';
 
 type Props = {
   children: React.ReactNode;
@@ -22,6 +23,13 @@ if (typeof window !== 'undefined') {
   initWeb3Modal = new Web3Modal({
     network: 'mainnet',
     cacheProvider: true,
+    theme: {
+      background: BackgroundPanel,
+      main: TextLight,
+      secondary: TextGray,
+      border: BackgroundPanel,
+      hover: BackgroundPanel2,
+    },
     providerOptions,
   });
 }
