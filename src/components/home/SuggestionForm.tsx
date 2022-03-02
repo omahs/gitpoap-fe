@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { rem } from 'polished';
 import { Radio, InputWrapper as InputWrapperUI } from '@mantine/core';
 import { validate } from 'email-validator';
-import { BackgroundPanel2, DarkBlue2 } from '../../colors';
+import { BackgroundPanel2, TextAccent } from '../../colors';
 import { Input, TextInputLabelStyles } from '../shared/elements/Input';
 import { Button } from '../shared/elements/Button';
 import { BREAKPOINTS } from '../../constants';
@@ -50,7 +50,7 @@ const FormStatus = styled.div`
   font-weight: 400;
   font-size: ${rem(16)};
   line-height: ${rem(19)};
-  color: ${DarkBlue2};
+  color: ${TextAccent};
   margin-bottom: ${rem(10)};
   margin-top: ${rem(5)};
 `;

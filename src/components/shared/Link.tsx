@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import RouterLink from 'next/link';
-import { DarkBlue2 } from '../../colors';
+import { TextAccent } from '../../colors';
 
 export const Link = styled(RouterLink)`
   text-decoration: none;
@@ -9,7 +9,7 @@ export const Link = styled(RouterLink)`
 export const ExternalLink = styled.a`
   text-decoration: none;
   cursor: pointer;
-  color: ${DarkBlue2};
+  color: ${TextAccent};
   font-weight: 500;
 
   &:hover {
