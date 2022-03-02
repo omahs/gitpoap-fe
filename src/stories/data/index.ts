@@ -1,12 +1,31 @@
-import { GitPoap } from '../../types';
+import { GitPoap, POAP } from '../../types';
 import badgeImg from '../assets/badge1.png';
 import { Project } from '../../types';
 import { Stats } from '../../components/home/BannerStats';
+
+/* Profile Pictures */
 import profile1 from '../assets/profile1.png';
 import profile2 from '../assets/profile2.png';
 import profile3 from '../assets/profile3.png';
 import profile4 from '../assets/profile4.png';
 import profile5 from '../assets/profile5.png';
+
+/* POAPs */
+import poap1 from '../assets/poaps/poap1.png';
+import poap2 from '../assets/poaps/poap2.png';
+import poap3 from '../assets/poaps/poap3.png';
+import poap4 from '../assets/poaps/poap4.png';
+import poap5 from '../assets/poaps/poap5.png';
+import poap6 from '../assets/poaps/poap6.png';
+import poap7 from '../assets/poaps/poap7.png';
+import poap8 from '../assets/poaps/poap8.png';
+import poap9 from '../assets/poaps/poap9.png';
+import poap10 from '../assets/poaps/poap10.png';
+import poap11 from '../assets/poaps/poap11.png';
+import poap12 from '../assets/poaps/poap12.png';
+import poap13 from '../assets/poaps/poap13.png';
+import poap14 from '../assets/poaps/poap14.png';
+import poap15 from '../assets/poaps/poap15.png';
 
 export const poaps: GitPoap[] = [
   {
@@ -29,6 +48,86 @@ export const poaps: GitPoap[] = [
     name: 'Polygon Genesis Creator',
     orgName: 'Polygon',
     description: 'To the creators of Polygon Network',
+  },
+];
+
+export const rawPOAPs: POAP[] = [
+  {
+    id: '1',
+    imgSrc: poap1 as unknown as string,
+    name: '2 LIVES NFT art exhibition',
+  },
+  {
+    id: '2',
+    imgSrc: poap2 as unknown as string,
+    name: 'DevOps Summit Canada 2021: Speaker',
+  },
+  {
+    id: '3',
+    imgSrc: poap3 as unknown as string,
+    name: 'Mojito at Somewhere Nowhere party',
+  },
+  {
+    id: '4',
+    imgSrc: poap4 as unknown as string,
+    name: 'Artifact Technology',
+  },
+  {
+    id: '5',
+    imgSrc: poap5 as unknown as string,
+    name: 'Deadfellaz Halloween Happy Hour',
+  },
+
+  {
+    id: '6',
+    imgSrc: poap6 as unknown as string,
+    name: 'DODO 1 year celebration event',
+  },
+  {
+    id: '7',
+    imgSrc: poap7 as unknown as string,
+    name: 'Crypto something lecture',
+  },
+  {
+    id: '8',
+    imgSrc: poap8 as unknown as string,
+    name: 'Float Capital AMA',
+  },
+  {
+    id: '9',
+    imgSrc: poap9 as unknown as string,
+    name: 'NFTs + Philantropy lecture',
+  },
+  {
+    id: '10',
+    imgSrc: poap10 as unknown as string,
+    name: 'Shapeshift DAO weekly sprint participant',
+  },
+
+  {
+    id: '11',
+    imgSrc: poap11 as unknown as string,
+    name: '2 LIVES NFT art exhibition',
+  },
+  {
+    id: '12',
+    imgSrc: poap12 as unknown as string,
+    name: 'Mojito at Somewhere Nowhere party',
+  },
+  {
+    id: '13',
+    imgSrc: poap13 as unknown as string,
+    name: 'Artifact Technology exhibition',
+  },
+  {
+    id: '14',
+    imgSrc: poap14 as unknown as string,
+    name: 'Deadfellaz Halloween event',
+  },
+  {
+    id: '15',
+    imgSrc: poap15 as unknown as string,
+    name: 'Bitcoin crypto something event',
   },
 ];
 

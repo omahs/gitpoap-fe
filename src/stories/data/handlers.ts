@@ -1,5 +1,5 @@
 import { graphql } from 'msw';
-import { poaps, stats, leaderData, projectData } from './index';
+import { poaps, stats, leaderData, projectData, rawPOAPs } from './index';
 
 export const GetAllStatsHandler = graphql.query('GetAllStats', (req, res, ctx) => {
   return res(
@@ -36,6 +36,16 @@ export const RecentProjectsHandler = graphql.query('recentProjects', (req, res, 
     ctx.data({
       recentProjects: {
         projects: projectData,
+      },
+    }),
+  );
+});
+
+export const AllPOAPsHandler = graphql.query('allPOAPs', (req, res, ctx) => {
+  return res(
+    ctx.data({
+      allPOAPs: {
+        poaps: rawPOAPs,
       },
     }),
   );

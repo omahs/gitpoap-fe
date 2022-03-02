@@ -1,14 +1,32 @@
 import React from 'react';
-import styled from 'styled-components';
 import { rem } from 'polished';
-import { useRouter } from 'next/router';
+import { useQuery } from 'urql';
 import Head from 'next/head';
-
 import { Grid } from '@mantine/core';
 import { Page } from '../_app';
 import { Layout } from '../../components/Layout';
+import { AllPOAPs } from '../../components/profile/AllPOAPs';
+import { POAP } from '../../types';
+
+const AllPOAPsQuery = `
+query allPOAPs {
+  poaps (orderBy: { count: desc }, first: 5) {
+    imgSrc
+    name
+    count
+  }
+}
+`;
 
 const Profile: Page = () => {
+  const [result] = useQuery<{
+    allPOAPs: {
+      poaps: POAP[];
+    };
+  }>({
+    query: AllPOAPsQuery,
+  });
+
   return (
     <>
       <Head>
@@ -22,7 +40,9 @@ const Profile: Page = () => {
         <Grid justify="center">
           <Grid.Col span={12}>{'Featured POAPs'}</Grid.Col>
           <Grid.Col span={12}>{'GitPOAPs'}</Grid.Col>
-          <Grid.Col span={12}>{'All POAPs'}</Grid.Col>
+          <Grid.Col span={12} style={{ marginBottom: rem(150) }}>
+            <AllPOAPs poaps={result.data?.allPOAPs.poaps} />
+          </Grid.Col>
         </Grid>
       </Grid>
     </>
