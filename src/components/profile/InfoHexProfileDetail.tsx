@@ -35,8 +35,6 @@ const Content = styled.div`
 
 const Avatar = styled(AvatarUI)`
   margin-bottom: ${rem(14)};
-  width: ${rem(160)};
-  height: ${rem(160)};
 `;
 
 const Name = styled.div`
@@ -123,7 +121,7 @@ export const InfoHexProfileDetail = ({
   return (
     <StyledInfoHex>
       <Content>
-        <Avatar src={imgSrc} />
+        <Avatar src={imgSrc} width={160} height={160} />
         <Name>{name}</Name>
         <Address address={address} isCollapsed />
         <Blurb>{blurb}</Blurb>
