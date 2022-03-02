@@ -30,3 +30,9 @@ export type Project = {
   gitPoapCount: number;
   stars: number;
 };
+
+export type POAP = {
+  id: string;
+  imgSrc: string;
+  name: string;
+};
