@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
+import ImageUI from 'next/image';
 
 type Props = {
   poap: POAP;
@@ -28,12 +29,10 @@ export type POAP = {
 };
 
 const Container = styled.div`
-  padding: 10px;
+  padding: ${rem(10)};
 `;
 
-const Image = styled.img`
-  max-width: ${rem(180)};
-  height: ${rem(180)};
+const Image = styled(ImageUI)`
   border-radius: 50%;
 `;
 
@@ -41,7 +40,7 @@ export const POAPItem = (props: Props) => {
   const { poap } = props;
   return (
     <Container>
-      <Image src={poap.event.image_url} alt={poap.event.description} />
+      <Image height={180} width={180} src={poap.event.image_url} alt={poap.event.description} />
     </Container>
   );
 };
