@@ -1,7 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
-import { rem } from 'polished';
-import { useRouter } from 'next/router';
 import Head from 'next/head';
 
 import { Grid } from '@mantine/core';
