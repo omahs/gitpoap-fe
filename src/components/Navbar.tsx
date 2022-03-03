@@ -7,8 +7,7 @@ import { ExtraHover, ExtraPressed, TextDarkGray, TextGray, TextLight } from '../
 import { BREAKPOINTS } from '../constants';
 import { GitPOAPLogo } from './shared/elements/icons/GitPOAPLogoWhite';
 import { Wallet } from './wallet/Wallet';
-import { Button } from './shared/elements/Button';
-import { GoMarkGithub } from 'react-icons/go';
+import { GitHub } from './github/GitHub';
 
 const Nav = styled(Group)`
   color: ${TextLight} !important;
@@ -45,7 +44,7 @@ const Links = styled.div`
   color: ${TextGray} !important;
   font-size: ${rem(12)};
   font-weight: 700;
-  letter-spacing: 2px;
+  letter-spacing: ${rem(2)};
   text-transform: uppercase;
 `;
 
@@ -69,7 +68,7 @@ const StyledLink = styled.a`
   }
 `;
 
-const ClaimButton = styled(Button)`
+const ClaimButton = styled(GitHub)`
   margin-right: ${rem(12)};
 `;
 
@@ -82,6 +81,11 @@ const NavLink = (props: { href: string; children: React.ReactNode }) => {
 };
 
 export const Navbar = () => {
+  const showPOAPsPage = false;
+  const showProjectsPage = false;
+  const showContributorsPage = false;
+  const showDocsLink = false;
+
   return (
     <Nav>
       <Container>
@@ -93,12 +97,12 @@ export const Navbar = () => {
         <Space />
         <ContentRight>
           <Links>
-            <NavLink href="/poaps">POAPS</NavLink>
-            <NavLink href="/projects">Projects</NavLink>
-            <NavLink href="/contributors">Contributors</NavLink>
-            <NavLink href="/docs">Docs</NavLink>
+            {showPOAPsPage && <NavLink href="/poaps">{'POAPS'}</NavLink>}
+            {showProjectsPage && <NavLink href="/projects">{'Projects'}</NavLink>}
+            {showContributorsPage && <NavLink href="/contributors">{'Contributors'}</NavLink>}
+            {showDocsLink && <NavLink href="/docs">{'Docs'}</NavLink>}
           </Links>
-          <ClaimButton leftIcon={<GoMarkGithub size={16} />}>{'CLAIM POAPS'}</ClaimButton>
+          <ClaimButton />
           <Wallet />
         </ContentRight>
       </Container>
