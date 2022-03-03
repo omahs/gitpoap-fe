@@ -49,7 +49,6 @@ type Props = {
 export const GHAuthProvider = ({ children }: Props) => {
   const [githubAuthState, setGithubAuthState] = useState<GHState>(getInitialState());
   const router = useRouter();
-  console.log(router);
   const redirectUri = REACT_APP_REDIRECT_URI + router.asPath;
   // https://docs.github.com/en/developers/apps/building-github-apps/identifying-and-authorizing-users-for-github-apps#1-request-a-users-github-identity
   const githubAuthURL = `https://github.com/login/oauth/authorize?scope=user&state=${githubAuthState.randomString}&client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${redirectUri}`;

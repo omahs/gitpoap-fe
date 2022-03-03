@@ -252,21 +252,21 @@ export const leaderData = [
 
 export const stats: Stats[] = [
   {
-    value: '17545',
+    value: 17545,
     unit: 'contributors',
-    rate: '+345 / past week ',
+    rate: 345,
     icon: 'people',
   },
   {
-    value: '1015',
+    value: 1015,
     unit: 'GitPOAPs',
-    rate: '+154 / past week ',
+    rate: 154,
     icon: 'gitPOAP',
   },
   {
-    value: '549',
+    value: 549,
     unit: 'projects',
-    rate: '+17 / past week ',
+    rate: 17,
     icon: 'project',
   },
 ];
