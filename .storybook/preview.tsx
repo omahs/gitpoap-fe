@@ -1,4 +1,5 @@
 import { addDecorator } from '@storybook/react';
+import { RouterContext } from 'next/dist/shared/lib/router-context';
 import { withGlobalStyles } from './decorators/withGlobalStyles';
 import { withProviders } from './decorators/withProviders';
 import { initialize, mswDecorator } from 'msw-storybook-addon';
@@ -29,5 +30,8 @@ export const parameters = {
       color: /(background|color)$/i,
       date: /Date$/,
     },
+  },
+  nextRouter: {
+    Provider: RouterContext.Provider,
   },
 };
