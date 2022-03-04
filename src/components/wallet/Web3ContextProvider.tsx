@@ -1,7 +1,6 @@
 import React, { useContext, useState, useCallback, createContext, useMemo, useEffect } from 'react';
 import Web3Modal from 'web3modal';
 import { JsonRpcProvider, Web3Provider } from '@ethersproject/providers';
-import WalletConnectProvider from '@walletconnect/web3-provider';
 import { NETWORKS } from '../../constants';
 import { BackgroundPanel, BackgroundPanel2, TextLight, TextGray } from '../../colors';
 
@@ -9,14 +8,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-const providerOptions = {
-  walletconnect: {
-    package: WalletConnectProvider,
-    options: {
-      infuraId: process.env.NEXT_PUBLIC_INFURA_ID,
-    },
-  },
-};
+const providerOptions = {};
 
 let initWeb3Modal: Web3Modal;
 if (typeof window !== 'undefined') {

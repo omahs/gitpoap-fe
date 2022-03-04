@@ -53,10 +53,10 @@ export const MostClaimed = () => {
       <Header>{'Most claimed POAPs last week'}</Header>
 
       <Poaps>
-        {result.data?.mostClaimedPoaps.poaps.map((gitPoap) => {
+        {result.data?.mostClaimedPoaps.poaps.map((gitPoap, i) => {
           return (
             <GitPOAP
-              key={gitPoap.id}
+              key={gitPoap.id + i}
               imgSrc={gitPoap.imgSrc}
               name={gitPoap.name}
               orgName={gitPoap.orgName}
