@@ -30,8 +30,8 @@ const Name = styled.span`
 `;
 
 const AvatarStyled = styled(Avatar)`
-  height: ${rem(32)};
-  width: ${rem(32)};
+  height: ${rem(40)};
+  width: ${rem(40)};
   margin-right: ${rem(14)};
 `;
 

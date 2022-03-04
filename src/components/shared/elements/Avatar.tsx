@@ -1,10 +1,27 @@
 import styled from 'styled-components';
-import Image from 'next/image';
+import { rem } from 'polished';
+import ImageUI from 'next/image';
 
-export const Avatar = styled(Image).attrs((props) => ({
-  width: props.width ?? 80,
-  height: props.height ?? 80,
-  quality: 100,
-}))`
+type Props = {
+  quality?: number;
+  className?: string;
+  src: string;
+};
+
+const AvatarWrapper = styled.div`
+  max-height: ${rem(80)};
+  max-width: ${rem(80)};
+  position: relative;
+`;
+
+const Image = styled(ImageUI)`
   border-radius: 50%;
 `;
+
+export const Avatar = ({ quality = 100, className, src }: Props) => {
+  return (
+    <AvatarWrapper className={className}>
+      <Image src={src} layout="fill" quality={quality} alt="" />;
+    </AvatarWrapper>
+  );
+};

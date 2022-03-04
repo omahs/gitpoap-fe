@@ -11,8 +11,10 @@ import { MostClaimed } from '../components/home/MostClaimed';
 import { LeaderBoard } from '../components/home/LeaderBoard';
 import { RecentlyAdded } from '../components/home/RecentlyAdded';
 import { SuggestionForm } from '../components/home/SuggestionForm';
+import { BackgroundHexes } from '../components/home/BackgroundHexes';
 
 const HeaderStyled = styled.span`
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -26,6 +28,18 @@ const HeaderStyled = styled.span`
   letter-spacing: ${rem(1)};
   color: ${TextLight};
   margin-bottom: ${rem(60)};
+  margin-top: ${rem(75)};
+`;
+
+const Background = styled(BackgroundHexes)`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  min-width: ${rem(1200)};
 `;
 
 const Home: Page = () => {
@@ -36,8 +50,9 @@ const Home: Page = () => {
         <meta name="description" content="GitPOAP Frontend App" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Grid justify="center">
-        <Grid.Col span={8}>
+      <Grid justify="center" style={{ zIndex: 0, position: 'relative' }}>
+        <Background />
+        <Grid.Col span={8} style={{ zIndex: 0 }}>
           <HeaderStyled>{'Issue POAPs to your GitHub contributors'}</HeaderStyled>
         </Grid.Col>
         <Grid.Col span={8}>
@@ -45,14 +60,14 @@ const Home: Page = () => {
         </Grid.Col>
       </Grid>
       <Grid justify="center" style={{ marginTop: rem(100), marginBottom: rem(100) }}>
-        <Grid.Col span={7}>
+        <Grid.Col span={7} style={{ zIndex: 0 }}>
           <MostClaimed />
         </Grid.Col>
-        <Grid.Col span={3}>
+        <Grid.Col span={3} style={{ zIndex: 0 }}>
           <LeaderBoard />
         </Grid.Col>
       </Grid>
-      <Grid justify="center" style={{ marginBottom: rem(100) }}>
+      <Grid justify="center" style={{ zIndex: 0, marginBottom: rem(100) }}>
         <Grid.Col span={10}>
           <RecentlyAdded />
         </Grid.Col>
