@@ -2,9 +2,9 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ClaimModal } from '../components/ClaimModal';
 import { Claim, ClaimStatus } from '../types';
-import badgeImg1 from './assets/badge1.png';
-import badgeImg2 from './assets/badge2.png';
-import badgeImg3 from './assets/badge3.png';
+import badgeImg1 from './assets/gitPOAPs/badge1.png';
+import badgeImg2 from './assets/gitPOAPs/badge2.png';
+import badgeImg3 from './assets/gitPOAPs/badge3.png';
 
 const claims: Claim[] = [
   {
