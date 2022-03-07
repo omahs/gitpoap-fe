@@ -71,7 +71,6 @@ const SortBy = styled(Text)`
   margin-right: ${rem(10)};
 `;
 
-// @TODO: ensure the count is correct
 export const AllPOAPs = ({ poaps }: Props) => {
   const selectOptions: { value: SortOptions; label: string }[] = [
     { value: SortOptions.Date, label: 'Date of Claim' },
@@ -90,7 +89,14 @@ export const AllPOAPs = ({ poaps }: Props) => {
       <POAPs>
         {poaps &&
           poaps.map((poap) => {
-            return <POAPBadge key={poap.id} name={poap.name} imgSrc={poap.imgSrc} />;
+            return (
+              <POAPBadge
+                key={poap.tokenId}
+                id={poap.tokenId}
+                name={poap.event.name}
+                imgSrc={poap.event.image_url}
+              />
+            );
           })}
       </POAPs>
       <ShowMore leftIcon={<FaPlus />} variant="outline">

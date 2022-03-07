@@ -1,29 +1,36 @@
 import React from 'react';
 import { rem } from 'polished';
-import { useQuery } from 'urql';
+import { useQuery, gql } from 'urql';
 import Head from 'next/head';
 import { Grid } from '@mantine/core';
 import { Page } from '../_app';
 import { Layout } from '../../components/Layout';
 import { AllPOAPs } from '../../components/profile/AllPOAPs';
+import { GitPOAPs } from '../../components/profile/GitPOAPs';
 import { POAP } from '../../types';
 
-const AllPOAPsQuery = `
-query allPOAPs {
-  poaps (orderBy: { count: desc }, first: 5) {
-    imgSrc
-    name
-    count
+const AllPOAPsQuery = gql`
+  query allPOAPs {
+    userPOAPs(address: "peebeejay.eth") {
+      poaps {
+        event {
+          name
+          image_url
+        }
+        tokenId
+      }
+    }
   }
-}
 `;
 
+export type UserPOAPsQueryRes = {
+  userPOAPs: {
+    poaps: POAP[];
+  };
+};
+
 const Profile: Page = () => {
-  const [result] = useQuery<{
-    allPOAPs: {
-      poaps: POAP[];
-    };
-  }>({
+  const [result] = useQuery<UserPOAPsQueryRes>({
     query: AllPOAPsQuery,
   });
 
@@ -39,9 +46,9 @@ const Profile: Page = () => {
         <Grid.Col span={12}>{'The Profile Hex'}</Grid.Col>
         <Grid justify="center">
           <Grid.Col span={12}>{'Featured POAPs'}</Grid.Col>
-          <Grid.Col span={12}>{'GitPOAPs'}</Grid.Col>
+          <Grid.Col span={12}>{/* <GitPOAPs /> */}</Grid.Col>
           <Grid.Col span={12} style={{ marginBottom: rem(150) }}>
-            <AllPOAPs poaps={result.data?.allPOAPs.poaps} />
+            <AllPOAPs poaps={result.data?.userPOAPs.poaps} />
           </Grid.Col>
         </Grid>
       </Grid>

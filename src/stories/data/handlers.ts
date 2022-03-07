@@ -1,4 +1,5 @@
 import { graphql } from 'msw';
+import { UserPOAPsQueryRes } from '../../pages/profile/[id]';
 import { gitPOAPs, stats, leaderData, projectData, rawPOAPs } from './index';
 
 export const GetAllStatsHandler = graphql.query('GetAllStats', (req, res, ctx) => {
@@ -42,10 +43,10 @@ export const RecentProjectsHandler = graphql.query('recentProjects', (req, res, 
   );
 });
 
-export const AllPOAPsHandler = graphql.query('allPOAPs', (req, res, ctx) => {
+export const AllPOAPsHandler = graphql.query<UserPOAPsQueryRes>('allPOAPs', (req, res, ctx) => {
   return res(
     ctx.data({
-      allPOAPs: {
+      userPOAPs: {
         poaps: rawPOAPs,
       },
     }),

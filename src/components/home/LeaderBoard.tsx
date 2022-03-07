@@ -81,6 +81,7 @@ const LeadersQuery = gql`
 
 const LeaderBoardItem = ({ user, claimsCount }: LeaderBoardItemProps) => {
   const imgSrc = `https://github.com/${user.githubHandle}.png?size=200`;
+
   return (
     <>
       <Item>

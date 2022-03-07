@@ -90,81 +90,111 @@ export const gitPOAPs: GitPoap[] = [
 
 export const rawPOAPs: POAP[] = [
   {
-    id: '1',
-    imgSrc: poap1 as unknown as string,
-    name: '2 LIVES NFT art exhibition',
+    tokenId: '1',
+    event: {
+      image_url: poap1 as unknown as string,
+      name: '2 LIVES NFT art exhibition',
+    },
   },
   {
-    id: '2',
-    imgSrc: poap2 as unknown as string,
-    name: 'DevOps Summit Canada 2021: Speaker',
+    tokenId: '2',
+    event: {
+      image_url: poap2 as unknown as string,
+      name: 'DevOps Summit Canada 2021: Speaker',
+    },
   },
   {
-    id: '3',
-    imgSrc: poap3 as unknown as string,
-    name: 'Mojito at Somewhere Nowhere party',
+    tokenId: '3',
+    event: {
+      image_url: poap3 as unknown as string,
+      name: 'Mojito at Somewhere Nowhere party',
+    },
   },
   {
-    id: '4',
-    imgSrc: poap4 as unknown as string,
-    name: 'Artifact Technology',
+    tokenId: '4',
+    event: {
+      image_url: poap4 as unknown as string,
+      name: 'Artifact Technology',
+    },
   },
   {
-    id: '5',
-    imgSrc: poap5 as unknown as string,
-    name: 'Deadfellaz Halloween Happy Hour',
-  },
-
-  {
-    id: '6',
-    imgSrc: poap6 as unknown as string,
-    name: 'DODO 1 year celebration event',
-  },
-  {
-    id: '7',
-    imgSrc: poap7 as unknown as string,
-    name: 'Crypto something lecture',
-  },
-  {
-    id: '8',
-    imgSrc: poap8 as unknown as string,
-    name: 'Float Capital AMA',
-  },
-  {
-    id: '9',
-    imgSrc: poap9 as unknown as string,
-    name: 'NFTs + Philantropy lecture',
-  },
-  {
-    id: '10',
-    imgSrc: poap10 as unknown as string,
-    name: 'Shapeshift DAO weekly sprint participant',
+    tokenId: '5',
+    event: {
+      image_url: poap5 as unknown as string,
+      name: 'Deadfellaz Halloween Happy Hour',
+    },
   },
 
   {
-    id: '11',
-    imgSrc: poap11 as unknown as string,
-    name: '2 LIVES NFT art exhibition',
+    tokenId: '6',
+    event: {
+      image_url: poap6 as unknown as string,
+      name: 'DODO 1 year celebration event',
+    },
   },
   {
-    id: '12',
-    imgSrc: poap12 as unknown as string,
-    name: 'Mojito at Somewhere Nowhere party',
+    tokenId: '7',
+    event: {
+      image_url: poap7 as unknown as string,
+      name: 'Crypto something lecture',
+    },
   },
   {
-    id: '13',
-    imgSrc: poap13 as unknown as string,
-    name: 'Artifact Technology exhibition',
+    tokenId: '8',
+    event: {
+      image_url: poap8 as unknown as string,
+      name: 'Float Capital AMA',
+    },
   },
   {
-    id: '14',
-    imgSrc: poap14 as unknown as string,
-    name: 'Deadfellaz Halloween event',
+    tokenId: '9',
+    event: {
+      image_url: poap9 as unknown as string,
+      name: 'NFTs + Philantropy lecture',
+    },
   },
   {
-    id: '15',
-    imgSrc: poap15 as unknown as string,
-    name: 'Bitcoin crypto something event',
+    tokenId: '10',
+    event: {
+      image_url: poap10 as unknown as string,
+      name: 'Shapeshift DAO weekly sprint participant',
+    },
+  },
+
+  {
+    tokenId: '11',
+    event: {
+      image_url: poap11 as unknown as string,
+      name: '2 LIVES NFT art exhibition',
+    },
+  },
+  {
+    tokenId: '12',
+    event: {
+      image_url: poap12 as unknown as string,
+      name: 'Mojito at Somewhere Nowhere party',
+    },
+  },
+  {
+    tokenId: '13',
+    event: {
+      image_url: poap13 as unknown as string,
+      name: 'Artifact Technology exhibition',
+    },
+  },
+  {
+    tokenId: '14',
+    event: {
+      image_url: poap14 as unknown as string,
+      name: 'Deadfellaz Halloween event',
+    },
+  },
+  {
+    tokenId: '15',
+    event: {
+      image_url: poap15 as unknown as string,
+      name: 'Bitcoin crypto something event',
+    },
   },
 ];
 
