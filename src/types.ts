@@ -32,7 +32,9 @@ export type Project = {
 };
 
 export type POAP = {
-  id: string;
-  imgSrc: string;
-  name: string;
+  event: {
+    name: string;
+    image_url: string;
+  };
+  tokenId: string;
 };
