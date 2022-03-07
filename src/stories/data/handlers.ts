@@ -1,5 +1,5 @@
 import { graphql } from 'msw';
-import { poaps, stats, leaderData, projectData, rawPOAPs } from './index';
+import { gitPOAPs, stats, leaderData, projectData, rawPOAPs } from './index';
 
 export const GetAllStatsHandler = graphql.query('GetAllStats', (req, res, ctx) => {
   return res(
@@ -18,7 +18,7 @@ export const MostClaimedPoapsHandler = graphql.query('mostClaimedPoaps', (req, r
   return res(
     ctx.data({
       mostClaimedPoaps: {
-        poaps: [...Array(10).keys()].map(() => poaps[0]),
+        poaps: [...Array(10).keys()].map(() => gitPOAPs[0]),
       },
     }),
   );

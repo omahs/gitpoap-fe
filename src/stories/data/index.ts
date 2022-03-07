@@ -1,7 +1,15 @@
 import { GitPoap, POAP } from '../../types';
-import badgeImg from '../assets/badge1.png';
 import { Project } from '../../types';
 import { Stats } from '../../components/home/BannerStats';
+
+/* GitPOAPs */
+import badge1 from '../assets/gitPOAPs/badge1.png';
+import badge2 from '../assets/gitPOAPs/badge2.png';
+import badge3 from '../assets/gitPOAPs/badge3.png';
+import badge4 from '../assets/gitPOAPs/badge4.png';
+import badge5 from '../assets/gitPOAPs/badge5.png';
+import badge6 from '../assets/gitPOAPs/badge6.png';
+import badge7 from '../assets/gitPOAPs/badge7.png';
 
 /* Profile Pictures */
 import profile1 from '../assets/profile1.png';
@@ -27,27 +35,55 @@ import poap13 from '../assets/poaps/poap13.png';
 import poap14 from '../assets/poaps/poap14.png';
 import poap15 from '../assets/poaps/poap15.png';
 
-export const poaps: GitPoap[] = [
+export const gitPOAPs: GitPoap[] = [
   {
     id: '1',
-    imgSrc: badgeImg as unknown as string,
+    imgSrc: badge2 as unknown as string,
     name: 'Polygon Genesis Creator',
     orgName: 'Polygon',
     description: 'To the creators of Polygon Network',
   },
   {
     id: '2',
-    imgSrc: badgeImg as unknown as string,
-    name: 'Polygon Genesis Creator',
-    orgName: 'Polygon',
-    description: 'To the creators of Polygon Network',
+    imgSrc: badge3 as unknown as string,
+    name: 'AAVE Contributor 2021',
+    orgName: 'AAVE',
+    description: 'For all our valuable contributors in 2021',
   },
   {
     id: '3',
-    imgSrc: badgeImg as unknown as string,
-    name: 'Polygon Genesis Creator',
-    orgName: 'Polygon',
-    description: 'To the creators of Polygon Network',
+    imgSrc: badge1 as unknown as string,
+    name: 'AAVE Core Contributor',
+    orgName: 'AAVE',
+    description: 'Issued to core contributors of AAVE protocol',
+  },
+  {
+    id: '4',
+    imgSrc: badge4 as unknown as string,
+    name: 'Contributor 2021',
+    orgName: 'SUBSPACE',
+    description: 'For all Subspace contributors in 2021',
+  },
+  {
+    id: '5',
+    imgSrc: badge5 as unknown as string,
+    name: 'Contributor 2020',
+    orgName: 'SUBSPACE',
+    description: 'For all Subspace contributors in 2020',
+  },
+  {
+    id: '6',
+    imgSrc: badge6 as unknown as string,
+    name: 'Contributor 2019',
+    orgName: 'AAVE',
+    description: 'For all Subspace contributors in 2019',
+  },
+  {
+    id: '7',
+    imgSrc: badge7 as unknown as string,
+    name: 'AAVE Contributor 2019',
+    orgName: 'AAVE',
+    description: 'Everyone who helped us progressing in 2019',
   },
 ];
 
