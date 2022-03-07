@@ -95,6 +95,7 @@ export const AllPOAPs = ({ poaps }: Props) => {
                 id={poap.tokenId}
                 name={poap.event.name}
                 imgSrc={poap.event.image_url}
+                href={`https://app.poap.xyz/token/${poap.tokenId}`}
               />
             );
           })}

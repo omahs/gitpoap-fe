@@ -7,9 +7,10 @@ import { TextLight } from '../../../colors';
 
 type Props = {
   className?: string;
+  id: string;
   imgSrc: string;
   name: string;
-  href?: string;
+  href: string;
 };
 
 const Container = styled.div`
@@ -18,7 +19,7 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const ImgContainer = styled.div`
+const ImgContainer = styled.a`
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
@@ -50,7 +51,7 @@ const Title = styled(TitleUI)`
 export const POAPBadge = ({ className, imgSrc, name, href }: Props) => {
   return (
     <Container className={className}>
-      <ImgContainer>
+      <ImgContainer href={href} target="_blank" rel="noreferrer">
         <POAP quality={100} height={150} width={150} src={imgSrc} />
       </ImgContainer>
       <Title>{name}</Title>
