@@ -27,9 +27,7 @@ export const MostClaimedPoapsHandler = graphql.query('mostClaimedPoaps', (req, r
 export const LeadersHandler = graphql.query('leaders', (req, res, ctx) => {
   return res(
     ctx.data({
-      leaders: {
-        users: leaderData,
-      },
+      lastWeekMostHonoredContributors: leaderData,
     }),
   );
 });

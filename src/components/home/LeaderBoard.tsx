@@ -1,18 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
-import { useQuery } from 'urql';
+import { useQuery, gql } from 'urql';
 import { Header } from '../shared/elements/Header';
-import { BackgroundPanel2, TextAccent } from '../../colors';
+import { BackgroundPanel2 } from '../../colors';
 import { Avatar } from '../shared/elements/Avatar';
 import { IconCount } from '../shared/elements/IconCount';
 import { GitPOAP } from '../shared/elements/icons/GitPOAP';
 import { Divider as DividerUI } from '@mantine/core';
+import { Title } from '../shared/elements/Title';
 
-type LeaderBoardItemProps = {
-  imgSrc: string;
-  name: string;
-  count: number;
+export type LeaderBoardItemProps = {
+  claimsCount: number;
+  user: {
+    githubHandle: string;
+    id: number;
+  };
 };
 
 const Wrapper = styled.div`
@@ -20,13 +23,11 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const Name = styled.span`
+const Name = styled(Title)`
   font-family: VT323;
   font-style: normal;
   font-weight: normal;
   font-size: ${rem(22)};
-  letter-spacing: ${rem(0.5)};
-  color: ${TextAccent};
 `;
 
 const AvatarStyled = styled(Avatar)`
@@ -66,25 +67,30 @@ const List = styled.div`
   margin-top: ${rem(30)};
 `;
 
-const LeadersQuery = `
-query leaders {
-  users (orderBy: { count: desc }, first: 5) {
-    imgSrc
-    name
-    count
+const LeadersQuery = gql`
+  query leaders {
+    lastWeekMostHonoredContributors(count: 10) {
+      user {
+        id
+        githubHandle
+      }
+      claimsCount
+    }
   }
-}
 `;
 
-const LeaderBoardItem = ({ name, imgSrc, count }: LeaderBoardItemProps) => {
+const LeaderBoardItem = ({ user, claimsCount }: LeaderBoardItemProps) => {
+  const imgSrc = `https://github.com/${user.githubHandle}.png?size=200`;
   return (
     <>
       <Item>
         <UserInfo>
           <AvatarStyled src={imgSrc} />
-          <Name>{name}</Name>
+          <a href={`https://github.com/${user.githubHandle}`} target="_blank" rel="noreferrer">
+            <Name>{user.githubHandle}</Name>
+          </a>
         </UserInfo>
-        <IconCount icon={<GitPOAP />} count={count} />
+        <IconCount icon={<GitPOAP />} count={claimsCount} />
       </Item>
       <Divider />
     </>
@@ -93,9 +99,7 @@ const LeaderBoardItem = ({ name, imgSrc, count }: LeaderBoardItemProps) => {
 
 export const LeaderBoard = () => {
   const [result] = useQuery<{
-    leaders: {
-      users: LeaderBoardItemProps[];
-    };
+    lastWeekMostHonoredContributors: LeaderBoardItemProps[];
   }>({
     query: LeadersQuery,
   });
@@ -104,8 +108,8 @@ export const LeaderBoard = () => {
     <Wrapper>
       <HeaderStyled>{'Most honored contributors last week'}</HeaderStyled>
       <List>
-        {result.data?.leaders.users.map((item: LeaderBoardItemProps) => (
-          <LeaderBoardItem key={item.name} {...item} />
+        {result.data?.lastWeekMostHonoredContributors.map((item: LeaderBoardItemProps) => (
+          <LeaderBoardItem key={item.user.githubHandle} {...item} />
         ))}
       </List>
     </Wrapper>

@@ -1,6 +1,7 @@
 import { GitPoap, POAP } from '../../types';
 import { Project } from '../../types';
 import { Stats } from '../../components/home/BannerStats';
+import { LeaderBoardItemProps } from '../../components/home/LeaderBoard';
 
 /* GitPOAPs */
 import badge1 from '../assets/gitPOAPs/badge1.png';
@@ -258,31 +259,41 @@ export const projectData: Project[] = [
   },
 ];
 
-export const leaderData = [
+export const leaderData: LeaderBoardItemProps[] = [
   {
-    name: 'nd-certora',
-    imgSrc: profile1 as unknown as string,
-    count: 12,
+    claimsCount: 12,
+    user: {
+      githubHandle: 'nd-certora',
+      id: 1,
+    },
   },
   {
-    name: 'matthewlilley',
-    imgSrc: profile2 as unknown as string,
-    count: 11,
+    claimsCount: 11,
+    user: {
+      githubHandle: 'matthewlilley',
+      id: 2,
+    },
   },
   {
-    name: 'chefnomi',
-    imgSrc: profile3 as unknown as string,
-    count: 9,
+    claimsCount: 9,
+    user: {
+      githubHandle: 'chefnomi',
+      id: 2,
+    },
   },
   {
-    name: 'clearwood.eth',
-    imgSrc: profile4 as unknown as string,
-    count: 5,
+    claimsCount: 5,
+    user: {
+      githubHandle: 'vbuterin',
+      id: 2,
+    },
   },
   {
-    name: 'levx-io',
-    imgSrc: profile5 as unknown as string,
-    count: 5,
+    claimsCount: 5,
+    user: {
+      githubHandle: 'levx-io',
+      id: 2,
+    },
   },
 ];
 
