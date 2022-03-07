@@ -5,7 +5,12 @@ module.exports = {
     styledComponents: true,
   },
   images: {
-    domains: ['assets.poap.xyz', 'github.com', 'githubusercontent.com'],
+    domains: [
+      'assets.poap.xyz',
+      'github.com',
+      'githubusercontent.com',
+      'avatars.githubusercontent.com',
+    ],
   },
   webpack: (config, options) => {
     if (!options.isServer) {
