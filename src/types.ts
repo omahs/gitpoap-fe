@@ -23,14 +23,8 @@ export type GitPOAPGql = {
         name: string;
       };
     };
-    poap: {
-      event: {
-        name: string;
-        image_url: string;
-      };
-      tokenId: string;
-    };
   };
+  poap: POAP;
 };
 
 export enum ClaimStatus {

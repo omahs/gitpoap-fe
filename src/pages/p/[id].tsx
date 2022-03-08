@@ -5,12 +5,17 @@ import { Grid } from '@mantine/core';
 import { Page } from '../_app';
 import { Layout } from '../../components/Layout';
 import { AllPOAPs } from '../../components/profile/AllPOAPs';
+import { GitPOAPs } from '../../components/profile/GitPOAPs';
 import { useRouter } from 'next/router';
 
 const Profile: Page = () => {
   const router = useRouter();
   /* ENS or ETH address */
   const address = router.query.id as string;
+
+  if (!router.isReady) {
+    return null;
+  }
 
   return (
     <>
@@ -24,7 +29,9 @@ const Profile: Page = () => {
         <Grid.Col span={12}>{'The Profile Hex'}</Grid.Col>
         <Grid justify="center">
           <Grid.Col span={11}>{'Featured POAPs'}</Grid.Col>
-          <Grid.Col span={11}>{/* <GitPOAPs /> */}</Grid.Col>
+          <Grid.Col span={11}>
+            <GitPOAPs address={address} />
+          </Grid.Col>
           <Grid.Col span={11} style={{ marginBottom: rem(150) }}>
             <AllPOAPs address={address} />
           </Grid.Col>

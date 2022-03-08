@@ -34,6 +34,7 @@ const GitPOAPBadge = styled(GitPOAPBadgeUI)`
 const GitPOAPsQuery = gql`
   query gitPOAPs($address: String!, $sort: String, $page: Float, $perPage: Float) {
     userPOAPs(address: $address, sort: $sort, page: $page, perPage: $perPage) {
+      totalGitPOAPs
       gitPOAPs {
         claim {
           gitPOAP {
@@ -57,9 +58,9 @@ const GitPOAPsQuery = gql`
 export const GitPOAPs = ({ address }: Props) => {
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState<SortOptions>('date');
-  const [gitPOAPs, setGitPOAPs] = useState<GitPOAPGql[]>([]);
+  const [gitPOAPItems, setGitPOAPItems] = useState<GitPOAPGql[]>([]);
   const [total, setTotal] = useState<number>();
-  const perPage = 4;
+  const perPage = 1;
 
   const [result] = useQuery<{
     userPOAPs: {
@@ -76,9 +77,9 @@ export const GitPOAPs = ({ address }: Props) => {
     },
   });
 
-  /* Hook to append new data onto existing list of poaps */
+  /* Hook to append new data onto existing list of gitPOAPs */
   useEffect(() => {
-    setGitPOAPs((prev: GitPOAPGql[]) => {
+    setGitPOAPItems((prev: GitPOAPGql[]) => {
       if (result.data?.userPOAPs) {
         return [...prev, ...result.data.userPOAPs.gitPOAPs];
       }
@@ -86,7 +87,7 @@ export const GitPOAPs = ({ address }: Props) => {
     });
   }, [result.data]);
 
-  /* Hook to set total number of poaps */
+  /* Hook to set total number of GitPOAPs */
   useEffect(() => {
     if (result.data?.userPOAPs) {
       setTotal(result.data.userPOAPs.totalGitPOAPs);
@@ -99,18 +100,18 @@ export const GitPOAPs = ({ address }: Props) => {
 
   return (
     <ItemList
-      title={`GitPOAPs: ${total}`}
+      title={`GitPOAPs: ${total ?? ''}`}
       selectOptions={selectOptions}
       selectValue={sort}
       onSelectChange={(sortValue) => {
         if (sortValue !== sort) {
           setSort(sortValue as SortOptions);
-          setGitPOAPs([]);
+          setGitPOAPItems([]);
           setPage(1);
         }
       }}
       isLoading={result.fetching}
-      hasShowMoreButton={!!total && gitPOAPs.length < total}
+      hasShowMoreButton={!!total && gitPOAPItems.length < total}
       showMoreOnClick={() => {
         if (!result.fetching) {
           setPage(page + 1);
@@ -118,14 +119,14 @@ export const GitPOAPs = ({ address }: Props) => {
       }}
     >
       <GitPOAPList>
-        {gitPOAPs &&
-          gitPOAPs.map((gitPOAP) => {
+        {gitPOAPItems &&
+          gitPOAPItems.map((gitPOAPItem) => {
             return (
               <GitPOAPBadge
-                key={gitPOAP.claim.poap.tokenId}
-                orgName={gitPOAP.claim.gitPOAP.repo.name}
-                name={gitPOAP.claim.poap.event.name}
-                imgSrc={gitPOAP.claim.poap.event.image_url}
+                key={gitPOAPItem.poap.tokenId}
+                orgName={gitPOAPItem.claim.gitPOAP.repo.name}
+                name={gitPOAPItem.poap.event.name}
+                imgSrc={gitPOAPItem.poap.event.image_url}
               />
             );
           })}
