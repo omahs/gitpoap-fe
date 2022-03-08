@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
-import { Header } from '../shared/elements/Header';
-import { Button } from '../shared/elements/Button';
+import { Header } from '../elements/Header';
+import { Button } from '../elements/Button';
 import { FaPlus } from 'react-icons/fa';
-import { Select } from '../shared/elements/Select';
-import { Text } from '../shared/elements/Text';
-import { TextGray } from '../../colors';
+import { Select } from '../elements/Select';
+import { Text } from '../elements/Text';
+import { TextGray } from '../../../colors';
 
 type Props = {
   title: string;
@@ -19,7 +19,7 @@ type Props = {
   showMoreOnClick: () => void;
 };
 
-export type SelectOption = { value: string; label: string };
+export type SelectOption<T = string> = { value: T; label: string };
 
 const Container = styled.div`
   display: inline-flex;
