@@ -2,27 +2,19 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
 import { useQuery, gql } from 'urql';
-import { Header } from '../shared/elements/Header';
-import { Button } from '../shared/elements/Button';
 import { POAP } from '../../types';
-import { FaPlus } from 'react-icons/fa';
 import { POAPBadge as POAPBadgeUI } from '../shared/elements/POAPBadge';
-import { Select } from '../shared/elements/Select';
-import { Text } from '../shared/elements/Text';
-import { TextGray } from '../../colors';
+import { ItemList, SelectOption } from './ItemList';
 
 type Props = {
   address: string;
 };
 
-enum SortOptions {
-  Date = 'date',
-  Alphabetical = 'alphabetical',
-}
+type SortOptions = 'date' | 'alphabetical';
 
-const selectOptions: { value: SortOptions; label: string }[] = [
-  { value: SortOptions.Date, label: 'Date of Claim' },
-  { value: SortOptions.Alphabetical, label: 'Alphabetical' },
+const selectOptions: SelectOption[] = [
+  { value: 'date', label: 'Date of Claim' },
+  { value: 'alphabetical', label: 'Alphabetical' },
 ];
 
 const AllPOAPsQuery = gql`
@@ -47,29 +39,6 @@ export type UserPOAPsQueryRes = {
   } | null;
 };
 
-const Container = styled.div`
-  display: inline-flex;
-  flex-direction: column;
-  width: 100%;
-`;
-
-const Heading = styled.div`
-  display: inline-flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const POAPCount = styled(Header)`
-  font-size: ${rem(30)};
-  line-height: ${rem(42)};
-`;
-
-const Sorting = styled.div`
-  display: inline-flex;
-  flex-direction: row;
-`;
-
 const POAPs = styled.div`
   display: inline-flex;
   flex-direction: row;
@@ -84,27 +53,11 @@ const POAPBadge = styled(POAPBadgeUI)`
   margin-top: ${rem(30)};
 `;
 
-const ShowMore = styled(Button)`
-  align-self: center;
-`;
-
-const SortBy = styled(Text)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: ${rem(12)};
-  line-height: ${rem(18)};
-  letter-spacing: ${rem(2)};
-  text-transform: uppercase;
-  color: ${TextGray};
-  margin-right: ${rem(10)};
-`;
-
 export const AllPOAPs = ({ address }: Props) => {
   const [page, setPage] = useState(1);
-  const [sort, setSort] = useState<SortOptions>(SortOptions.Date);
+  const [sort, setSort] = useState<SortOptions>('date');
   const [gitPOAPs, setGitPOAPs] = useState<POAP[]>([]);
-  const [total, setTotal] = useState('');
+  const [total, setTotal] = useState<number>();
   const perPage = 4;
   const [result] = useQuery<UserPOAPsQueryRes>({
     query: AllPOAPsQuery,
@@ -127,7 +80,7 @@ export const AllPOAPs = ({ address }: Props) => {
 
   useEffect(() => {
     if (result.data?.userPOAPs) {
-      setTotal(result.data.userPOAPs.totalPOAPs.toString());
+      setTotal(result.data.userPOAPs.totalPOAPs);
     }
   }, [result.data]);
 
@@ -136,24 +89,25 @@ export const AllPOAPs = ({ address }: Props) => {
   }
 
   return (
-    <Container>
-      <Heading>
-        <POAPCount>{`All POAPS: ${total}`}</POAPCount>
-        <Sorting>
-          <SortBy>{'Sort By: '}</SortBy>
-          <Select
-            data={selectOptions}
-            value={sort}
-            onChange={(sortValue: SortOptions) => {
-              if (sortValue !== sort) {
-                setSort(sortValue);
-                setGitPOAPs([]);
-                setPage(1);
-              }
-            }}
-          />
-        </Sorting>
-      </Heading>
+    <ItemList
+      title={`All POAPs: ${total}`}
+      selectOptions={selectOptions}
+      selectValue={sort}
+      onSelectChange={(sortValue) => {
+        if (sortValue !== sort) {
+          setSort(sortValue as SortOptions);
+          setGitPOAPs([]);
+          setPage(1);
+        }
+      }}
+      isLoading={result.fetching}
+      hasShowMoreButton={!!total && gitPOAPs.length < total}
+      showMoreOnClick={() => {
+        if (!result.fetching) {
+          setPage(page + 1);
+        }
+      }}
+    >
       <POAPs>
         {gitPOAPs &&
           gitPOAPs.map((gitPOAP) => {
@@ -168,20 +122,6 @@ export const AllPOAPs = ({ address }: Props) => {
             );
           })}
       </POAPs>
-      {result.data?.userPOAPs && result.data.userPOAPs?.totalPOAPs > gitPOAPs.length && (
-        <ShowMore
-          onClick={() => {
-            if (!result.fetching) {
-              setPage(page + 1);
-            }
-          }}
-          leftIcon={<FaPlus />}
-          variant="outline"
-          loading={result.fetching}
-        >
-          {'Show more'}
-        </ShowMore>
-      )}
-    </Container>
+    </ItemList>
   );
 };
