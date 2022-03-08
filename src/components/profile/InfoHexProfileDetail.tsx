@@ -142,11 +142,8 @@ export const InfoHexProfileDetail = ({
               return (
                 <ProjectHex
                   key={project.id}
-                  category={project.category}
+                  category={project.Organization.name}
                   name={project.name}
-                  memberCount={project.memberCount}
-                  gitPoapCount={project.gitPoapCount}
-                  stars={project.stars}
                 />
               );
             })}
