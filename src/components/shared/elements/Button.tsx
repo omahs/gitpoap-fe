@@ -19,6 +19,7 @@ type Props = {
   leftIcon?: React.ComponentProps<typeof ButtonUI>['leftIcon'];
   rightIcon?: React.ComponentProps<typeof ButtonUI>['rightIcon'];
   size?: React.ComponentProps<typeof ButtonUI>['size'];
+  loading?: React.ComponentProps<typeof ButtonUI>['loading'];
   variant?: 'filled' | 'outline';
 };
 
@@ -90,6 +91,7 @@ export const Button = ({
   rightIcon,
   variant,
   size,
+  loading,
 }: Props) => {
   return (
     <StyledButton
@@ -100,6 +102,7 @@ export const Button = ({
       leftIcon={leftIcon}
       rightIcon={rightIcon}
       variant={variant}
+      loading={loading}
     >
       {children}
     </StyledButton>

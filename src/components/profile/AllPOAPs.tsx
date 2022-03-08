@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
+import { useQuery, gql } from 'urql';
 import { Header } from '../shared/elements/Header';
 import { Button } from '../shared/elements/Button';
 import { POAP } from '../../types';
@@ -10,18 +11,42 @@ import { Select } from '../shared/elements/Select';
 import { Text } from '../shared/elements/Text';
 import { TextGray } from '../../colors';
 
-type Props = {
-  poaps?: POAP[];
-};
-
 enum SortOptions {
-  Date = 'Date',
-  Alphabetical = 'Alphabetical',
+  Date = 'date',
+  Alphabetical = 'alphabetical',
 }
+
+const selectOptions: { value: SortOptions; label: string }[] = [
+  { value: SortOptions.Date, label: 'Date of Claim' },
+  { value: SortOptions.Alphabetical, label: 'Alphabetical' },
+];
+
+const AllPOAPsQuery = gql`
+  query allPOAPs($address: String!, $sort: String, $page: Float, $perPage: Float) {
+    userPOAPs(address: $address, sort: $sort, page: $page, perPage: $perPage) {
+      totalPOAPs
+      poaps {
+        event {
+          name
+          image_url
+        }
+        tokenId
+      }
+    }
+  }
+`;
+
+export type UserPOAPsQueryRes = {
+  userPOAPs: {
+    totalPOAPs: number;
+    poaps: POAP[];
+  };
+};
 
 const Container = styled.div`
   display: inline-flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 const Heading = styled.div`
@@ -71,38 +96,77 @@ const SortBy = styled(Text)`
   margin-right: ${rem(10)};
 `;
 
-export const AllPOAPs = ({ poaps }: Props) => {
-  const selectOptions: { value: SortOptions; label: string }[] = [
-    { value: SortOptions.Date, label: 'Date of Claim' },
-    { value: SortOptions.Alphabetical, label: 'Alphabetical' },
-  ];
+export const AllPOAPs = () => {
+  const [page, setPage] = useState(1);
+  const [sort, setSort] = useState<SortOptions>(SortOptions.Date);
+  const [gitPOAPs, setGitPOAPs] = useState<POAP[]>([]);
+  const perPage = 4;
+  const [result] = useQuery<UserPOAPsQueryRes>({
+    query: AllPOAPsQuery,
+    variables: {
+      address: 'peebeejay.eth',
+      page: page,
+      perPage,
+      sort,
+    },
+  });
+
+  useEffect(() => {
+    setGitPOAPs((prev: POAP[]) => {
+      if (result.data?.userPOAPs) {
+        return [...prev, ...result.data.userPOAPs.poaps];
+      }
+      return prev;
+    });
+  }, [result.data]);
 
   return (
     <Container>
       <Heading>
-        <POAPCount>{`All POAPS: ${poaps?.length ?? ''}`}</POAPCount>
+        <POAPCount>{`All POAPS: ${result.data?.userPOAPs.totalPOAPs ?? ''}`}</POAPCount>
         <Sorting>
           <SortBy>{'Sort By: '}</SortBy>
-          <Select data={selectOptions} value={SortOptions.Date} />
+          <Select
+            data={selectOptions}
+            value={sort}
+            onChange={(sortValue: SortOptions) => {
+              if (sortValue !== sort) {
+                setSort(sortValue);
+                setGitPOAPs([]);
+                setPage(1);
+              }
+            }}
+          />
         </Sorting>
       </Heading>
       <POAPs>
-        {poaps &&
-          poaps.map((poap) => {
+        {gitPOAPs &&
+          gitPOAPs.map((gitPOAP) => {
             return (
               <POAPBadge
-                key={poap.tokenId}
-                id={poap.tokenId}
-                name={poap.event.name}
-                imgSrc={poap.event.image_url}
-                href={`https://app.poap.xyz/token/${poap.tokenId}`}
+                key={gitPOAP.tokenId}
+                id={gitPOAP.tokenId}
+                name={gitPOAP.event.name}
+                imgSrc={gitPOAP.event.image_url}
+                href={`https://app.poap.xyz/token/${gitPOAP.tokenId}`}
               />
             );
           })}
       </POAPs>
-      <ShowMore leftIcon={<FaPlus />} variant="outline">
-        {'Show more'}
-      </ShowMore>
+      {result.data && result.data.userPOAPs.totalPOAPs > gitPOAPs.length && (
+        <ShowMore
+          onClick={() => {
+            if (!result.fetching) {
+              setPage(page + 1);
+            }
+          }}
+          leftIcon={<FaPlus />}
+          variant="outline"
+          loading={result.fetching}
+        >
+          {'Show more'}
+        </ShowMore>
+      )}
     </Container>
   );
 };
