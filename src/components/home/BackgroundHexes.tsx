@@ -2,7 +2,13 @@ import { forwardRef, Ref, SVGAttributes } from 'react';
 
 export const BackgroundHexes = forwardRef(
   (props: SVGAttributes<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1440 479" {...props} ref={ref}>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 1440 479"
+      className={props.className}
+      ref={ref}
+    >
       <g clipPath="url(#clip0_295_4974)">
         <path fill="#10111E" d="M0 0H1440V479H0z"></path>
         <path
