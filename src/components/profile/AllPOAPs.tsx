@@ -92,7 +92,7 @@ export const AllPOAPs = ({ address }: Props) => {
 
   return (
     <ItemList
-      title={`All POAPs: ${total}`}
+      title={`All POAPs: ${total ?? ''}`}
       selectOptions={selectOptions}
       selectValue={sort}
       onSelectChange={(sortValue) => {
