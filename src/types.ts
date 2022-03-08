@@ -34,12 +34,12 @@ export enum ClaimStatus {
 }
 
 export type Project = {
-  id: string;
-  category: string;
+  id: number;
   name: string;
-  memberCount: number;
-  gitPoapCount: number;
-  stars: number;
+  createdAt: string;
+  Organization: {
+    name: string;
+  };
 };
 
 export type POAP = {
