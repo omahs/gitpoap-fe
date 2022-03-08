@@ -7,3 +7,4 @@ coverage
 
 # Ignore markdown:
 README.md
+*.md
