@@ -8,8 +8,8 @@ export default {
 } as ComponentMeta<typeof AllPOAPs>;
 
 const Template: ComponentStory<typeof AllPOAPs> = (args) => {
-  return <AllPOAPs />;
+  return <AllPOAPs {...args} />;
 };
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = { address: 'peebeejay.eth' };
