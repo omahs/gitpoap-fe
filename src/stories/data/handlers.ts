@@ -1,6 +1,6 @@
 import { graphql } from 'msw';
 import { UserPOAPsQueryRes } from '../../components/profile/AllPOAPs';
-import { gitPOAPs, stats, leaderData, projectData, rawPOAPs } from './index';
+import { gitPOAPs, stats, leaderData, projectData, rawPOAPs, mostClaimed } from './index';
 
 export const GetAllStatsHandler = graphql.query('GetAllStats', (req, res, ctx) => {
   return res(
@@ -15,12 +15,10 @@ export const GetAllStatsHandler = graphql.query('GetAllStats', (req, res, ctx) =
   );
 });
 
-export const MostClaimedPoapsHandler = graphql.query('mostClaimedPoaps', (req, res, ctx) => {
+export const MostClaimedGitPoapsHandler = graphql.query('mostClaimedGitPoaps', (req, res, ctx) => {
   return res(
     ctx.data({
-      mostClaimedPoaps: {
-        poaps: [...Array(10).keys()].map(() => gitPOAPs[0]),
-      },
+      mostClaimedGitPOAPs: mostClaimed,
     }),
   );
 });
@@ -36,9 +34,7 @@ export const LeadersHandler = graphql.query('leaders', (req, res, ctx) => {
 export const RecentProjectsHandler = graphql.query('recentProjects', (req, res, ctx) => {
   return res(
     ctx.data({
-      recentProjects: {
-        projects: projectData,
-      },
+      recentlyAddedProjects: projectData,
     }),
   );
 });

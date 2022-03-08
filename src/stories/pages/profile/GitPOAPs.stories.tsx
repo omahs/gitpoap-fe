@@ -12,4 +12,4 @@ const Template: ComponentStory<typeof GitPOAPs> = (args) => {
 };
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = { address: 'peebeejay.eth' };

@@ -1,7 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { RecentlyAdded } from '../../../components/home/RecentlyAdded';
-import { RecentProjectsHandler } from '../../data/handlers';
 
 export default {
   title: 'Home/RecentlyAdded',
@@ -15,10 +14,4 @@ const Template: ComponentStory<typeof RecentlyAdded> = () => {
 export const Default = Template.bind({});
 Default.args = {
   title: 'Most honored contributors last week',
-};
-
-Default.parameters = {
-  msw: {
-    handlers: [RecentProjectsHandler],
-  },
 };

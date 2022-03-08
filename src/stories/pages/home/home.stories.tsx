@@ -1,11 +1,5 @@
 import Home from '../../../pages/index';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import {
-  LeadersHandler,
-  GetAllStatsHandler,
-  RecentProjectsHandler,
-  MostClaimedPoapsHandler,
-} from '../../data/handlers';
 import { Layout } from '../../../components/Layout';
 
 export default {
@@ -23,9 +17,3 @@ const Template: ComponentStory<typeof Home> = () => {
 
 export const Default = Template.bind({});
 Default.args = {};
-
-Default.parameters = {
-  msw: {
-    handlers: [RecentProjectsHandler, LeadersHandler, GetAllStatsHandler, MostClaimedPoapsHandler],
-  },
-};

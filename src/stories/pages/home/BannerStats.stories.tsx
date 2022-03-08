@@ -1,7 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { BannerStats } from '../../../components/home/BannerStats';
-import { GetAllStatsHandler } from '../../data/handlers';
 
 export default {
   title: 'Home/BannerStats',
@@ -13,8 +12,3 @@ const Template: ComponentStory<typeof BannerStats> = () => {
 };
 
 export const Default = Template.bind({});
-Default.parameters = {
-  msw: {
-    handlers: [GetAllStatsHandler],
-  },
-};

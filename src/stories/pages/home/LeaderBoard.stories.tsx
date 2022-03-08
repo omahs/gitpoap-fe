@@ -1,7 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { LeaderBoard } from '../../../components/home/LeaderBoard';
-import { LeadersHandler } from '../../data/handlers';
 
 export default {
   title: 'Home/LeaderBoard',
@@ -13,9 +12,3 @@ const Template: ComponentStory<typeof LeaderBoard> = () => {
 };
 
 export const Default = Template.bind({});
-
-Default.parameters = {
-  msw: {
-    handlers: [LeadersHandler],
-  },
-};

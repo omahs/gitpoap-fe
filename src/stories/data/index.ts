@@ -1,3 +1,4 @@
+import { DateTime } from 'luxon';
 import { GitPOAP, POAP } from '../../types';
 import { Project } from '../../types';
 import { Stats } from '../../components/home/BannerStats';
@@ -35,6 +36,7 @@ import poap12 from '../assets/poaps/poap12.png';
 import poap13 from '../assets/poaps/poap13.png';
 import poap14 from '../assets/poaps/poap14.png';
 import poap15 from '../assets/poaps/poap15.png';
+import { MostClaimedItem } from '../../components/home/MostClaimed';
 
 export const gitPOAPs: GitPOAP[] = [
   {
@@ -200,92 +202,114 @@ export const rawPOAPs: POAP[] = [
 
 export const projectData: Project[] = [
   {
-    id: '1',
+    id: 1,
     name: 'Acala',
-    memberCount: 80,
-    gitPoapCount: 15,
-    stars: 1507,
-    category: 'Exchanges',
+    createdAt: DateTime.utc(2017, 5, 15).toISO(),
+    // memberCount: 80,
+    // gitPoapCount: 15,
+    // stars: 1507,
+    // category: 'Exchanges',
+    Organization: { name: 'Exchanges' },
   },
   {
-    id: '2',
+    id: 2,
     name: 'ACDX',
-    memberCount: 44,
-    gitPoapCount: 8,
-    stars: 240,
-    category: 'Blockchain',
+    createdAt: DateTime.utc(2017, 5, 15).toISO(),
+    // memberCount: 44,
+    // gitPoapCount: 8,
+    // stars: 240,
+    // category: 'Blockchain',
+    Organization: { name: 'Blockchain' },
   },
   {
-    id: '3',
+    id: 3,
     name: 'Aegis',
-    memberCount: 9,
-    gitPoapCount: 5,
-    stars: 15,
-    category: 'DAPP',
+    createdAt: DateTime.utc(2017, 5, 15).toISO(),
+    // memberCount: 9,
+    // gitPoapCount: 5,
+    // stars: 15,
+    // category: 'DAPP',
+    Organization: { name: 'DAPP' },
   },
   {
-    id: '4',
+    id: 4,
     name: 'YFValue',
-    memberCount: 6,
-    gitPoapCount: 2,
-    stars: 912,
-    category: 'DAPP',
+    createdAt: DateTime.utc(2017, 5, 15).toISO(),
+    // memberCount: 6,
+    // gitPoapCount: 2,
+    // stars: 912,
+    // category: 'DAPP',
+    Organization: { name: 'DAPP' },
   },
   {
-    id: '5',
+    id: 5,
     name: 'Celo',
-    memberCount: 17,
-    gitPoapCount: 3,
-    stars: 492,
-    category: 'Blockchain',
+    createdAt: DateTime.utc(2017, 5, 15).toISO(),
+    // memberCount: 17,
+    // gitPoapCount: 3,
+    // stars: 492,
+    // category: 'Blockchain',
+    Organization: { name: 'Blockchain' },
   },
   {
-    id: '6',
+    id: 6,
     name: 'Liquidity Vision',
-    memberCount: 9,
-    gitPoapCount: 3,
-    stars: 95,
-    category: 'Investing',
+    createdAt: DateTime.utc(2017, 5, 15).toISO(),
+    // memberCount: 9,
+    // gitPoapCount: 3,
+    // stars: 95,
+    // category: 'Investing',
+    Organization: { name: 'Investing' },
   },
   {
-    id: '7',
+    id: 7,
     name: 'Curve',
-    memberCount: 36,
-    gitPoapCount: 10,
-    stars: 1024,
-    category: 'Exchanges',
+    createdAt: DateTime.utc(2017, 5, 15).toISO(),
+    // memberCount: 36,
+    // gitPoapCount: 10,
+    // stars: 1024,
+    // category: 'Exchanges',
+    Organization: { name: 'Exchanges' },
   },
   {
-    id: '8',
+    id: 8,
     name: 'SushiSwap',
-    memberCount: 48,
-    gitPoapCount: 20,
-    stars: 984,
-    category: 'Exchanges',
+    createdAt: DateTime.utc(2017, 5, 15).toISO(),
+    // memberCount: 48,
+    // gitPoapCount: 20,
+    // stars: 984,
+    // category: 'Exchanges',
+    Organization: { name: 'Exchanges' },
   },
   {
-    id: '9',
+    id: 9,
     name: 'Polygon',
-    memberCount: 80,
-    gitPoapCount: 15,
-    stars: 1507,
-    category: 'Blockchain',
+    createdAt: DateTime.utc(2017, 5, 15).toISO(),
+    // memberCount: 80,
+    // gitPoapCount: 15,
+    // stars: 1507,
+    // category: 'Blockchain',
+    Organization: { name: 'Blockchain' },
   },
   {
-    id: '10',
+    id: 10,
     name: 'AAVE',
-    memberCount: 44,
-    gitPoapCount: 8,
-    stars: 973,
-    category: 'Blockchain',
+    createdAt: DateTime.utc(2017, 5, 15).toISO(),
+    // memberCount: 44,
+    // gitPoapCount: 8,
+    // stars: 973,
+    // category: 'Blockchain',
+    Organization: { name: 'Blockchain' },
   },
   {
-    id: '11',
+    id: 11,
     name: 'Subspace',
-    memberCount: 6,
-    gitPoapCount: 2,
-    stars: 85,
-    category: 'DApp',
+    createdAt: DateTime.utc(2017, 5, 15).toISO(),
+    // memberCount: 6,
+    // gitPoapCount: 2,
+    // stars: 85,
+    // category: 'DApp',
+    Organization: { name: 'DApp' },
   },
 ];
 
@@ -345,5 +369,47 @@ export const stats: Stats[] = [
     unit: 'projects',
     rate: 17,
     icon: 'project',
+  },
+];
+
+export const mostClaimed: MostClaimedItem[] = [
+  {
+    claimsCount: 35,
+    gitPOAP: {
+      id: 1,
+      repo: {
+        name: 'Polygon',
+      },
+    },
+    event: {
+      name: 'Polygon Genesis Creator',
+      image_url: badge2 as unknown as string,
+    },
+  },
+  {
+    claimsCount: 22,
+    gitPOAP: {
+      id: 2,
+      repo: {
+        name: 'AAVE',
+      },
+    },
+    event: {
+      name: 'AAVE Contributor 2021',
+      image_url: badge3 as unknown as string,
+    },
+  },
+  {
+    claimsCount: 10,
+    gitPOAP: {
+      id: 3,
+      repo: {
+        name: 'AAVE',
+      },
+    },
+    event: {
+      name: 'AAVE Core Contributor',
+      image_url: badge1 as unknown as string,
+    },
   },
 ];

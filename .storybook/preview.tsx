@@ -4,6 +4,7 @@ import { withGlobalStyles } from './decorators/withGlobalStyles';
 import { withProviders } from './decorators/withProviders';
 import { initialize, mswDecorator } from 'msw-storybook-addon';
 import * as NextImage from 'next/image';
+import * as handlers from '../src/stories/data/handlers';
 
 // Initialize Mock Service Worker (MSW)
 initialize();
@@ -33,5 +34,8 @@ export const parameters = {
   },
   nextRouter: {
     Provider: RouterContext.Provider,
+  },
+  msw: {
+    handlers,
   },
 };
