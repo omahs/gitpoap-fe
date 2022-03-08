@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
-import { useQuery } from 'urql';
+import { useQuery, gql } from 'urql';
 import { FaArrowRight } from 'react-icons/fa';
 import { FaQuestion } from 'react-icons/fa';
 import { ProjectHex as ProjectHexUI } from '../shared/compounds/ProjectHex';
@@ -54,23 +54,25 @@ const Header = styled(HeaderUI)`
   align-items: center;
 `;
 
-const RecentProjectsQuery = `
-query recentProjects {
-  allStats {
-    value
-    unit
-    rate
-    icon
+const RecentProjectsQuery = gql`
+  query recentProjects {
+    recentlyAddedProjects(count: 12) {
+      id
+      name
+      createdAt
+      Organization {
+        name
+      }
+    }
   }
-}
 `;
 
+type RecentProjectsQueryRes = {
+  recentlyAddedProjects: Project[];
+};
+
 export const RecentlyAdded = () => {
-  const [result] = useQuery<{
-    recentProjects: {
-      projects: Project[];
-    };
-  }>({
+  const [result] = useQuery<RecentProjectsQueryRes>({
     query: RecentProjectsQuery,
   });
   const [isOpen, setIsOpen] = useState(false);
@@ -90,16 +92,9 @@ export const RecentlyAdded = () => {
         />
       </Header>
       <Projects>
-        {result.data?.recentProjects.projects.map((project) => {
+        {result.data?.recentlyAddedProjects.map((project) => {
           return (
-            <ProjectHex
-              key={project.id}
-              category={project.category}
-              name={project.name}
-              memberCount={project.memberCount}
-              gitPoapCount={project.gitPoapCount}
-              stars={project.stars}
-            />
+            <ProjectHex key={project.id} category={project.Organization.name} name={project.name} />
           );
         })}
       </Projects>
