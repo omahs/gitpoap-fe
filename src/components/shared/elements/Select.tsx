@@ -80,6 +80,12 @@ export const Select = (props: Props) => {
         hovered: {
           backgroundColor: BackgroundPanel2,
         },
+        selected: {
+          backgroundColor: TextDarkGray,
+          '&:hover': {
+            backgroundColor: BackgroundPanel2,
+          },
+        },
       }}
       onDropdownOpen={() => setIsOpen(true)}
       onDropdownClose={() => setIsOpen(false)}
