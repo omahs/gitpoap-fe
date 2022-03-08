@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
-import { useQuery } from 'urql';
+import { useQuery, gql } from 'urql';
 import { Header } from '../shared/elements/Header';
-import { GitPOAP } from '../../types';
 import { GitPOAP as GitPOAPUI } from '../shared/compounds/GitPOAP';
 import { Button } from '../shared/elements/Button';
 import { FaArrowRight } from 'react-icons/fa';
@@ -29,21 +28,41 @@ const GitPOAPBadge = styled(GitPOAPUI)`
   margin-bottom: ${rem(36)};
 `;
 
-const MostClaimedQuery = `
-query mostClaimedPoaps {
-  poaps (orderBy: { count: desc }, first: 5) {
-    imgSrc
-    name
-    count
+type MostClaimedItem = {
+  claimsCount: number;
+  gitPOAP: {
+    id: number;
+    repo: {
+      name: string;
+    };
+  };
+  event: {
+    name: string;
+    image_url: string;
+  };
+};
+
+const MostClaimedQuery = gql`
+  query mostClaimedGitPoaps {
+    mostClaimedGitPOAPs(count: 10) {
+      claimsCount
+      gitPOAP {
+        id
+        repo {
+          name
+        }
+      }
+      event {
+        name
+        image_url
+      }
+    }
   }
-}
 `;
 
 export const MostClaimed = () => {
   const [result] = useQuery<{
-    mostClaimedPoaps: {
-      poaps: GitPOAP[];
-    };
+    mostClaimedGitPOAPs: MostClaimedItem[];
   }>({
     query: MostClaimedQuery,
   });
@@ -53,13 +72,13 @@ export const MostClaimed = () => {
       <Header>{'Most claimed POAPs last week'}</Header>
 
       <Poaps>
-        {result.data?.mostClaimedPoaps.poaps.map((gitPoap, i) => {
+        {result.data?.mostClaimedGitPOAPs.map((item, i) => {
           return (
             <GitPOAPBadge
-              key={gitPoap.id + i}
-              imgSrc={gitPoap.imgSrc}
-              name={gitPoap.name}
-              orgName={gitPoap.orgName}
+              key={item.gitPOAP.id + i}
+              imgSrc={item.event.image_url}
+              name={item.event.name}
+              orgName={item.gitPOAP.repo.name}
             />
           );
         })}
