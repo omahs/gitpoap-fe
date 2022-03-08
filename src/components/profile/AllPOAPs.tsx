@@ -11,6 +11,10 @@ import { Select } from '../shared/elements/Select';
 import { Text } from '../shared/elements/Text';
 import { TextGray } from '../../colors';
 
+type Props = {
+  address: string;
+};
+
 enum SortOptions {
   Date = 'date',
   Alphabetical = 'alphabetical',
@@ -40,7 +44,7 @@ export type UserPOAPsQueryRes = {
   userPOAPs: {
     totalPOAPs: number;
     poaps: POAP[];
-  };
+  } | null;
 };
 
 const Container = styled.div`
@@ -96,16 +100,17 @@ const SortBy = styled(Text)`
   margin-right: ${rem(10)};
 `;
 
-export const AllPOAPs = () => {
+export const AllPOAPs = ({ address }: Props) => {
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState<SortOptions>(SortOptions.Date);
   const [gitPOAPs, setGitPOAPs] = useState<POAP[]>([]);
+  const [total, setTotal] = useState('');
   const perPage = 4;
   const [result] = useQuery<UserPOAPsQueryRes>({
     query: AllPOAPsQuery,
     variables: {
-      address: 'peebeejay.eth',
-      page: page,
+      address,
+      page,
       perPage,
       sort,
     },
@@ -120,10 +125,20 @@ export const AllPOAPs = () => {
     });
   }, [result.data]);
 
+  useEffect(() => {
+    if (result.data?.userPOAPs) {
+      setTotal(result.data.userPOAPs.totalPOAPs.toString());
+    }
+  }, [result.data]);
+
+  if (result.error) {
+    return null;
+  }
+
   return (
     <Container>
       <Heading>
-        <POAPCount>{`All POAPS: ${result.data?.userPOAPs.totalPOAPs ?? ''}`}</POAPCount>
+        <POAPCount>{`All POAPS: ${total}`}</POAPCount>
         <Sorting>
           <SortBy>{'Sort By: '}</SortBy>
           <Select
@@ -153,7 +168,7 @@ export const AllPOAPs = () => {
             );
           })}
       </POAPs>
-      {result.data && result.data.userPOAPs.totalPOAPs > gitPOAPs.length && (
+      {result.data?.userPOAPs && result.data.userPOAPs?.totalPOAPs > gitPOAPs.length && (
         <ShowMore
           onClick={() => {
             if (!result.fetching) {
