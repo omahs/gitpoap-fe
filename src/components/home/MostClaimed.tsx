@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { rem } from 'polished';
 import { useQuery } from 'urql';
 import { Header } from '../shared/elements/Header';
-import { GitPoap } from '../../types';
+import { GitPOAP } from '../../types';
 import { GitPOAP as GitPOAPUI } from '../shared/compounds/GitPOAP';
 import { Button } from '../shared/elements/Button';
 import { FaArrowRight } from 'react-icons/fa';
@@ -24,7 +24,7 @@ const Poaps = styled.div`
   margin-bottom: ${rem(50)};
 `;
 
-const GitPOAP = styled(GitPOAPUI)`
+const GitPOAPBadge = styled(GitPOAPUI)`
   margin-right: ${rem(36)};
   margin-bottom: ${rem(36)};
 `;
@@ -42,7 +42,7 @@ query mostClaimedPoaps {
 export const MostClaimed = () => {
   const [result] = useQuery<{
     mostClaimedPoaps: {
-      poaps: GitPoap[];
+      poaps: GitPOAP[];
     };
   }>({
     query: MostClaimedQuery,
@@ -55,7 +55,7 @@ export const MostClaimed = () => {
       <Poaps>
         {result.data?.mostClaimedPoaps.poaps.map((gitPoap, i) => {
           return (
-            <GitPOAP
+            <GitPOAPBadge
               key={gitPoap.id + i}
               imgSrc={gitPoap.imgSrc}
               name={gitPoap.name}

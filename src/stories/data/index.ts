@@ -1,4 +1,4 @@
-import { GitPoap, POAP } from '../../types';
+import { GitPOAP, POAP } from '../../types';
 import { Project } from '../../types';
 import { Stats } from '../../components/home/BannerStats';
 import { LeaderBoardItemProps } from '../../components/home/LeaderBoard';
@@ -36,7 +36,7 @@ import poap13 from '../assets/poaps/poap13.png';
 import poap14 from '../assets/poaps/poap14.png';
 import poap15 from '../assets/poaps/poap15.png';
 
-export const gitPOAPs: GitPoap[] = [
+export const gitPOAPs: GitPOAP[] = [
   {
     id: '1',
     imgSrc: badge2 as unknown as string,

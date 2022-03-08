@@ -1,4 +1,4 @@
-import Profile from '../../../pages/profile/[id]';
+import Profile from '../../../pages/p/[id]';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Layout } from '../../../components/Layout';
 import { AllPOAPsHandler } from '../../data/handlers';
