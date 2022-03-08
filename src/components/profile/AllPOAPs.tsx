@@ -4,7 +4,7 @@ import { rem } from 'polished';
 import { useQuery, gql } from 'urql';
 import { POAP } from '../../types';
 import { POAPBadge as POAPBadgeUI } from '../shared/elements/POAPBadge';
-import { ItemList, SelectOption } from './ItemList';
+import { ItemList, SelectOption } from '../shared/compounds/ItemList';
 
 type Props = {
   address: string;
@@ -12,7 +12,7 @@ type Props = {
 
 type SortOptions = 'date' | 'alphabetical';
 
-const selectOptions: SelectOption[] = [
+const selectOptions: SelectOption<SortOptions>[] = [
   { value: 'date', label: 'Date of Claim' },
   { value: 'alphabetical', label: 'Alphabetical' },
 ];
@@ -69,6 +69,7 @@ export const AllPOAPs = ({ address }: Props) => {
     },
   });
 
+  /* Hook to append new data onto existing list of poaps */
   useEffect(() => {
     setGitPOAPs((prev: POAP[]) => {
       if (result.data?.userPOAPs) {
@@ -78,6 +79,7 @@ export const AllPOAPs = ({ address }: Props) => {
     });
   }, [result.data]);
 
+  /* Hook to set total number of poaps */
   useEffect(() => {
     if (result.data?.userPOAPs) {
       setTotal(result.data.userPOAPs.totalPOAPs);
