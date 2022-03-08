@@ -1,46 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
 import { useQuery, gql } from 'urql';
-import { Header } from '../shared/elements/Header';
-import { GitPoap } from '../../types';
-import { Button } from '../shared/elements/Button';
-import { Text } from '../shared/elements/Text';
-import { TextGray } from '../../colors';
-import { Select } from '../shared/elements/Select';
-import { FaPlus } from 'react-icons/fa';
+import { GitPOAPGql } from '../../types';
 import { GitPOAP as GitPOAPBadgeUI } from '../shared/compounds/GitPOAP';
+import { ItemList, SelectOption } from '../shared/compounds/ItemList';
 
 type Props = {
-  gitPOAPs?: GitPoap[];
+  address: string;
 };
 
-enum SortOptions {
-  Date = 'Date',
-  Alphabetical = 'Alphabetical',
-}
+type SortOptions = 'date' | 'alphabetical';
 
-const Container = styled.div`
-  display: inline-flex;
-  flex-direction: column;
-`;
-
-const Heading = styled.div`
-  display: inline-flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const Count = styled(Header)`
-  font-size: ${rem(30)};
-  line-height: ${rem(42)};
-`;
-
-const Sorting = styled.div`
-  display: inline-flex;
-  flex-direction: row;
-`;
+const selectOptions: SelectOption<SortOptions>[] = [
+  { value: 'date', label: 'Date of Claim' },
+  { value: 'alphabetical', label: 'Alphabetical' },
+];
 
 const GitPOAPList = styled.div`
   display: inline-flex;
@@ -56,25 +31,9 @@ const GitPOAPBadge = styled(GitPOAPBadgeUI)`
   margin-top: ${rem(30)};
 `;
 
-const ShowMore = styled(Button)`
-  align-self: center;
-`;
-
-const SortBy = styled(Text)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: ${rem(12)};
-  line-height: ${rem(18)};
-  letter-spacing: ${rem(2)};
-  text-transform: uppercase;
-  color: ${TextGray};
-  margin-right: ${rem(10)};
-`;
-
 const GitPOAPsQuery = gql`
-  query gitPOAPs {
-    userPOAPs(address: "peebeejay.eth") {
+  query gitPOAPs($address: String!, $sort: String, $page: Float, $perPage: Float) {
+    userPOAPs(address: $address, sort: $sort, page: $page, perPage: $perPage) {
       gitPOAPs {
         claim {
           gitPOAP {
@@ -95,60 +54,82 @@ const GitPOAPsQuery = gql`
   }
 `;
 
-export const GitPOAPs = ({ gitPOAPs }: Props) => {
+export const GitPOAPs = ({ address }: Props) => {
+  const [page, setPage] = useState(1);
+  const [sort, setSort] = useState<SortOptions>('date');
+  const [gitPOAPs, setGitPOAPs] = useState<GitPOAPGql[]>([]);
+  const [total, setTotal] = useState<number>();
+  const perPage = 4;
+
   const [result] = useQuery<{
     userPOAPs: {
-      gitPOAPs: {
-        claim: {
-          gitPOAP: {
-            repo: {
-              name: string;
-            };
-          };
-          poap: {
-            event: {
-              name: string;
-              image_url: string;
-            };
-            tokenId: string;
-          };
-        };
-      }[];
+      totalGitPOAPs: number;
+      gitPOAPs: GitPOAPGql[];
     };
   }>({
     query: GitPOAPsQuery,
+    variables: {
+      address,
+      page,
+      perPage,
+      sort,
+    },
   });
 
-  const selectOptions: { value: SortOptions; label: string }[] = [
-    { value: SortOptions.Date, label: 'Date of Claim' },
-    { value: SortOptions.Alphabetical, label: 'Alphabetical' },
-  ];
+  /* Hook to append new data onto existing list of poaps */
+  useEffect(() => {
+    setGitPOAPs((prev: GitPOAPGql[]) => {
+      if (result.data?.userPOAPs) {
+        return [...prev, ...result.data.userPOAPs.gitPOAPs];
+      }
+      return prev;
+    });
+  }, [result.data]);
+
+  /* Hook to set total number of poaps */
+  useEffect(() => {
+    if (result.data?.userPOAPs) {
+      setTotal(result.data.userPOAPs.totalGitPOAPs);
+    }
+  }, [result.data]);
+
+  if (result.error) {
+    return null;
+  }
 
   return (
-    <Container>
-      <Heading>
-        <Count>{`GitPOAPs: ${gitPOAPs?.length ?? ''}`}</Count>
-        <Sorting>
-          <SortBy>{'Sort By: '}</SortBy>
-          <Select data={selectOptions} value={SortOptions.Date} />
-        </Sorting>
-      </Heading>
+    <ItemList
+      title={`GitPOAPs: ${total}`}
+      selectOptions={selectOptions}
+      selectValue={sort}
+      onSelectChange={(sortValue) => {
+        if (sortValue !== sort) {
+          setSort(sortValue as SortOptions);
+          setGitPOAPs([]);
+          setPage(1);
+        }
+      }}
+      isLoading={result.fetching}
+      hasShowMoreButton={!!total && gitPOAPs.length < total}
+      showMoreOnClick={() => {
+        if (!result.fetching) {
+          setPage(page + 1);
+        }
+      }}
+    >
       <GitPOAPList>
         {gitPOAPs &&
           gitPOAPs.map((gitPOAP) => {
             return (
               <GitPOAPBadge
-                key={gitPOAP.id}
-                orgName={gitPOAP.orgName}
-                name={gitPOAP.name}
-                imgSrc={gitPOAP.imgSrc}
+                key={gitPOAP.claim.poap.tokenId}
+                orgName={gitPOAP.claim.gitPOAP.repo.name}
+                name={gitPOAP.claim.poap.event.name}
+                imgSrc={gitPOAP.claim.poap.event.image_url}
               />
             );
           })}
       </GitPOAPList>
-      <ShowMore leftIcon={<FaPlus />} variant="outline">
-        {'Show more'}
-      </ShowMore>
-    </Container>
+    </ItemList>
   );
 };
