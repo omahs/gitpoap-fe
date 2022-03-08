@@ -5,6 +5,7 @@ import { MantineProvider } from '@mantine/core';
 import { GlobalStyles } from '../styles/globalStyles';
 import { Web3ContextProvider } from '../components/wallet/Web3ContextProvider';
 import { GHAuthProvider } from '../components/github/GHAuthContext';
+import { FeaturesProvider } from '../components/FeaturesContext';
 import { NextPage } from 'next';
 import { Layout } from '../components/Layout';
 import { MidnightBlue } from '../colors';
@@ -41,12 +42,14 @@ const TheApp = ({ Component, pageProps }: Props) => {
       <MantineProvider theme={{ colorScheme: 'dark' }}>
         <URQLProvider value={client}>
           <GHAuthProvider>
-            <GlobalStyles />
-            <App>
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
-            </App>
+            <FeaturesProvider>
+              <GlobalStyles />
+              <App>
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+              </App>
+            </FeaturesProvider>
           </GHAuthProvider>
         </URQLProvider>
       </MantineProvider>
