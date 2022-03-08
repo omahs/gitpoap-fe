@@ -12,6 +12,7 @@ import { LeaderBoard } from '../components/home/LeaderBoard';
 import { RecentlyAdded } from '../components/home/RecentlyAdded';
 import { SuggestionForm } from '../components/home/SuggestionForm';
 import { BackgroundHexes } from '../components/home/BackgroundHexes';
+import { useFeatures } from '../components/FeaturesContext';
 
 const HeaderStyled = styled.span`
   position: relative;
@@ -43,6 +44,8 @@ const Background = styled(BackgroundHexes)`
 `;
 
 const Home: Page = () => {
+  const features = useFeatures();
+
   return (
     <>
       <Head>
@@ -67,11 +70,13 @@ const Home: Page = () => {
           <LeaderBoard />
         </Grid.Col>
       </Grid>
-      <Grid justify="center" style={{ zIndex: 0, marginBottom: rem(100) }}>
-        <Grid.Col span={10}>
-          <RecentlyAdded />
-        </Grid.Col>
-      </Grid>
+      {features.hasHomePageRecentProjects && (
+        <Grid justify="center" style={{ zIndex: 0, marginBottom: rem(100) }}>
+          <Grid.Col span={10}>
+            <RecentlyAdded />
+          </Grid.Col>
+        </Grid>
+      )}
       <Grid justify="center" style={{ marginBottom: rem(100) }}>
         <Grid.Col span={10}>
           <SuggestionForm />

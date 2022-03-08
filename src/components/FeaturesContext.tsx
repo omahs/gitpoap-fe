@@ -1,6 +1,8 @@
 import React, { createContext, useState, useContext } from 'react';
 
 type FeaturesState = {
+  hasHomePageRecentProjects: boolean;
+  /* Placeholders */
   hasPOAPsPage: boolean;
   hasProfilePage: boolean;
   hasProjectsPage: boolean;
@@ -9,6 +11,7 @@ type FeaturesState = {
 };
 
 export const getInitialState = (): FeaturesState => ({
+  hasHomePageRecentProjects: false,
   hasPOAPsPage: true,
   hasProfilePage: true,
   hasProjectsPage: true,
@@ -16,10 +19,10 @@ export const getInitialState = (): FeaturesState => ({
   hasClaimsPage: true,
 });
 
-const GHAuthContext = createContext<FeaturesState>({} as FeaturesState);
+const FeaturesContext = createContext<FeaturesState>({} as FeaturesState);
 
-export const useGHAuthContext = () => {
-  return useContext(GHAuthContext);
+export const useFeatures = () => {
+  return useContext(FeaturesContext);
 };
 
 type Props = {
@@ -29,5 +32,5 @@ type Props = {
 export const FeaturesProvider = ({ children }: Props) => {
   const [featuresState, _] = useState<FeaturesState>(getInitialState());
 
-  return <GHAuthContext.Provider value={featuresState}>{children}</GHAuthContext.Provider>;
+  return <FeaturesContext.Provider value={featuresState}>{children}</FeaturesContext.Provider>;
 };
