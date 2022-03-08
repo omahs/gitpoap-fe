@@ -5,15 +5,32 @@ export type Claim = {
   gitPoapId: string;
   address: string;
   userId: string;
-  gitPoap?: GitPoap;
+  gitPoap?: GitPOAP;
 };
 
-export type GitPoap = {
+export type GitPOAP = {
   id: string;
   name: string;
   description: string;
   orgName: string;
   imgSrc: string;
+};
+
+export type GitPOAPGql = {
+  claim: {
+    gitPOAP: {
+      repo: {
+        name: string;
+      };
+    };
+    poap: {
+      event: {
+        name: string;
+        image_url: string;
+      };
+      tokenId: string;
+    };
+  };
 };
 
 export enum ClaimStatus {
