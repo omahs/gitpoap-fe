@@ -1387,18 +1387,6 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@date-io/core@^2.11.0":
-  version "2.11.0"
-  resolved "https://registry.yarnpkg.com/@date-io/core/-/core-2.11.0.tgz#28580cda1c8228ab2c7ed6aee673ef0495f913e6"
-  integrity sha512-DvPBnNoeuLaoSJZaxgpu54qzRhRKjSYVyQjhznTFrllKuDpm0sDFjHo6lvNLCM/cfMx2gb2PM2zY2kc9C8nmuw==
-
-"@date-io/luxon@^2.11.1":
-  version "2.11.1"
-  resolved "https://registry.yarnpkg.com/@date-io/luxon/-/luxon-2.11.1.tgz#31a72f7b5e163c74e8a3b29d8f16c4c30de6ed43"
-  integrity sha512-JUXo01kdPQxLORxqdENrgdUhooKgDUggsNRSdi2BcUhASIY2KGwwWXu8ikVHHGkw+DUF4FOEKGfkQd0RHSvX6g==
-  dependencies:
-    "@date-io/core" "^2.11.0"
-
 "@discoveryjs/json-ext@^0.5.3":
   version "0.5.6"
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.6.tgz#d5e0706cf8c6acd8c6032f8d54070af261bbbb2f"
@@ -10989,6 +10977,11 @@ ltgt@~2.2.0:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/ltgt/-/ltgt-2.2.1.tgz#f35ca91c493f7b73da0e07495304f17b31f87ee5"
   integrity sha1-81ypHEk/e3PaDgdJUwTxezH4fuU=
+
+luxon@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/luxon/-/luxon-2.3.1.tgz#f276b1b53fd9a740a60e666a541a7f6dbed4155a"
+  integrity sha512-I8vnjOmhXsMSlNMZlMkSOvgrxKJl0uOsEzdGgGNZuZPaS9KlefpE9KV95QFftlJSC+1UyCC9/I69R02cz/zcCA==
 
 make-dir@^2.0.0, make-dir@^2.1.0:
   version "2.1.0"
