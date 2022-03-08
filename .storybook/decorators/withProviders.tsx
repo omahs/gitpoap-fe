@@ -5,6 +5,7 @@ import { createClient, Provider as URQLProvider } from 'urql';
 import { MantineProvider } from '@mantine/core';
 import { RouterContext } from 'next/dist/shared/lib/router-context';
 import { NextRouter } from 'next/router';
+import { FeaturesProvider } from '../../src/components/FeaturesContext';
 
 const client = createClient({
   url: 'http://localhost:3001/graphql',
@@ -41,7 +42,9 @@ export const withProviders = (storyFn) => {
       <Web3ContextProvider>
         <MantineProvider theme={{ colorScheme: 'dark' }}>
           <URQLProvider value={client}>
-            <GHAuthProvider>{storyFn()}</GHAuthProvider>
+            <GHAuthProvider>
+              <FeaturesProvider>{storyFn()}</FeaturesProvider>
+            </GHAuthProvider>
           </URQLProvider>
         </MantineProvider>
       </Web3ContextProvider>
