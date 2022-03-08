@@ -8,15 +8,14 @@ import { IconCount } from '../elements/IconCount';
 import { Star } from '../elements/icons/Star';
 import { People } from '../elements/icons/People';
 import { GitPOAP } from '../elements/icons/GitPOAP';
-import ProjectHexBackground from './ProjectHexBackground.svg';
 
 type Props = {
   className?: string;
   category: string;
   name: string;
-  memberCount: number;
-  gitPoapCount: number;
-  stars: number;
+  memberCount?: number;
+  gitPoapCount?: number;
+  stars?: number;
 };
 
 const Content = styled.div`
@@ -24,7 +23,7 @@ const Content = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: url(${ProjectHexBackground}) no-repeat center;
+  background: url(${'/ProjectHexBackground.svg'}) no-repeat center;
   padding: ${rem(25)} ${rem(25)};
   width: ${rem(220)};
 `;
@@ -67,9 +66,11 @@ export const ProjectHex = ({
     <Content className={className}>
       <TitleStyled>{name}</TitleStyled>
       <Icons>
-        <IconCount count={memberCount} icon={<People width="13" height="11" />} />
-        <IconCount count={gitPoapCount} icon={<GitPOAP width="14" height="12" />} />
-        <IconCount count={stars} icon={<Star width="13" height="11" />} />
+        {memberCount && <IconCount count={memberCount} icon={<People width="13" height="11" />} />}
+        {gitPoapCount && (
+          <IconCount count={gitPoapCount} icon={<GitPOAP width="14" height="12" />} />
+        )}
+        {stars && <IconCount count={stars} icon={<Star width="13" height="11" />} />}
       </Icons>
       <BadgeStyled>{category}</BadgeStyled>
     </Content>
