@@ -28,7 +28,7 @@ const GitPOAPBadge = styled(GitPOAPUI)`
   margin-bottom: ${rem(36)};
 `;
 
-type MostClaimedItem = {
+export type MostClaimedItem = {
   claimsCount: number;
   gitPOAP: {
     id: number;
@@ -69,7 +69,7 @@ export const MostClaimed = () => {
 
   return (
     <Container>
-      <Header>{'Most claimed POAPs last week'}</Header>
+      <Header>{'Most claimed GitPOAPs last week'}</Header>
 
       <Poaps>
         {result.data?.mostClaimedGitPOAPs.map((item, i) => {
@@ -84,7 +84,7 @@ export const MostClaimed = () => {
         })}
       </Poaps>
       <Button variant="outline" rightIcon={<FaArrowRight />}>
-        {'ALL POAPS'}
+        {'ALL GitPOAPS'}
       </Button>
     </Container>
   );
