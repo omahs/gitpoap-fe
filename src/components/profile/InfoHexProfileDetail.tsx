@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
 import { Divider as DividerUI, Text } from '@mantine/core';
+import { Jazzicon as JazzIconReact } from '@ukstv/jazzicon-react';
 import { DividerGray1, TextAccent, TextLight } from '../../colors';
 import { Twitter } from '../shared/elements/icons/Twitter';
 import { GitHub } from '../shared/elements/icons/GitHub';
@@ -13,11 +14,11 @@ import { Project } from '../../types';
 import { ProjectHex } from '../shared/compounds/ProjectHex';
 
 type Props = {
-  imgSrc: string;
+  imgSrc?: string;
   name: string;
   address: string;
-  blurb: string;
-  gitpoapId: string | number;
+  bio?: string;
+  gitpoapId?: string | number;
   twitterHref?: string;
   githubHref?: string;
   websiteHref?: string;
@@ -39,6 +40,12 @@ const Avatar = styled(AvatarUI)`
   height: ${rem(160)};
 `;
 
+const JazzIcon = styled(JazzIconReact)`
+  height: ${rem(160)};
+  width: ${rem(160)};
+  margin-bottom: ${rem(14)};
+`;
+
 const Name = styled.div`
   font-family: VT323;
   font-style: normal;
@@ -49,9 +56,13 @@ const Name = styled.div`
   letter-spacing: ${rem(-1)};
   color: ${TextAccent};
   margin-bottom: ${rem(4)};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: ${rem(230)};
 `;
 
-const Blurb = styled(Text)`
+const Bio = styled(Text)`
   font-family: PT Mono;
   font-style: normal;
   font-weight: normal;
@@ -113,7 +124,7 @@ export const InfoHexProfileDetail = ({
   imgSrc,
   name,
   address,
-  blurb,
+  bio,
   gitpoapId,
   twitterHref,
   githubHref,
@@ -123,14 +134,15 @@ export const InfoHexProfileDetail = ({
   return (
     <StyledInfoHex>
       <Content>
-        <Avatar src={imgSrc} />
-        <Name>{name}</Name>
+        {imgSrc && <Avatar src={imgSrc} useDefaultImage />}
+        {!imgSrc && <JazzIcon address={address} />}
+        <Name title={name}>{name}</Name>
         <Address address={address} isCollapsed />
-        <Blurb>{blurb}</Blurb>
+        {bio && <Bio>{bio}</Bio>}
         <Social>
           {twitterHref && <Twitter href={twitterHref} />}
           {githubHref && <GitHub href={githubHref} />}
-          {websiteHref && <GitPOAP href={getGitPOAPHref(gitpoapId)} />}
+          {websiteHref && gitpoapId && <GitPOAP href={getGitPOAPHref(gitpoapId)} />}
         </Social>
         {projects && (
           <>
