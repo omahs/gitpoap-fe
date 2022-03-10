@@ -59,7 +59,6 @@ export const ProfileDetails: ComponentStory<typeof InfoHexBase> = (args) => {
       bio="Passionate for Ethereum, Bitcoin, and client-side development."
       twitterHref="https://twitter.com/miguelmota"
       githubHref="github.com/miguelmota"
-      gitpoapId={10}
       websiteHref="https://miguelmota.com"
       projects={projectData.slice(0, 3)}
     />

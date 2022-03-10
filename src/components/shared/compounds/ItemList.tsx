@@ -7,6 +7,7 @@ import { FaPlus } from 'react-icons/fa';
 import { Select } from '../elements/Select';
 import { Text } from '../elements/Text';
 import { TextGray } from '../../../colors';
+import { Input } from '../elements/Input';
 
 type Props = {
   title: string;
@@ -17,6 +18,9 @@ type Props = {
   isLoading: boolean;
   hasShowMoreButton: boolean;
   showMoreOnClick: () => void;
+  searchInputPlaceholder?: string;
+  searchInputValue?: string;
+  onSearchInputChange?: React.ChangeEventHandler<HTMLInputElement>;
 };
 
 export type SelectOption<T = string> = { value: T; label: string };
@@ -60,6 +64,10 @@ const SortBy = styled(Text)`
   margin-right: ${rem(10)};
 `;
 
+const SearchInput = styled(Input)`
+  margin-right: ${rem(50)};
+`;
+
 export const ItemList = ({
   children,
   title,
@@ -69,12 +77,22 @@ export const ItemList = ({
   isLoading,
   hasShowMoreButton,
   showMoreOnClick,
+  searchInputPlaceholder,
+  searchInputValue,
+  onSearchInputChange,
 }: Props) => {
   return (
     <Container>
       <Heading>
         <ListTitle>{title}</ListTitle>
         <Sorting>
+          {searchInputValue !== undefined && onSearchInputChange && (
+            <SearchInput
+              placeholder={searchInputPlaceholder}
+              value={searchInputValue}
+              onChange={onSearchInputChange}
+            />
+          )}
           <SortBy>{'Sort By: '}</SortBy>
           <Select data={selectOptions} value={selectValue} onChange={onSelectChange} />
         </Sorting>

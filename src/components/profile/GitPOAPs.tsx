@@ -60,7 +60,8 @@ export const GitPOAPs = ({ address }: Props) => {
   const [sort, setSort] = useState<SortOptions>('date');
   const [gitPOAPItems, setGitPOAPItems] = useState<GitPOAPGql[]>([]);
   const [total, setTotal] = useState<number>();
-  const perPage = 1;
+  const [searchValue, setSearchValue] = useState('');
+  const perPage = 4;
 
   const [result] = useQuery<{
     userPOAPs: {
@@ -117,19 +118,37 @@ export const GitPOAPs = ({ address }: Props) => {
           setPage(page + 1);
         }
       }}
+      searchInputPlaceholder={'QUICK SEARCH...'}
+      searchInputValue={searchValue}
+      onSearchInputChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+        setSearchValue(e.target.value)
+      }
     >
       <GitPOAPList>
         {gitPOAPItems &&
-          gitPOAPItems.map((gitPOAPItem) => {
-            return (
-              <GitPOAPBadge
-                key={gitPOAPItem.poap.tokenId}
-                orgName={gitPOAPItem.claim.gitPOAP.repo.name}
-                name={gitPOAPItem.poap.event.name}
-                imgSrc={gitPOAPItem.poap.event.image_url}
-              />
-            );
-          })}
+          gitPOAPItems
+            .filter((gitPOAPItem) => {
+              if (searchValue) {
+                return (
+                  gitPOAPItem.poap.event.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+                  gitPOAPItem.claim.gitPOAP.repo.name
+                    .toLowerCase()
+                    .includes(searchValue.toLowerCase())
+                );
+              }
+
+              return true;
+            })
+            .map((gitPOAPItem) => {
+              return (
+                <GitPOAPBadge
+                  key={gitPOAPItem.poap.tokenId}
+                  orgName={gitPOAPItem.claim.gitPOAP.repo.name}
+                  name={gitPOAPItem.poap.event.name}
+                  imgSrc={gitPOAPItem.poap.event.image_url}
+                />
+              );
+            })}
       </GitPOAPList>
     </ItemList>
   );

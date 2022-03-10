@@ -14,7 +14,7 @@ import { TextInput } from '@mantine/core';
 type Props = {
   className?: string;
   placeholder?: string;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onChange: React.ComponentProps<typeof TextInput>['onChange'];
   disabled?: boolean;
   value: string;
   error?: React.ComponentProps<typeof TextInput>['error'];
