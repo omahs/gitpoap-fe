@@ -77,7 +77,7 @@ const Home: Page = () => {
           </Grid.Col>
         </Grid>
       )}
-      <Grid justify="center" style={{ marginBottom: rem(100) }}>
+      <Grid justify="center" style={{ zIndex: 0, marginBottom: rem(100) }}>
         <Grid.Col span={10}>
           <SuggestionForm />
         </Grid.Col>
