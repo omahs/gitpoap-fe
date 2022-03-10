@@ -6,11 +6,12 @@ type Props = {
   quality?: number;
   className?: string;
   src: string;
+  useDefaultImage?: boolean;
 };
 
 const AvatarWrapper = styled.div`
-  max-height: ${rem(80)};
-  max-width: ${rem(80)};
+  height: ${rem(80)};
+  width: ${rem(80)};
   position: relative;
 `;
 
@@ -18,10 +19,20 @@ const Image = styled(ImageUI)`
   border-radius: 50%;
 `;
 
-export const Avatar = ({ quality = 100, className, src }: Props) => {
+const DefaultImage = styled.img`
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+`;
+
+export const Avatar = ({ quality = 100, className, src, useDefaultImage }: Props) => {
   return (
     <AvatarWrapper className={className}>
-      <Image src={src} layout="fill" quality={quality} alt="" />;
+      {useDefaultImage ? (
+        <DefaultImage src={src} alt="" />
+      ) : (
+        <Image src={src} layout="fill" quality={quality} alt="" />
+      )}
     </AvatarWrapper>
   );
 };
