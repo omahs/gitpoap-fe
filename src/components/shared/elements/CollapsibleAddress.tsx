@@ -6,6 +6,7 @@ import { FiCopy } from 'react-icons/fi';
 import { Tooltip } from '@mantine/core';
 import { Title } from '../../shared/elements/Title';
 import { TextGray } from '../../../colors';
+import { truncateAddress } from '../../../helpers';
 
 type Props = {
   className?: string;
@@ -25,19 +26,12 @@ const Address = styled(Title)`
 
 export const CollapsibleAddress = ({ className, address, isCollapsed }: Props) => {
   const clipboard = useClipboard({ timeout: 1500 });
-  const truncatedAddress = address.slice(0, 14) + '...' + address.slice(-4);
+  const truncatedAddress = truncateAddress(address);
 
   return (
     <Address className={className} onClick={() => clipboard.copy(address)}>
       {isCollapsed ? truncatedAddress : address}
-      <Tooltip
-        opened={clipboard.copied}
-        label="Copied!"
-        color="dark"
-        withArrow
-        position="right"
-        placement="end"
-      >
+      <Tooltip opened={clipboard.copied} label="Copied!" withArrow position="right" placement="end">
         <FiCopy style={{ marginLeft: rem(6) }} />
       </Tooltip>
     </Address>
