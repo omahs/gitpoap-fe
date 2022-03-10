@@ -10,6 +10,8 @@ module.exports = {
       'github.com',
       'githubusercontent.com',
       'avatars.githubusercontent.com',
+      'lh3.googleusercontent.com',
+      '*',
     ],
   },
   webpack: (config, options) => {
