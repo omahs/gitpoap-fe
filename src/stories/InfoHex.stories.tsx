@@ -56,7 +56,7 @@ export const ProfileDetails: ComponentStory<typeof InfoHexBase> = (args) => {
       imgSrc={profileImg6 as unknown as string}
       name="miguelmota.eth"
       address="0xe4feb387cb1daff4bf9108581b116e5fa737bea2"
-      blurb="Passionate for Ethereum, Bitcoin, and client-side development."
+      bio="Passionate for Ethereum, Bitcoin, and client-side development."
       twitterHref="https://twitter.com/miguelmota"
       githubHref="github.com/miguelmota"
       gitpoapId={10}
