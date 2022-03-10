@@ -42,7 +42,7 @@ export const Wallet = () => {
           onClick={() => {
             disconnect();
           }}
-          account={address}
+          address={address}
           name={resolvedName}
         />
       )}
