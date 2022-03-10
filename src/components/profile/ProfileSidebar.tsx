@@ -17,6 +17,8 @@ const ProfileQuery = gql`
       id
       bio
       name
+      twitterHandle
+      personalSiteUrl
     }
   }
 `;
@@ -26,6 +28,8 @@ export type UserPOAPsQueryRes = {
     id: string;
     bio: string;
     name: string;
+    twitterHandle?: string;
+    personalSiteUrl?: string;
   } | null;
 };
 
@@ -67,7 +71,12 @@ export const ProfileSidebar = ({ address, ensName }: Props) => {
         name={ensName ? ensName : truncateAddress(address, 10)}
         address={address}
         bio={profileData?.bio}
-        gitpoapId={profileData?.id}
+        twitterHref={
+          profileData?.twitterHandle
+            ? `https://twitter.com/${profileData.twitterHandle}`
+            : undefined
+        }
+        websiteHref={profileData?.personalSiteUrl}
       />
     </Grid.Col>
   );

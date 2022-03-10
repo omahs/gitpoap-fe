@@ -6,19 +6,19 @@ import { Jazzicon as JazzIconReact } from '@ukstv/jazzicon-react';
 import { DividerGray1, TextAccent, TextLight } from '../../colors';
 import { Twitter } from '../shared/elements/icons/Twitter';
 import { GitHub } from '../shared/elements/icons/GitHub';
-import { GitPOAP } from '../shared/elements/icons/GitPOAP';
 import { InfoHexBase } from '../shared/elements/InfoHexBase';
 import { Avatar as AvatarUI } from '../shared/elements/Avatar';
 import { CollapsibleAddress } from '../shared/elements/CollapsibleAddress';
 import { Project } from '../../types';
 import { ProjectHex } from '../shared/compounds/ProjectHex';
+import { FiGlobe } from 'react-icons/fi';
+import { IconStyles } from '../shared/elements/icons/BaseIcon';
 
 type Props = {
   imgSrc?: string;
   name: string;
   address: string;
   bio?: string;
-  gitpoapId?: string | number;
   twitterHref?: string;
   githubHref?: string;
   websiteHref?: string;
@@ -116,16 +116,32 @@ const Divider = styled(DividerUI)`
   width: ${rem(100)};
 `;
 
-const getGitPOAPHref = (gitpoapId: string | number) => {
-  return `https://gitpoap.io/@${gitpoapId}`;
-};
+const IconLink = styled.a`
+  text-decoration: none;
+`;
+
+const FiGlobeStyled = styled(FiGlobe)`
+  ${IconStyles};
+  path {
+    fill: unset;
+  }
+  &:hover {
+    path {
+      fill: unset;
+    }
+  }
+  &:active {
+    path {
+      fill: unset;
+    }
+  }
+`;
 
 export const InfoHexProfileDetail = ({
   imgSrc,
   name,
   address,
   bio,
-  gitpoapId,
   twitterHref,
   githubHref,
   websiteHref,
@@ -140,16 +156,28 @@ export const InfoHexProfileDetail = ({
         <Address address={address} isCollapsed />
         {bio && <Bio>{bio}</Bio>}
         <Social>
-          {twitterHref && <Twitter href={twitterHref} />}
-          {githubHref && <GitHub href={githubHref} />}
-          {websiteHref && gitpoapId && <GitPOAP href={getGitPOAPHref(gitpoapId)} />}
+          {twitterHref && (
+            <IconLink href={twitterHref} target="_blank" rel="noreferrer">
+              <Twitter />
+            </IconLink>
+          )}
+          {githubHref && (
+            <IconLink href={githubHref} target="_blank" rel="noreferrer">
+              <GitHub />
+            </IconLink>
+          )}
+          {websiteHref && (
+            <IconLink href={websiteHref} target="_blank" rel="noreferrer">
+              <FiGlobeStyled />
+            </IconLink>
+          )}
         </Social>
         {projects && (
           <>
             <Divider />
-            <ProjectCount>{`${projects.length} ${
-              projects.length > 1 ? 'Projects' : 'Project'
-            }`}</ProjectCount>
+            <ProjectCount>
+              {`${projects.length} ${projects.length > 1 ? 'Projects' : 'Project'}`}
+            </ProjectCount>
             {projects.map((project) => {
               return (
                 <ProjectHex
