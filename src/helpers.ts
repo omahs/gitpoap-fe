@@ -1,19 +1,13 @@
-import { getAddress } from '@ethersproject/address';
-
-/* Returns the check-summed address if the address is valid, otherwise returns false */
-export function isAddress(value: any): string | false {
-  try {
-    return getAddress(value);
-  } catch {
-    return false;
-  }
-}
+import { isAddress } from 'ethers/lib/utils';
 
 /* Shorten check-summed version of the input address ~ 0x + 4 chars @ start + end */
 export function shortenAddress(address: string, chars = 4): string {
-  const parsed = isAddress(address);
-  if (!parsed) {
+  if (!isAddress(address)) {
     throw Error(`Invalid 'address' parameter '${address}'.`);
   }
-  return `${parsed.substring(0, chars + 2)}...${parsed.substring(42 - chars)}`;
+  return `${address.substring(0, chars + 2)}...${address.substring(42 - chars)}`;
 }
+
+export const truncateAddress = (address: string, startChars: number = 14): string => {
+  return address.slice(0, startChars) + '...' + address.slice(-4);
+};
