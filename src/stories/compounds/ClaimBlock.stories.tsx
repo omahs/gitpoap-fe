@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { ClaimBlock } from '../components/shared/compounds/ClaimBlock';
-import badgeImg1 from './assets/gitPOAPs/badge1.png';
+import { ClaimBlock } from '../../components/shared/compounds/ClaimBlock';
+import badgeImg1 from '../assets/gitPOAPs/badge1.png';
 
 export default {
   title: 'Compounds/ClaimBlock',

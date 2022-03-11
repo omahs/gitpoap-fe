@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { GitPOAP } from '../components/shared/compounds/GitPOAP';
-import badgeImg1 from './assets/gitPOAPs/badge1.png';
+import { GitPOAP } from '../../components/shared/compounds/GitPOAP';
+import badgeImg1 from '../assets/gitPOAPs/badge1.png';
 
 export default {
   title: 'Compounds/GitPOAP',

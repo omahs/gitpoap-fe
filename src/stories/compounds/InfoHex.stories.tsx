@@ -1,13 +1,13 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { InfoHexBase } from '../components/shared/elements/InfoHexBase';
-import { InfoHexMetric } from '../components/home/InfoHexMetric';
-import { InfoHexSummary } from '../components/gitpoap/InfoHexSummary';
-import { InfoHexProfileDetail } from '../components/profile/InfoHexProfileDetail';
-import { People } from '../components/shared/elements/icons/People';
-import profileImg from './assets/profile1.png';
-import profileImg6 from './assets/profile6-large.png';
-import { projectData } from './data';
+import { InfoHexBase } from '../../components/shared/elements/InfoHexBase';
+import { InfoHexMetric } from '../../components/home/InfoHexMetric';
+import { InfoHexSummary } from '../../components/gitpoap/InfoHexSummary';
+import { InfoHexProfileDetail } from '../../components/profile/InfoHexProfileDetail';
+import { People } from '../../components/shared/elements/icons/People';
+import profileImg from '../assets/profile1.png';
+import profileImg6 from '../assets/profile6-large.png';
+import { projectData } from '../data';
 
 export default {
   title: 'Compounds/InfoHex',
