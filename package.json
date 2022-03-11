@@ -10,12 +10,9 @@
     "chromatic": "npx chromatic --project-token=17617c85151f"
   },
   "dependencies": {
-    "@emotion/react": "^11",
-    "@emotion/styled": "^11",
     "@ensdomains/ens-avatar": "^0.1.1",
-    "@mantine/core": "^3.6.5",
-    "@mantine/hooks": "^3.6.5",
-    "@mui/material": "^5.2.4",
+    "@mantine/core": "^4.0.1",
+    "@mantine/hooks": "^4.0.1",
     "@ukstv/jazzicon-react": "^1.0.0",
     "@walletconnect/web3-provider": "^1.7.3",
     "email-validator": "^2.0.4",
