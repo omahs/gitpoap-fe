@@ -14,9 +14,7 @@ const Template: ComponentStory<typeof Radio> = (args) => {
 
   return (
     <RadioGroup {...args} defaultValue="react" value={value} onChange={setValue}>
-      <Radio {...args} value="contributor">
-        {'Contributor'}
-      </Radio>
+      <Radio {...args} value="contributor" label={'Contributor'} />
     </RadioGroup>
   );
 };

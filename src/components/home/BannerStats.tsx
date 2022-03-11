@@ -26,9 +26,9 @@ const StatsQuery = gql`
 `;
 
 const ICONS: Record<string, React.ReactNode> = {
-  people: <People height="70" width="70" />,
-  gitPOAP: <GitPOAP height="70" width="70" />,
-  project: <Project height="70" width="70" />,
+  people: <People style={{ height: rem(70), width: rem(70) }} />,
+  gitPOAP: <GitPOAP style={{ height: rem(70), width: rem(70) }} />,
+  project: <Project style={{ height: rem(70), width: rem(70) }} />,
 };
 
 const StatsStyled = styled.div`

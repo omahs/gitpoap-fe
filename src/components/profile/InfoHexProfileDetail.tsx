@@ -3,7 +3,14 @@ import styled from 'styled-components';
 import { rem } from 'polished';
 import { Divider as DividerUI, Text } from '@mantine/core';
 import { Jazzicon as JazzIconReact } from '@ukstv/jazzicon-react';
-import { DividerGray1, TextAccent, TextLight } from '../../colors';
+import {
+  DividerGray1,
+  ExtraHover,
+  ExtraPressed,
+  TextAccent,
+  TextGray,
+  TextLight,
+} from '../../colors';
 import { Twitter } from '../shared/elements/icons/Twitter';
 import { GitHub } from '../shared/elements/icons/GitHub';
 import { InfoHexBase } from '../shared/elements/InfoHexBase';
@@ -122,15 +129,18 @@ const IconLink = styled.a`
 
 const FiGlobeStyled = styled(FiGlobe)`
   ${IconStyles};
+  stroke: ${TextGray};
   path {
     fill: unset;
   }
   &:hover {
+    stroke: ${ExtraHover};
     path {
       fill: unset;
     }
   }
   &:active {
+    stroke: ${ExtraPressed};
     path {
       fill: unset;
     }

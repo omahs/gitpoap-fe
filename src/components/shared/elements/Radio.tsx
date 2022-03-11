@@ -18,6 +18,10 @@ export const RadioGroup = styled(RadioGroupUI)`
       transition: 150ms background-color ease;
       background-color: ${TextAccent};
     }
+
+    &:hover:not(.mantine-RadioGroup-radioDisabled) {
+      cursor: pointer;
+    }
   }
 
   .mantine-RadioGroup-label {
@@ -31,6 +35,7 @@ export const RadioGroup = styled(RadioGroupUI)`
 
     &:hover:not(.mantine-RadioGroup-labelDisabled) {
       color: ${ExtraHover};
+      cursor: pointer;
       .mantine-RadioGroup-radio {
         border-color: ${ExtraHover};
       }
