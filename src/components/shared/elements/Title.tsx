@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { rem } from 'polished';
-import { Text } from '@mantine/core';
+import { Text, TextProps } from '@mantine/core';
 import { ExtraHover, ExtraPressed, TextAccent, TextDarkGray } from '../../../colors';
 
-export const Title = styled(Text)`
+export const Title = styled(Text)<TextProps<'div'>>`
   display: inline-block;
   font-family: 'PT Mono', monospace;
   font-weight: 700;

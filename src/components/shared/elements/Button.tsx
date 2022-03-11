@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button as ButtonUI } from '@mantine/core';
+import { Button as ButtonUI, SharedButtonProps, ButtonProps } from '@mantine/core';
 import { rem } from 'polished';
 import {
   PrimaryBlue,
@@ -16,14 +16,14 @@ type Props = {
   className?: string;
   onClick?: React.MouseEventHandler;
   disabled?: boolean;
-  leftIcon?: React.ComponentProps<typeof ButtonUI>['leftIcon'];
-  rightIcon?: React.ComponentProps<typeof ButtonUI>['rightIcon'];
-  size?: React.ComponentProps<typeof ButtonUI>['size'];
-  loading?: React.ComponentProps<typeof ButtonUI>['loading'];
+  leftIcon?: SharedButtonProps['leftIcon'];
+  rightIcon?: SharedButtonProps['rightIcon'];
+  size?: SharedButtonProps['size'];
+  loading?: SharedButtonProps['loading'];
   variant?: 'filled' | 'outline';
 };
 
-const StyledButton = styled(ButtonUI)`
+const StyledButton = styled(ButtonUI)<ButtonProps<'button'>>`
   display: inline-flex;
   flex-direction: row;
   justify-content: center;

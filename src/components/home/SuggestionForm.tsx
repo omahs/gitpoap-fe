@@ -198,8 +198,8 @@ export const SuggestionForm = () => {
         <UserTypeSection>
           <InputWrapper label={'I am a..'}>
             <RadioGroup value={userType} onChange={(value: UserType) => setUserType(value)}>
-              <Radio value={UserType.Contributor}>{'Contributor'}</Radio>
-              <Radio value={UserType.Owner}>{'Repo owner'}</Radio>
+              <Radio value={UserType.Contributor} label={'Contributor'} />
+              <Radio value={UserType.Owner} label={'Repo owner'} />
             </RadioGroup>
           </InputWrapper>
         </UserTypeSection>

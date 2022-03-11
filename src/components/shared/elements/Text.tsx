@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { rem } from 'polished';
-import { Text as TextUI } from '@mantine/core';
+import { Text as TextUI, TextProps } from '@mantine/core';
 import { TextLight } from '../../../colors';
 
-export const Text = styled(TextUI)`
+export const Text = styled(TextUI)<TextProps<'div'>>`
   font-family: PT Mono;
   font-style: normal;
   font-weight: normal;

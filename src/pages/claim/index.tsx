@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { StyledEngineProvider } from '@mui/material/styles';
 import { Gallery } from '../../components/Gallery';
 
 const Claim: NextPage = () => {
@@ -11,9 +10,7 @@ const Claim: NextPage = () => {
         <meta name="description" content="GitPOAP Frontend App" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <StyledEngineProvider injectFirst>
-        <Gallery />
-      </StyledEngineProvider>
+      <Gallery />
     </div>
   );
 };

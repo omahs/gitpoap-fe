@@ -49,8 +49,8 @@ export const RecentlyAddedPopover = ({ target, isOpen, onClose }: Props) => {
       position="bottom"
       placement="center"
       withArrow
-      noFocusTrap
-      noEscape
+      trapFocus={false}
+      closeOnEscape={false}
       transition="pop-top-left"
       width={180}
       radius="md"
