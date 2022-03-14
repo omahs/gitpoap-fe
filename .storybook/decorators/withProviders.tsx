@@ -1,6 +1,6 @@
 import React from 'react';
 import { Web3ContextProvider } from '../../src/components/wallet/Web3ContextProvider';
-import { GHAuthProvider } from '../../src/components/github/GHAuthContext';
+import { AuthProvider } from '../../src/components/github/AuthContext';
 import { createClient, Provider as URQLProvider } from 'urql';
 import { MantineProvider } from '@mantine/core';
 import { RouterContext } from 'next/dist/shared/lib/router-context';
@@ -42,9 +42,9 @@ export const withProviders = (storyFn) => {
       <Web3ContextProvider>
         <MantineProvider theme={{ colorScheme: 'dark' }}>
           <URQLProvider value={client}>
-            <GHAuthProvider>
+            <AuthProvider>
               <FeaturesProvider>{storyFn()}</FeaturesProvider>
-            </GHAuthProvider>
+            </AuthProvider>
           </URQLProvider>
         </MantineProvider>
       </Web3ContextProvider>
