@@ -4,12 +4,12 @@ import { rem } from 'polished';
 import { Modal, Center } from '@mantine/core';
 import { BackgroundPanel, TextGray, TextLight } from '../colors';
 import { Button } from './shared/elements/Button';
-import { Claim } from '../types';
 import { ClaimBlock } from './shared/compounds/ClaimBlock';
+import { UserClaim } from './github/GitHub';
 
 type Props = {
   isOpen: boolean;
-  claims: Claim[];
+  claims: UserClaim[];
   onClose: () => void;
 };
 
@@ -76,17 +76,16 @@ export const ClaimModal = ({ isOpen, claims, onClose }: Props) => {
       <Content>
         <Header>{claimText}</Header>
         <GitPOAPs>
-          {claims.map((claim: Claim) => {
-            if (claim.gitPoap) {
-              return (
-                <ClaimBlock
-                  imgSrc={claim.gitPoap?.imgSrc}
-                  name={claim.gitPoap?.name}
-                  orgName={claim.gitPoap?.orgName}
-                  description={claim.gitPoap?.description}
-                />
-              );
-            }
+          {claims.map((userClaim: UserClaim) => {
+            return (
+              <ClaimBlock
+                key={userClaim.claim.id}
+                imgSrc={userClaim.event.image_url}
+                name={userClaim.event.name}
+                orgName={userClaim.claim.gitPOAP.repo.Organization.name}
+                description={userClaim.event.description}
+              />
+            );
           })}
         </GitPOAPs>
         <Claims>
