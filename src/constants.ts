@@ -4,6 +4,7 @@ export const REACT_APP_CLIENT_SECRET = '62f2f29b8f77bc529c3010731364c5aab94a9ef9
 export const REACT_APP_REDIRECT_URI = 'http://localhost:3000';
 export const REACT_APP_PROXY_URL = 'http://api.gitpoap.io/github';
 export const SERVER_PORT = 3001;
+export const FIVE_MINUTES = 5 * 60 * 1000;
 
 /* CSS Breakpoints */
 export const BREAKPOINTS = {

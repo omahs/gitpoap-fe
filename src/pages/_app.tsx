@@ -4,7 +4,7 @@ import { createClient, Provider as URQLProvider } from 'urql';
 import { MantineProvider } from '@mantine/core';
 import { GlobalStyles } from '../styles/globalStyles';
 import { Web3ContextProvider } from '../components/wallet/Web3ContextProvider';
-import { GHAuthProvider } from '../components/github/GHAuthContext';
+import { AuthProvider } from '../components/github/AuthContext';
 import { FeaturesProvider } from '../components/FeaturesContext';
 import { NextPage } from 'next';
 import { Layout } from '../components/Layout';
@@ -41,7 +41,7 @@ const TheApp = ({ Component, pageProps }: Props) => {
     <Web3ContextProvider>
       <MantineProvider theme={{ colorScheme: 'dark' }}>
         <URQLProvider value={client}>
-          <GHAuthProvider>
+          <AuthProvider>
             <FeaturesProvider>
               <GlobalStyles />
               <App>
@@ -50,7 +50,7 @@ const TheApp = ({ Component, pageProps }: Props) => {
                 </Layout>
               </App>
             </FeaturesProvider>
-          </GHAuthProvider>
+          </AuthProvider>
         </URQLProvider>
       </MantineProvider>
     </Web3ContextProvider>

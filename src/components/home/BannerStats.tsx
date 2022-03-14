@@ -82,11 +82,11 @@ export const BannerStats = () => {
 
   return (
     <StatsStyled>
-      {stats.map((stat) => {
+      {stats.map((stat, i) => {
         return (
           <InfoHexMetricStyled
             value={Number(stat.value).toLocaleString()}
-            key={stat.unit}
+            key={stat.unit + '-' + i}
             unit={stat.unit}
             rate={`${stat.rate >= 0 && '+'}${stat.rate} / past week`}
             icon={ICONS[stat.icon]}

@@ -17,11 +17,19 @@ const Content = styled.div`
 `;
 
 export const GitHub = ({ className }: Props) => {
-  const { githubAuthState, handleLogout, authorize } = useGHAuthContext();
+  const { authState, handleLogout, authorize } = useGHAuthContext();
 
   return (
     <Content className={className}>
-      {!githubAuthState.isLoggedIntoGitHub && (
+      {authState.isLoggedIntoGitHub ? (
+        <ConnectedButton
+          onClick={handleLogout}
+          variant="outline"
+          leftIcon={<GoMarkGithub size={16} />}
+        >
+          {authState.user?.githubHandle}
+        </ConnectedButton>
+      ) : (
         <Button onClick={authorize} leftIcon={<GoMarkGithub size={16} />}>
           {'CLAIM POAPS'}
         </Button>
