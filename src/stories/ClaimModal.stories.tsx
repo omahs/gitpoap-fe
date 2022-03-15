@@ -1,55 +1,84 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ClaimModal } from '../components/ClaimModal';
-import { Claim, ClaimStatus } from '../types';
+import { UserClaim } from '../types';
 import badgeImg1 from './assets/gitPOAPs/badge1.png';
 import badgeImg2 from './assets/gitPOAPs/badge2.png';
 import badgeImg3 from './assets/gitPOAPs/badge3.png';
+import badgeImg4 from './assets/gitPOAPs/badge4.png';
 
-const claims: Claim[] = [
+const claims: UserClaim[] = [
   {
-    id: '1',
-    status: ClaimStatus.UNCLAIMED,
-    poapTokenId: '1',
-    address: '0x1',
-    userId: '1',
-    gitPoapId: '1',
-    gitPoap: {
-      id: '1',
+    claim: {
+      id: 1,
+      gitPOAP: {
+        repo: {
+          Organization: {
+            name: 'Polygon',
+          },
+        },
+      },
+    },
+    event: {
+      id: 1,
       name: 'Polygon Genesis Creator',
-      orgName: 'Polygon',
+      image_url: badgeImg1 as unknown as string,
       description: 'To the creators of Polygon Network',
-      imgSrc: badgeImg1 as unknown as string,
     },
   },
   {
-    id: '2',
-    status: ClaimStatus.UNCLAIMED,
-    poapTokenId: '2',
-    address: '0x1',
-    userId: '2',
-    gitPoapId: '2',
-    gitPoap: {
-      id: '2',
+    claim: {
+      id: 2,
+      gitPOAP: {
+        repo: {
+          Organization: {
+            name: 'AAVE',
+          },
+        },
+      },
+    },
+    event: {
+      id: 2,
       name: 'AAVE Contributor 2021',
-      orgName: 'AAVE',
+      image_url: badgeImg2 as unknown as string,
       description: 'For all our valuable contributors in 2021',
-      imgSrc: badgeImg2 as unknown as string,
     },
   },
   {
-    id: '3',
-    status: ClaimStatus.UNCLAIMED,
-    poapTokenId: '3',
-    address: '0x1',
-    userId: '3',
-    gitPoapId: '3',
-    gitPoap: {
-      id: '3',
+    claim: {
+      id: 3,
+      gitPOAP: {
+        repo: {
+          Organization: {
+            name: 'AAVE',
+          },
+        },
+      },
+    },
+    event: {
+      id: 3,
       name: 'AAVE Core Contributor',
-      orgName: 'AAVE',
+      image_url: badgeImg3 as unknown as string,
       description: 'Issued to core contributors of AAVE protocol',
-      imgSrc: badgeImg3 as unknown as string,
+    },
+  },
+  {
+    claim: {
+      id: 4,
+      gitPOAP: {
+        repo: {
+          Organization: {
+            name: 'Swype Protocol',
+          },
+        },
+      },
+    },
+    event: {
+      id: 4,
+      name: 'Swype Protocol Purple Contributor',
+      image_url: badgeImg4 as unknown as string,
+      description:
+        'Issued to core contributors who have given back to the community enough to meet the requirements of level purple',
     },
   },
 ];
