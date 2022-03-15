@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
-import { Modal, Center } from '@mantine/core';
+import { Modal, Center, Pagination } from '@mantine/core';
 import { BackgroundPanel, TextGray, TextLight } from '../colors';
 import { Button } from './shared/elements/Button';
 import { ClaimBlock } from './shared/compounds/ClaimBlock';
-import { UserClaim } from './github/GitHub';
+import { UserClaim } from '../types';
 
 type Props = {
   isOpen: boolean;
@@ -31,14 +31,18 @@ const Header = styled.div`
   color: ${TextLight};
 `;
 
-const GitPOAPs = styled(Center)`
+const GitPOAPClaims = styled.div`
+  display: flex;
   margin-top: ${rem(60)};
+  margin-bottom: ${rem(20)};
+  height: ${rem(340)};
+
   > div:not(:last-child) {
     margin-right: ${rem(30)};
   }
 `;
 
-const Claims = styled(Center)`
+const ClaimAll = styled(Center)`
   display: inline-flex;
   flex-direction: column;
   margin-top: ${rem(54)};
@@ -63,7 +67,12 @@ const getClaimText = (numClaims: number): string => {
 };
 
 export const ClaimModal = ({ isOpen, claims, onClose }: Props) => {
+  const [page, setPage] = useState(1);
   const claimText = getClaimText(claims.length);
+  const perPage = 3;
+  const numPages = Math.ceil(claims.length / perPage);
+  const start = (page - 1) * perPage;
+  const end = start + perPage;
 
   return (
     <StyledModal
@@ -75,8 +84,8 @@ export const ClaimModal = ({ isOpen, claims, onClose }: Props) => {
     >
       <Content>
         <Header>{claimText}</Header>
-        <GitPOAPs>
-          {claims.map((userClaim: UserClaim) => {
+        <GitPOAPClaims>
+          {claims.slice(start, end).map((userClaim: UserClaim) => {
             return (
               <ClaimBlock
                 key={userClaim.claim.id}
@@ -87,11 +96,12 @@ export const ClaimModal = ({ isOpen, claims, onClose }: Props) => {
               />
             );
           })}
-        </GitPOAPs>
-        <Claims>
+        </GitPOAPClaims>
+        <Pagination style={{ padding: rem(5) }} page={page} onChange={setPage} total={numPages} />
+        <ClaimAll>
           <ClaimText>{'Claiming is free, no transaction fee required'}</ClaimText>
           <Button>{'Claim all'}</Button>
-        </Claims>
+        </ClaimAll>
       </Content>
     </StyledModal>
   );
