@@ -15,18 +15,25 @@ const Wrapper = styled.div`
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  height: 100%;
 `;
 
-const ClaimButton = styled(Button)`
-  margin-top: ${rem(36)};
+const ButtonWrapper = styled.div`
+  flex: 1;
+  margin-top: ${rem(14)};
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 `;
 
 export const ClaimBlock = ({ imgSrc, name, orgName, description }: Props) => {
   return (
     <Wrapper>
       <GitPOAP imgSrc={imgSrc} name={name} orgName={orgName} description={description} />
-      <ClaimButton>{'Claim'}</ClaimButton>
+      <ButtonWrapper>
+        <Button onClick={() => console.warn('clicking claim')}>{'Claim'}</Button>
+      </ButtonWrapper>
     </Wrapper>
   );
 };
