@@ -56,6 +56,10 @@ const Description = styled.div`
   letter-spacing: ${rem(-0.1)};
   color: ${TextLight};
   margin-top: ${rem(8)};
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 `;
 
 export const GitPOAP = ({ className, imgSrc, name, orgName, description }: Props) => {

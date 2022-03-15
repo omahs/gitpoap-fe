@@ -19,3 +19,12 @@ Default.args = {
   orgName: 'Polygon',
   description: 'To the creators of Polygon Network',
 };
+
+export const LongDescription = Template.bind({});
+LongDescription.args = {
+  imgSrc: badgeImg1 as unknown as string,
+  name: 'Swype Protocol Purple Contributor',
+  orgName: 'Swype',
+  description:
+    'Issued to core contributors who have given back to the community enough to meet the requirements of level purple',
+};
