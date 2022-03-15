@@ -60,7 +60,7 @@ const RecentProjectsQuery = gql`
       id
       name
       createdAt
-      Organization {
+      organization {
         name
       }
     }
@@ -94,7 +94,7 @@ export const RecentlyAdded = () => {
       <Projects>
         {result.data?.recentlyAddedProjects.map((project) => {
           return (
-            <ProjectHex key={project.id} category={project.Organization.name} name={project.name} />
+            <ProjectHex key={project.id} category={project.organization.name} name={project.name} />
           );
         })}
       </Projects>

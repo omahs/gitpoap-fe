@@ -13,7 +13,7 @@ export type UserClaim = {
     id: number;
     gitPOAP: {
       repo: {
-        Organization: {
+        organization: {
           name: string;
         };
       };
@@ -56,7 +56,7 @@ export type Project = {
   id: number;
   name: string;
   createdAt: string;
-  Organization: {
+  organization: {
     name: string;
   };
 };

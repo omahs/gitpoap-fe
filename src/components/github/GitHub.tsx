@@ -20,7 +20,7 @@ const OpenClaimsQuery = gql`
         id
         gitPOAP {
           repo {
-            Organization {
+            organization {
               name
             }
           }
@@ -41,7 +41,7 @@ export type UserOpenClaimsRes = {
 
 const Content = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   color: white;

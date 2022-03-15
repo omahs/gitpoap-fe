@@ -90,13 +90,16 @@ export const ClaimModal = ({ isOpen, claims, onClose }: Props) => {
                 key={userClaim.claim.id}
                 imgSrc={userClaim.event.image_url}
                 name={userClaim.event.name}
-                orgName={userClaim.claim.gitPOAP.repo.Organization.name}
+                orgName={userClaim.claim.gitPOAP.repo.organization.name}
                 description={userClaim.event.description}
               />
             );
           })}
         </GitPOAPClaims>
-        <Pagination style={{ padding: rem(5) }} page={page} onChange={setPage} total={numPages} />
+        {claims.length > perPage && (
+          <Pagination style={{ padding: rem(5) }} page={page} onChange={setPage} total={numPages} />
+        )}
+
         <ClaimAll>
           <ClaimText>{'Claiming is free, no transaction fee required'}</ClaimText>
           <Button>{'Claim all'}</Button>

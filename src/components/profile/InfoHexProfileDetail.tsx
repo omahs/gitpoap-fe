@@ -192,7 +192,7 @@ export const InfoHexProfileDetail = ({
               return (
                 <ProjectHex
                   key={project.id}
-                  category={project.Organization.name}
+                  category={project.organization.name}
                   name={project.name}
                 />
               );

@@ -209,7 +209,7 @@ export const projectData: Project[] = [
     // gitPoapCount: 15,
     // stars: 1507,
     // category: 'Exchanges',
-    Organization: { name: 'Exchanges' },
+    organization: { name: 'Exchanges' },
   },
   {
     id: 2,
@@ -219,7 +219,7 @@ export const projectData: Project[] = [
     // gitPoapCount: 8,
     // stars: 240,
     // category: 'Blockchain',
-    Organization: { name: 'Blockchain' },
+    organization: { name: 'Blockchain' },
   },
   {
     id: 3,
@@ -229,7 +229,7 @@ export const projectData: Project[] = [
     // gitPoapCount: 5,
     // stars: 15,
     // category: 'DAPP',
-    Organization: { name: 'DAPP' },
+    organization: { name: 'DAPP' },
   },
   {
     id: 4,
@@ -239,7 +239,7 @@ export const projectData: Project[] = [
     // gitPoapCount: 2,
     // stars: 912,
     // category: 'DAPP',
-    Organization: { name: 'DAPP' },
+    organization: { name: 'DAPP' },
   },
   {
     id: 5,
@@ -249,7 +249,7 @@ export const projectData: Project[] = [
     // gitPoapCount: 3,
     // stars: 492,
     // category: 'Blockchain',
-    Organization: { name: 'Blockchain' },
+    organization: { name: 'Blockchain' },
   },
   {
     id: 6,
@@ -259,7 +259,7 @@ export const projectData: Project[] = [
     // gitPoapCount: 3,
     // stars: 95,
     // category: 'Investing',
-    Organization: { name: 'Investing' },
+    organization: { name: 'Investing' },
   },
   {
     id: 7,
@@ -269,7 +269,7 @@ export const projectData: Project[] = [
     // gitPoapCount: 10,
     // stars: 1024,
     // category: 'Exchanges',
-    Organization: { name: 'Exchanges' },
+    organization: { name: 'Exchanges' },
   },
   {
     id: 8,
@@ -279,7 +279,7 @@ export const projectData: Project[] = [
     // gitPoapCount: 20,
     // stars: 984,
     // category: 'Exchanges',
-    Organization: { name: 'Exchanges' },
+    organization: { name: 'Exchanges' },
   },
   {
     id: 9,
@@ -289,7 +289,7 @@ export const projectData: Project[] = [
     // gitPoapCount: 15,
     // stars: 1507,
     // category: 'Blockchain',
-    Organization: { name: 'Blockchain' },
+    organization: { name: 'Blockchain' },
   },
   {
     id: 10,
@@ -299,7 +299,7 @@ export const projectData: Project[] = [
     // gitPoapCount: 8,
     // stars: 973,
     // category: 'Blockchain',
-    Organization: { name: 'Blockchain' },
+    organization: { name: 'Blockchain' },
   },
   {
     id: 11,
@@ -309,7 +309,7 @@ export const projectData: Project[] = [
     // gitPoapCount: 2,
     // stars: 85,
     // category: 'DApp',
-    Organization: { name: 'DApp' },
+    organization: { name: 'DApp' },
   },
 ];
 
