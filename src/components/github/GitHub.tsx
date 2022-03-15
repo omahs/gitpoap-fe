@@ -7,6 +7,7 @@ import { useAuthContext } from './AuthContext';
 import { Button } from '../shared/elements/Button';
 import { ClaimCircle } from '../shared/elements/ClaimCircle';
 import { ClaimModal } from '../ClaimModal';
+import { UserClaim } from '../../types';
 
 type Props = {
   className?: string;
@@ -36,24 +37,6 @@ const OpenClaimsQuery = gql`
 
 export type UserOpenClaimsRes = {
   userClaims: UserClaim[];
-};
-
-export type UserClaim = {
-  claim: {
-    id: number;
-    gitPOAP: {
-      repo: {
-        Organization: {
-          name: string;
-        };
-      };
-    };
-  };
-  event: {
-    name: string;
-    image_url: string;
-    description: string;
-  };
 };
 
 const Content = styled.div`

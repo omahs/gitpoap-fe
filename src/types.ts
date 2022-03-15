@@ -8,6 +8,25 @@ export type Claim = {
   gitPoap?: GitPOAP;
 };
 
+export type UserClaim = {
+  claim: {
+    id: number;
+    gitPOAP: {
+      repo: {
+        Organization: {
+          name: string;
+        };
+      };
+    };
+  };
+  event: {
+    id: number;
+    name: string;
+    image_url: string;
+    description: string;
+  };
+};
+
 export type GitPOAP = {
   id: string;
   name: string;
