@@ -35,7 +35,6 @@ const GitPOAPClaims = styled.div`
   display: flex;
   margin-top: ${rem(60)};
   margin-bottom: ${rem(20)};
-  height: ${rem(340)};
 
   > div:not(:last-child) {
     margin-right: ${rem(30)};
