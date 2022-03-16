@@ -9,11 +9,12 @@ export default {
 } as ComponentMeta<typeof POAPBadge>;
 
 const Template: ComponentStory<typeof POAPBadge> = (args) => {
-  return <POAPBadge {...args}>{'Exchanges'}</POAPBadge>;
+  return <POAPBadge {...args} />;
 };
 
 export const Default = Template.bind({});
 Default.args = {
   imgSrc: poap4 as unknown as string,
   name: 'Float Capital AMA',
+  poapTokenId: '1234',
 };

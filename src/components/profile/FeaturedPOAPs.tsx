@@ -38,7 +38,9 @@ const isGitPOAP = (poap: POAP | GitPOAPType): poap is GitPOAPType => {
 };
 
 export const FeaturedPOAPs = () => {
-  const { featuredPOAPsFull } = useFeaturedPOAPs();
+  const {
+    featuredPOAPsState: { featuredPOAPsFull },
+  } = useFeaturedPOAPs();
 
   return (
     <>
@@ -62,7 +64,7 @@ export const FeaturedPOAPs = () => {
             return (
               <POAPBadge
                 key={featuredPOAP.tokenId}
-                id={featuredPOAP.tokenId}
+                poapTokenId={featuredPOAP.tokenId}
                 name={featuredPOAP.event.name}
                 imgSrc={featuredPOAP.event.image_url}
                 href={`https://app.poap.xyz/token/${featuredPOAP.tokenId}`}
