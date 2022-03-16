@@ -63,16 +63,20 @@ const MostClaimedQuery = gql`
 export const MostClaimed = () => {
   const [result] = useQuery<{
     mostClaimedGitPOAPs: MostClaimedItem[];
-  }>({
+  } | null>({
     query: MostClaimedQuery,
   });
+
+  if (!result.data) {
+    return null;
+  }
 
   return (
     <Container>
       <Header>{'Most claimed GitPOAPs'}</Header>
 
       <Poaps>
-        {result.data?.mostClaimedGitPOAPs.map((item, i) => {
+        {result.data?.mostClaimedGitPOAPs?.map((item, i) => {
           return (
             <GitPOAPBadge
               key={item.gitPOAP.id + '-' + i}

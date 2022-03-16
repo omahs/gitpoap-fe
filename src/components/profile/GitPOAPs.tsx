@@ -146,6 +146,7 @@ export const GitPOAPs = ({ address }: Props) => {
                   orgName={gitPOAPItem.claim.gitPOAP.repo.name}
                   name={gitPOAPItem.poap.event.name}
                   imgSrc={gitPOAPItem.poap.event.image_url}
+                  poapTokenId={gitPOAPItem.poap.tokenId}
                 />
               );
             })}

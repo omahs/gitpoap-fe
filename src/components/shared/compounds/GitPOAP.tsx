@@ -4,6 +4,7 @@ import { rem } from 'polished';
 import { GitPOAPBadge } from '../elements/GitPOAPBadge';
 import { Title } from '../elements/Title';
 import { TextLight } from '../../../colors';
+import { FeatureHeart } from './FeatureHeart';
 
 type Props = {
   imgSrc: string;
@@ -11,6 +12,7 @@ type Props = {
   orgName: string;
   description?: string;
   className?: string;
+  poapTokenId?: string;
 };
 
 const Wrapper = styled.div`
@@ -62,10 +64,23 @@ const Description = styled.div`
   -webkit-box-orient: vertical;
 `;
 
-export const GitPOAP = ({ className, imgSrc, name, orgName, description }: Props) => {
+const Heart = styled(FeatureHeart)`
+  position: absolute;
+  bottom: ${rem(0)};
+  right: ${rem(10)};
+`;
+
+const BadgeWrapper = styled(Wrapper)`
+  position: relative;
+`;
+
+export const GitPOAP = ({ className, poapTokenId, imgSrc, name, orgName, description }: Props) => {
   return (
     <Wrapper className={className}>
-      <GitPOAPBadge size="sm" imgUrl={imgSrc} />
+      <BadgeWrapper>
+        <GitPOAPBadge size="sm" imgUrl={imgSrc} />
+        {poapTokenId && <Heart poapTokenId={poapTokenId} />}
+      </BadgeWrapper>
       <Info>
         <TitleStyled>{name}</TitleStyled>
         <OrgName>{orgName}</OrgName>
