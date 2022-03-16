@@ -56,9 +56,9 @@ const POAPBadge = styled(POAPBadgeUI)`
 export const AllPOAPs = ({ address }: Props) => {
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState<SortOptions>('date');
-  const [gitPOAPs, setGitPOAPs] = useState<POAP[]>([]);
+  const [poaps, setPoaps] = useState<POAP[]>([]);
   const [total, setTotal] = useState<number>();
-  const perPage = 4;
+  const perPage = 12;
   const [result] = useQuery<UserPOAPsQueryRes>({
     query: AllPOAPsQuery,
     variables: {
@@ -71,7 +71,7 @@ export const AllPOAPs = ({ address }: Props) => {
 
   /* Hook to append new data onto existing list of poaps */
   useEffect(() => {
-    setGitPOAPs((prev: POAP[]) => {
+    setPoaps((prev: POAP[]) => {
       if (result.data?.userPOAPs) {
         return [...prev, ...result.data.userPOAPs.poaps];
       }
@@ -98,12 +98,12 @@ export const AllPOAPs = ({ address }: Props) => {
       onSelectChange={(sortValue) => {
         if (sortValue !== sort) {
           setSort(sortValue as SortOptions);
-          setGitPOAPs([]);
+          setPoaps([]);
           setPage(1);
         }
       }}
       isLoading={result.fetching}
-      hasShowMoreButton={!!total && gitPOAPs.length < total}
+      hasShowMoreButton={!!total && poaps.length < total}
       showMoreOnClick={() => {
         if (!result.fetching) {
           setPage(page + 1);
@@ -111,15 +111,15 @@ export const AllPOAPs = ({ address }: Props) => {
       }}
     >
       <POAPs>
-        {gitPOAPs &&
-          gitPOAPs.map((gitPOAP) => {
+        {poaps &&
+          poaps.map((poap) => {
             return (
               <POAPBadge
-                key={gitPOAP.tokenId}
-                id={gitPOAP.tokenId}
-                name={gitPOAP.event.name}
-                imgSrc={gitPOAP.event.image_url}
-                href={`https://app.poap.xyz/token/${gitPOAP.tokenId}`}
+                key={poap.tokenId}
+                name={poap.event.name}
+                imgSrc={poap.event.image_url}
+                poapTokenId={poap.tokenId}
+                href={`https://app.poap.xyz/token/${poap.tokenId}`}
               />
             );
           })}
