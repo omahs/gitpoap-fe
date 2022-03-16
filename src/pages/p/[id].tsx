@@ -9,7 +9,9 @@ import { AllPOAPs } from '../../components/profile/AllPOAPs';
 import { GitPOAPs } from '../../components/profile/GitPOAPs';
 import { useRouter } from 'next/router';
 import { ProfileSidebar } from '../../components/profile/ProfileSidebar';
+import { FeaturedPOAPs } from '../../components/profile/FeaturedPOAPs';
 import { useWeb3Context } from '../../components/wallet/Web3ContextProvider';
+import { FeaturedPOAPsProvider } from '../../components/profile/FeaturedPOAPsContext';
 
 const Profile: Page = () => {
   const router = useRouter();
@@ -57,19 +59,27 @@ const Profile: Page = () => {
         <meta name="description" content="GitPOAP Frontend App" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div style={{ color: 'white' }}>{'The Banner goes here'}</div>
-      <Grid style={{ color: 'white' }} justify="center">
-        <ProfileSidebar address={address} ensName={ensName} />
-        <Grid justify="center">
-          <Grid.Col span={11}>{'Featured POAPs'}</Grid.Col>
-          <Grid.Col span={11}>
-            <GitPOAPs address={nameOrAddress} />
-          </Grid.Col>
-          <Grid.Col span={11} style={{ marginBottom: rem(150) }}>
-            <AllPOAPs address={nameOrAddress} />
-          </Grid.Col>
+      <FeaturedPOAPsProvider address={address}>
+        <div style={{ color: 'white' }}>{'The Banner goes here'}</div>
+        <Grid style={{ color: 'white' }} justify="center">
+          <Grid justify="center">
+            <Grid.Col span={10}>
+              <ProfileSidebar address={address} ensName={ensName} />
+            </Grid.Col>
+          </Grid>
+          <Grid justify="center">
+            <Grid.Col span={10}>
+              <FeaturedPOAPs />
+            </Grid.Col>
+            <Grid.Col span={10}>
+              <GitPOAPs address={nameOrAddress} />
+            </Grid.Col>
+            <Grid.Col span={10} style={{ marginBottom: rem(150) }}>
+              <AllPOAPs address={nameOrAddress} />
+            </Grid.Col>
+          </Grid>
         </Grid>
-      </Grid>
+      </FeaturedPOAPsProvider>
     </>
   );
 };
