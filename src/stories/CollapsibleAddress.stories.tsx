@@ -12,4 +12,4 @@ const Template: ComponentStory<typeof CollapsibleAddress> = (args) => {
 };
 
 export const Default = Template.bind({});
-Default.args = { address: '0xe4feb387cb1daff4bf9108581b116e5fa737bea2' };
+Default.args = { address: '0xe4feb387cb1daff4bf9108581b116e5fa737bea2', isCollapsed: true };

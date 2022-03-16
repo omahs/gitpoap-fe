@@ -6,11 +6,11 @@ export const GetAllStatsHandler = graphql.query('GetAllStats', (req, res, ctx) =
   return res(
     ctx.data({
       totalContributors: stats[0].value,
-      lastWeekContributors: stats[0].rate,
+      lastMonthContributors: stats[0].rate,
       totalGitPOAPs: stats[1].value,
-      lastWeekGitPOAPs: stats[1].rate,
+      lastMonthGitPOAPs: stats[1].rate,
       totalRepos: stats[2].value,
-      lastWeekRepos: stats[2].rate,
+      lastMonthRepos: stats[2].rate,
     }),
   );
 });
@@ -26,7 +26,7 @@ export const MostClaimedGitPoapsHandler = graphql.query('mostClaimedGitPoaps', (
 export const LeadersHandler = graphql.query('leaders', (req, res, ctx) => {
   return res(
     ctx.data({
-      lastWeekMostHonoredContributors: leaderData,
+      mostHonoredContributors: leaderData,
     }),
   );
 });
