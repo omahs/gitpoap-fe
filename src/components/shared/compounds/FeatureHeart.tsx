@@ -33,9 +33,16 @@ const FeatureHeartStyled = styled(FaHeart)`
 `;
 
 export const FeatureHeart = ({ className, poapTokenId }: Props) => {
-  const { featuredPOAPTokenIDs } = useFeaturedPOAPs();
+  const {
+    featuredPOAPsState: { featuredPOAPTokenIDs },
+    showHearts,
+  } = useFeaturedPOAPs();
   const { addFeaturedPOAP, removeFeaturedPOAP } = useFeaturedPOAPsDispatch();
-  const isFeatured: boolean = !!featuredPOAPTokenIDs[poapTokenId];
+  const isFeatured: boolean = !!featuredPOAPTokenIDs && !!featuredPOAPTokenIDs[poapTokenId];
+
+  if (!showHearts) {
+    return null;
+  }
 
   return (
     <HeartWrapper isFeatured={isFeatured}>

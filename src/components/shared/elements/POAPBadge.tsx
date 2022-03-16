@@ -4,13 +4,14 @@ import { rem } from 'polished';
 import Image from 'next/image';
 import { Title as TitleUI } from '../elements/Title';
 import { TextLight } from '../../../colors';
+import { FeatureHeart } from '../compounds/FeatureHeart';
 
 type Props = {
   className?: string;
-  id: string;
   imgSrc: string;
   name: string;
   href: string;
+  poapTokenId?: string;
 };
 
 const Container = styled.div`
@@ -48,12 +49,25 @@ const Title = styled(TitleUI)`
   width: ${rem(170)};
 `;
 
-export const POAPBadge = ({ className, imgSrc, name, href }: Props) => {
+const Heart = styled(FeatureHeart)`
+  position: absolute;
+  bottom: ${rem(0)};
+  right: ${rem(0)};
+`;
+
+const BadgeContainer = styled(Container)`
+  position: relative;
+`;
+
+export const POAPBadge = ({ className, imgSrc, name, href, poapTokenId }: Props) => {
   return (
     <Container className={className}>
-      <ImgContainer href={href} target="_blank" rel="noreferrer">
-        <POAP quality={100} height={150} width={150} src={imgSrc} />
-      </ImgContainer>
+      <BadgeContainer>
+        <ImgContainer href={href} target="_blank" rel="noreferrer">
+          <POAP quality={100} height={150} width={150} src={imgSrc} />
+        </ImgContainer>
+        {poapTokenId && <Heart poapTokenId={poapTokenId} />}
+      </BadgeContainer>
       <Title>{name}</Title>
     </Container>
   );

@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect, useCallback } from 'react';
 import { useQuery, gql } from 'urql';
+import { JsonRpcSigner } from '@ethersproject/providers';
 import { POAP } from '../../types';
 import { useWeb3Context } from '../wallet/Web3ContextProvider';
 import { GITPOAP_API_URL } from '../../constants';
@@ -66,6 +67,11 @@ type FeaturedPOAPsState = {
   featuredPOAPTokenIDs: Record<string, true>;
 };
 
+type FeaturedPOAPsData = {
+  featuredPOAPsState: FeaturedPOAPsState;
+  showHearts: boolean;
+};
+
 type FeaturedPOAPsDispatch = {
   addFeaturedPOAP: (poapTokenId: string) => void;
   removeFeaturedPOAP: (poapTokenId: string) => void;
@@ -78,7 +84,7 @@ export const getInitialState = (): FeaturedPOAPsState =>
     featuredPOAPTokenIDs: {} as Record<string, true>,
   } as FeaturedPOAPsState);
 
-const FeaturedPOAPsContext = createContext<FeaturedPOAPsState>({} as FeaturedPOAPsState);
+const FeaturedPOAPsContext = createContext<FeaturedPOAPsData>({} as FeaturedPOAPsData);
 const FeaturedPOAPsDispatchContext = createContext<FeaturedPOAPsDispatch>(
   {} as FeaturedPOAPsDispatch,
 );
@@ -96,7 +102,7 @@ export const FeaturedPOAPsProvider = ({ children, address }: Props) => {
   const { web3Provider } = useWeb3Context();
   const signer = web3Provider?.getSigner();
   const { tokens } = useAuthContext();
-
+  const [showHearts, setShowHearts] = useState(false);
   const [featuredPOAPsState, setFeaturedPOAPsState] = useState<FeaturedPOAPsState>(
     getInitialState(),
   );
@@ -106,6 +112,22 @@ export const FeaturedPOAPsProvider = ({ children, address }: Props) => {
       address,
     },
   });
+
+  const checkIfUserOwnsProfile = useCallback(async (address: string, signer: JsonRpcSigner) => {
+    const walletAddress = await signer?.getAddress();
+    if (address.toLocaleLowerCase() === walletAddress?.toLocaleLowerCase()) {
+      setShowHearts(true);
+    } else {
+      setShowHearts(false);
+    }
+  }, []);
+
+  /* Checks if the user owns the profile they're currently viewing */
+  useEffect(() => {
+    if (address && signer) {
+      checkIfUserOwnsProfile(address, signer);
+    }
+  }, [address, signer, checkIfUserOwnsProfile]);
 
   /* Hook to append new data onto existing list of poaps */
   useEffect(() => {
@@ -184,7 +206,7 @@ export const FeaturedPOAPsProvider = ({ children, address }: Props) => {
   );
 
   return (
-    <FeaturedPOAPsContext.Provider value={featuredPOAPsState}>
+    <FeaturedPOAPsContext.Provider value={{ featuredPOAPsState, showHearts }}>
       <FeaturedPOAPsDispatchContext.Provider value={{ addFeaturedPOAP, removeFeaturedPOAP }}>
         {children}
       </FeaturedPOAPsDispatchContext.Provider>
