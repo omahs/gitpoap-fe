@@ -4,23 +4,18 @@ import {
   TextGray,
   DarkGray,
   BackgroundPanel,
-  TextDarkGray,
   TextLight,
   BackgroundPanel2,
   ExtraRed,
 } from '../../../colors';
 import { TextInput } from '@mantine/core';
 
-type Props = {
+type Props = React.ComponentProps<typeof TextInput> & {
   className?: string;
   placeholder?: string;
-  onChange: React.ComponentProps<typeof TextInput>['onChange'];
   disabled?: boolean;
   value: string;
-  error?: React.ComponentProps<typeof TextInput>['error'];
-  size?: React.ComponentProps<typeof TextInput>['size'];
-  label?: React.ComponentProps<typeof TextInput>['label'];
-  required?: React.ComponentProps<typeof TextInput>['required'];
+  inputRef?: React.RefObject<HTMLInputElement>;
 };
 
 export const TextInputLabelStyles = css<{ disabled?: boolean }>`
@@ -61,7 +56,7 @@ const StyledInputBase = styled(TextInput)<{ disabled?: boolean }>`
       border: ${rem(1)} solid ${DarkGray} !important;
     }
     &::placeholder {
-      color: ${TextDarkGray};
+      color: ${TextGray};
     }
     &.mantine-TextInput-invalid {
       color: ${ExtraRed};
@@ -79,6 +74,6 @@ const StyledInputBase = styled(TextInput)<{ disabled?: boolean }>`
   }
 `;
 
-export const Input = (props: Props) => {
-  return <StyledInputBase {...props} />;
-};
+export function Input(props: Props) {
+  return <StyledInputBase {...props} ref={props.inputRef} spellCheck={false} />;
+}
