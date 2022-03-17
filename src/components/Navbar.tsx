@@ -8,6 +8,7 @@ import { BREAKPOINTS } from '../constants';
 import { GitPOAPLogo } from './shared/elements/icons/GitPOAPLogoWhite';
 import { Wallet } from './wallet/Wallet';
 import { GitHub } from './github/GitHub';
+import { SearchBox as SearchBoxUI } from './search/SearchBox';
 
 const Nav = styled(Group)`
   color: ${TextLight} !important;
@@ -72,6 +73,10 @@ const ClaimButton = styled(GitHub)`
   margin-right: ${rem(12)};
 `;
 
+const SearchBox = styled(SearchBoxUI)`
+  margin-right: ${rem(25)};
+`;
+
 const NavLink = (props: { href: string; children: React.ReactNode }) => {
   return (
     <Link href="/poaps" passHref>
@@ -96,6 +101,7 @@ export const Navbar = () => {
         </Link>
         <Space />
         <ContentRight>
+          <SearchBox />
           <Links>
             {showPOAPsPage && <NavLink href="/poaps">{'POAPS'}</NavLink>}
             {showProjectsPage && <NavLink href="/projects">{'Projects'}</NavLink>}
