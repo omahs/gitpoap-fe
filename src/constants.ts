@@ -3,6 +3,8 @@ export const REACT_APP_CLIENT_ID = '2c27505d957d66f74122';
 export const REACT_APP_CLIENT_SECRET = '62f2f29b8f77bc529c3010731364c5aab94a9ef9';
 export const REACT_APP_REDIRECT_URI = 'http://localhost:3000';
 export const REACT_APP_PROXY_URL = 'http://api.gitpoap.io/github';
+// export const GITPOAP_API_URL = 'http://api.gitpoap.io';
+export const GITPOAP_API_URL = 'http://localhost:3001';
 export const SERVER_PORT = 3001;
 export const FIVE_MINUTES = 5 * 60 * 1000;
 
