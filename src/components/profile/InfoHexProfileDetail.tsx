@@ -160,7 +160,7 @@ export const InfoHexProfileDetail = ({
   return (
     <StyledInfoHex>
       <Content>
-        {imgSrc && <Avatar src={imgSrc} useDefaultImage />}
+        {imgSrc && <Avatar src={imgSrc} useDefaultImageTag />}
         {!imgSrc && <JazzIcon address={address} />}
         <Name title={name}>{name}</Name>
         <Address address={address} isCollapsed />

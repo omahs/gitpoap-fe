@@ -6,7 +6,7 @@ type Props = {
   quality?: number;
   className?: string;
   src: string;
-  useDefaultImage?: boolean;
+  useDefaultImageTag?: boolean;
 };
 
 const AvatarWrapper = styled.div`
@@ -25,10 +25,10 @@ const DefaultImage = styled.img`
   height: 100%;
 `;
 
-export const Avatar = ({ quality = 100, className, src, useDefaultImage }: Props) => {
+export const Avatar = ({ quality = 100, className, src, useDefaultImageTag }: Props) => {
   return (
     <AvatarWrapper className={className}>
-      {useDefaultImage ? (
+      {useDefaultImageTag ? (
         <DefaultImage src={src} alt="" />
       ) : (
         <Image src={src} layout="fill" quality={quality} alt="" />
