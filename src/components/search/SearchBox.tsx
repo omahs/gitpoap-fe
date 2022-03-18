@@ -65,7 +65,7 @@ const Results = styled.div`
   position: absolute;
   display: inline-flex;
   flex-direction: column;
-  bottom: ${rem(-55)};
+  top: ${rem(45)};
   left: 0;
   min-width: ${rem(198)};
   padding: ${rem(6)} ${rem(6)} ${rem(6)} ${rem(6)};
@@ -74,17 +74,15 @@ const Results = styled.div`
   border-radius: ${rem(6)};
 `;
 
-const SearchIcon = styled(FaSearch)``;
-
 export const SearchBox = ({ className }: Props) => {
+  const maxResults = 5;
   const [query, setQuery] = useState('');
   const [debouncedQuery] = useDebouncedValue(query, 200);
   const [searchResults, setSearchResults] = useState<Result[]>([]);
   const [areResultsVisible, setAreResultsVisible] = useState<boolean>(false);
-  const [{ data, fetching }, refetch] = useQuery<SearchQueryRes>({
+  const [result, refetch] = useQuery<SearchQueryRes>({
     query: SearchQuery,
     pause: true,
-    requestPolicy: 'network-only',
     variables: {
       text: debouncedQuery,
     },
@@ -94,43 +92,48 @@ export const SearchBox = ({ className }: Props) => {
   const resultsRef = useRef<HTMLDivElement>(null);
   useOnClickOutside([inputRef, resultsRef], () => setAreResultsVisible(false));
 
+  /* This hook is used to transform the search results into a list of SearchItems & store the results in state */
   useEffect(() => {
-    let results: Result[] = [];
-    if (data?.search.profilesByAddress) {
-      const profilesByAddress = data.search.profilesByAddress.map(
-        (profile): Result => ({
-          id: profile.id,
-          text: profile.address,
-          href: `/p/${profile.address}`,
-        }),
-      );
+    if (debouncedQuery.length > 0) {
+      let results: Result[] = [];
+      if (result.data?.search.profilesByAddress) {
+        const profilesByAddress = result.data.search.profilesByAddress.map(
+          (profile): Result => ({
+            id: profile.id,
+            text: profile.address,
+            href: `/p/${profile.address}`,
+          }),
+        );
 
-      results = [...profilesByAddress];
+        results = [...profilesByAddress];
+      }
+      if (result.data?.search.profileByENS) {
+        const profileByENSData = result.data?.search.profileByENS;
+        const profileByENS = {
+          id: profileByENSData.profile.id,
+          text: profileByENSData.profile.address,
+          href: `/p/${profileByENSData.ens}`,
+          name: profileByENSData.ens,
+        };
+
+        results = [profileByENS, ...results];
+      }
+
+      setSearchResults(results);
     }
-    if (data?.search.profileByENS) {
-      const profileByENSData = data?.search.profileByENS;
-      const profileByENS = {
-        id: profileByENSData.profile.id,
-        text: profileByENSData.profile.address,
-        href: `/p/${profileByENSData.ens}`,
-        name: profileByENSData.ens,
-      };
+  }, [debouncedQuery, result.data]);
 
-      results = [profileByENS, ...results];
-    }
-
-    setSearchResults(results);
-  }, [query, data]);
-
+  /* This hook is used to refetch data when the debounced query changes */
   useEffect(() => {
-    if (debouncedQuery.length > 3 && refetch) {
+    if (debouncedQuery.length > 1 && refetch) {
       refetch();
     }
-    if (debouncedQuery.length == 0) {
-      console.log('clearing results');
-      setSearchResults([]);
-    }
   }, [debouncedQuery, refetch]);
+
+  /* This hook is used to clear stored results to ensure no random autocomplete flashes - urql caches results ~ so 🤪 */
+  useEffect(() => {
+    setSearchResults([]);
+  }, [query, debouncedQuery]);
 
   return (
     <Container className={className} onFocus={() => setAreResultsVisible(true)}>
@@ -139,19 +142,18 @@ export const SearchBox = ({ className }: Props) => {
         placeholder={'SEARCH...'}
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        icon={fetching ? <Loader size={18} /> : <FaSearch />}
+        icon={result.fetching ? <Loader size={18} /> : <FaSearch />}
       />
 
       {areResultsVisible && searchResults.length > 0 && debouncedQuery.length > 0 && (
         <Results ref={resultsRef}>
-          {searchResults.map((profile, i) => {
+          {searchResults.slice(0, maxResults).map((profile, i) => {
             return (
               <SearchItem
                 key={i}
                 href={profile.href}
                 text={profile.name ?? profile.text}
                 onClick={() => {
-                  console.log('calling the ONCLICK');
                   setQuery('');
                   setAreResultsVisible(false);
                   setSearchResults([]);
