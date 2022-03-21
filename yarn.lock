@@ -2168,27 +2168,27 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@mantine/core@^4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@mantine/core/-/core-4.0.1.tgz#d568d24ed3d458f219e661b1651694c7dbdc5421"
-  integrity sha512-wk1oevLSfs93BFSbepObw7yKjSlPu1trcmGhHCdeYeclyhx3D2YnOurEe7ZFUBYmuEiakgiJsx+TbIBzO+FRWg==
+"@mantine/core@^4.0.7":
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/@mantine/core/-/core-4.0.7.tgz#225b6be81a4bdede204eb24aa30a5029a110920b"
+  integrity sha512-HBUlPR7T5C0phuaKuY5SfyMB9hSMatXrqfbf8XE+a/3mRYacqa2wvp2YRGFtLxbLD49bZqybRXc8OR1VtsrZ6A==
   dependencies:
-    "@mantine/styles" "4.0.1"
+    "@mantine/styles" "4.0.7"
     "@popperjs/core" "^2.9.3"
     "@radix-ui/react-scroll-area" "^0.1.1"
     clsx "^1.1.1"
     react-popper "^2.2.5"
     react-textarea-autosize "^8.3.2"
 
-"@mantine/hooks@^4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@mantine/hooks/-/hooks-4.0.1.tgz#865b361458f0233ced263c836d0f0236b48c0bae"
-  integrity sha512-SO1vRNDfINtfZGH9ZKXVqly1uUrlyJMCI1rKXcup1QnpIRrr5EVReSBnmhpAf2islBQy0ljos8v3rqlWdkuI1Q==
+"@mantine/hooks@^4.0.7":
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/@mantine/hooks/-/hooks-4.0.7.tgz#7b6d12994f3bc35e653dd3054efeaef40f8af032"
+  integrity sha512-SjP6SZIgri3oMLDZBDYIo+nj9EKAN5OgvCDzREfD9k++BluPk2AfyzCpaZ7mr4+4ZskS6o5FIBvKqvUZYzr9bg==
 
-"@mantine/styles@4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@mantine/styles/-/styles-4.0.1.tgz#8567579e1fb051b0e57984f6e306999c85ccfd4a"
-  integrity sha512-BbwBxDZPFo06nlW15WGCRD5jxxWLoTPV7vDgMRPfIHVMLS8mASoW5dOEjoWrMzWDCQYqZb45Cg4lJTeSrwQopQ==
+"@mantine/styles@4.0.7":
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/@mantine/styles/-/styles-4.0.7.tgz#bb2e3cde15004b9d9a0f72ed359da8c24bd8fd6a"
+  integrity sha512-8QOHAigeTZwS90XwL/MjokmMu9vZDnIJetQRUrRnprovNaLm96aklPVQeXmgxmDlWGuleDq9zhLhjyBJSMPN0A==
   dependencies:
     "@emotion/cache" "^11.7.1"
     "@emotion/react" "^11.7.1"

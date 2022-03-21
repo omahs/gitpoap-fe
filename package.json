@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@ensdomains/ens-avatar": "^0.1.1",
-    "@mantine/core": "^4.0.1",
-    "@mantine/hooks": "^4.0.1",
+    "@mantine/core": "^4.0.7",
+    "@mantine/hooks": "^4.0.7",
     "@ukstv/jazzicon-react": "^1.0.0",
     "@walletconnect/web3-provider": "^1.7.3",
     "email-validator": "^2.0.4",
