@@ -19,8 +19,14 @@ Primary.args = { children: 'Claim All' };
 export const PrimaryDisabled = Template.bind({});
 PrimaryDisabled.args = { children: 'Claim All', disabled: true };
 
+export const PrimaryLoading = Template.bind({});
+PrimaryLoading.args = { children: 'Claim All', disabled: true, loading: true };
+
 export const Outline = Template.bind({});
 Outline.args = { children: 'Claim All', variant: 'outline' };
 
 export const OutlineDisabled = Template.bind({});
 OutlineDisabled.args = { children: 'Claim All', variant: 'outline', disabled: true };
+
+export const OutlineLoading = Template.bind({});
+OutlineLoading.args = { children: 'Claim All', variant: 'outline', disabled: true, loading: true };

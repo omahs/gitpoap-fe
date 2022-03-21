@@ -36,21 +36,24 @@ const StyledButton = styled(ButtonUI)<ButtonProps<'button'>>`
 
   &.mantine-Button-filled {
     background-color: ${PrimaryBlue};
-    border: ${rem(2)} solid ${PrimaryBlue};
+    border: none;
     color: white;
     &:hover:not(:disabled) {
       background-color: ${ExtraHover};
-      border-color: ${ExtraHover};
     }
     &:active:not(:disabled) {
       background-color: ${ExtraActive};
-      border-color: ${ExtraActive};
     }
     &:disabled {
       background-color: ${DarkGray};
-      border-color: ${DarkGray};
       .mantine-Button-label {
         color: ${TextGray};
+      }
+    }
+    &.mantine-Button-loading {
+      background-color: ${PrimaryBlue};
+      .mantine-Button-label {
+        color: white;
       }
     }
   }
@@ -59,6 +62,7 @@ const StyledButton = styled(ButtonUI)<ButtonProps<'button'>>`
     border: ${rem(2)} solid ${TextGray};
     color: white;
     background-color: transparent;
+    padding: ${rem(6)} ${rem(12)}; /* Adjusted for border */
     &:hover:not(:disabled) {
       border-color: ${ExtraHover};
       color: ${ExtraHover};
@@ -72,6 +76,17 @@ const StyledButton = styled(ButtonUI)<ButtonProps<'button'>>`
       border-color: ${TextGray};
       .mantine-Button-label {
         color: ${TextGray};
+      }
+    }
+    &.mantine-Button-loading {
+      &:before {
+        top: ${rem(-2)};
+        left: ${rem(-2)};
+        right: ${rem(-2)};
+        bottom: ${rem(-2)};
+      }
+      .mantine-Button-label {
+        color: white;
       }
     }
   }
