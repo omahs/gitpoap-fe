@@ -61,6 +61,8 @@ export const ProfileDetails: ComponentStory<typeof InfoHexBase> = (args) => {
       githubHref="github.com/miguelmota"
       websiteHref="https://miguelmota.com"
       projects={projectData.slice(0, 3)}
+      onClickEditProfile={() => {}}
+      showEditProfileButton={true}
     />
   );
 };

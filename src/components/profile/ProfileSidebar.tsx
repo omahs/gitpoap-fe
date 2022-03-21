@@ -9,6 +9,7 @@ import { AvatarResolver } from '@ensdomains/ens-avatar';
 type Props = {
   address: string;
   ensName?: string;
+  onClickEditProfile: () => void;
 };
 
 const ProfileQuery = gql`
@@ -33,8 +34,8 @@ export type UserPOAPsQueryRes = {
   } | null;
 };
 
-export const ProfileSidebar = ({ address, ensName }: Props) => {
-  const { web3Provider } = useWeb3Context();
+export const ProfileSidebar = ({ address, ensName, onClickEditProfile }: Props) => {
+  const { web3Provider, address: connectedWalletAddress } = useWeb3Context();
   const [profileData, setProfileData] = useState<UserPOAPsQueryRes['profileData']>();
   const [avatarURI, setAvatarURI] = useState<string>();
   const [result] = useQuery<UserPOAPsQueryRes>({
@@ -43,6 +44,9 @@ export const ProfileSidebar = ({ address, ensName }: Props) => {
       address,
     },
   });
+
+  const showEditProfileButton =
+    address.toLocaleLowerCase() === connectedWalletAddress?.toLocaleLowerCase();
 
   /* Hook to set profile data to state */
   useEffect(() => {
@@ -77,6 +81,8 @@ export const ProfileSidebar = ({ address, ensName }: Props) => {
             : undefined
         }
         websiteHref={profileData?.personalSiteUrl}
+        onClickEditProfile={onClickEditProfile}
+        showEditProfileButton={showEditProfileButton}
       />
     </Grid.Col>
   );

@@ -12,11 +12,15 @@ import { ProfileSidebar } from '../../components/profile/ProfileSidebar';
 import { FeaturedPOAPs } from '../../components/profile/FeaturedPOAPs';
 import { useWeb3Context } from '../../components/wallet/Web3ContextProvider';
 import { FeaturedPOAPsProvider } from '../../components/profile/FeaturedPOAPsContext';
+import { EditProfileModal } from '../../components/profile/EditProfileModal';
+import { useFeatures } from '../../components/FeaturesContext';
 
 const Profile: Page = () => {
   const router = useRouter();
   const [address, setAddress] = useState<string>('');
   const [ensName, setEnsName] = useState<string>('');
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState<boolean>(false);
+  const { hasTwitterIntegration } = useFeatures();
   const { web3Provider } = useWeb3Context();
 
   const nameOrAddress = router.query.id as string;
@@ -64,7 +68,11 @@ const Profile: Page = () => {
         <Grid style={{ color: 'white' }} justify="center">
           <Grid justify="center">
             <Grid.Col span={10}>
-              <ProfileSidebar address={address} ensName={ensName} />
+              <ProfileSidebar
+                address={address}
+                ensName={ensName}
+                onClickEditProfile={() => setIsUpdateModalOpen(true)}
+              />
             </Grid.Col>
           </Grid>
           <Grid justify="center">
@@ -79,6 +87,11 @@ const Profile: Page = () => {
             </Grid.Col>
           </Grid>
         </Grid>
+        <EditProfileModal
+          isOpen={isUpdateModalOpen}
+          onClose={() => setIsUpdateModalOpen(false)}
+          hasTwitterIntegration={hasTwitterIntegration}
+        />
       </FeaturedPOAPsProvider>
     </>
   );

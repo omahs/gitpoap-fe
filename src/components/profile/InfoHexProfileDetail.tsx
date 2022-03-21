@@ -20,6 +20,7 @@ import { Project } from '../../types';
 import { ProjectHex } from '../shared/compounds/ProjectHex';
 import { FiGlobe } from 'react-icons/fi';
 import { IconStyles } from '../shared/elements/icons/BaseIcon';
+import { Button } from '../shared/elements/Button';
 
 type Props = {
   imgSrc?: string;
@@ -30,6 +31,8 @@ type Props = {
   githubHref?: string;
   websiteHref?: string;
   projects?: Project[];
+  onClickEditProfile: () => void;
+  showEditProfileButton: boolean;
 };
 
 const Content = styled.div`
@@ -156,6 +159,8 @@ export const InfoHexProfileDetail = ({
   githubHref,
   websiteHref,
   projects,
+  onClickEditProfile,
+  showEditProfileButton,
 }: Props) => {
   return (
     <StyledInfoHex>
@@ -182,6 +187,11 @@ export const InfoHexProfileDetail = ({
             </IconLink>
           )}
         </Social>
+        {showEditProfileButton && (
+          <Button style={{ marginTop: rem(10) }} onClick={onClickEditProfile} variant="outline">
+            {'Edit Profile'}
+          </Button>
+        )}
         {projects && (
           <>
             <Divider />

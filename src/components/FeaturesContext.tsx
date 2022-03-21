@@ -8,6 +8,7 @@ type FeaturesState = {
   hasProjectsPage: boolean;
   hasDocs: boolean;
   hasClaimsPage: boolean;
+  hasTwitterIntegration: boolean;
 };
 
 export const getInitialState = (): FeaturesState => ({
@@ -17,6 +18,7 @@ export const getInitialState = (): FeaturesState => ({
   hasProjectsPage: true,
   hasDocs: true,
   hasClaimsPage: true,
+  hasTwitterIntegration: false,
 });
 
 const FeaturesContext = createContext<FeaturesState>({} as FeaturesState);
