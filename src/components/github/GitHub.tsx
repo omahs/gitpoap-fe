@@ -136,13 +136,6 @@ export const GitHub = ({ className }: Props) => {
     <Content className={className}>
       {renderGitHubButton()}
 
-      <ConnectedButton
-        onClick={handleLogout}
-        variant="outline"
-        leftIcon={<GoMarkGithub size={16} />}
-      >
-        {authState.user?.githubHandle}
-      </ConnectedButton>
       <ClaimModal
         claims={userClaims ?? []}
         isOpen={isModalOpen}
