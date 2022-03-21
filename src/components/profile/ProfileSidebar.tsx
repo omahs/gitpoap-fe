@@ -1,72 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Grid } from '@mantine/core';
-import { useQuery, gql } from 'urql';
 import { InfoHexProfileDetail } from './InfoHexProfileDetail';
 import { truncateAddress } from '../../helpers';
-import { useWeb3Context } from '../../components/wallet/Web3ContextProvider';
-import { AvatarResolver } from '@ensdomains/ens-avatar';
+import { useProfileContext } from './ProfileContext';
 
 type Props = {
   address: string;
   ensName?: string;
-  onClickEditProfile: () => void;
 };
 
-const ProfileQuery = gql`
-  query profile($address: String!) {
-    profileData(address: $address) {
-      id
-      bio
-      name
-      twitterHandle
-      personalSiteUrl
-    }
-  }
-`;
-
-export type UserPOAPsQueryRes = {
-  profileData: {
-    id: string;
-    bio: string;
-    name: string;
-    twitterHandle?: string;
-    personalSiteUrl?: string;
-  } | null;
-};
-
-export const ProfileSidebar = ({ address, ensName, onClickEditProfile }: Props) => {
-  const { web3Provider, address: connectedWalletAddress } = useWeb3Context();
-  const [profileData, setProfileData] = useState<UserPOAPsQueryRes['profileData']>();
-  const [avatarURI, setAvatarURI] = useState<string>();
-  const [result] = useQuery<UserPOAPsQueryRes>({
-    query: ProfileQuery,
-    variables: {
-      address,
-    },
-  });
-
-  const showEditProfileButton =
-    address.toLocaleLowerCase() === connectedWalletAddress?.toLocaleLowerCase();
-
-  /* Hook to set profile data to state */
-  useEffect(() => {
-    setProfileData(result.data?.profileData);
-  }, [result.data]);
-
-  useEffect(() => {
-    const getAvatar = async () => {
-      if (web3Provider && ensName) {
-        const avt = new AvatarResolver(web3Provider);
-        const resolvedAvatarURI = await avt.getAvatar(ensName, {});
-
-        if (resolvedAvatarURI) {
-          setAvatarURI(resolvedAvatarURI);
-        }
-      }
-    };
-
-    getAvatar();
-  }, [ensName, web3Provider]);
+export const ProfileSidebar = ({ address, ensName }: Props) => {
+  const { profileData, avatarURI, showEditProfileButton, setIsUpdateModalOpen } =
+    useProfileContext();
 
   return (
     <Grid.Col span={12}>
@@ -81,7 +26,7 @@ export const ProfileSidebar = ({ address, ensName, onClickEditProfile }: Props) 
             : undefined
         }
         websiteHref={profileData?.personalSiteUrl}
-        onClickEditProfile={onClickEditProfile}
+        onClickEditProfile={() => setIsUpdateModalOpen(true)}
         showEditProfileButton={showEditProfileButton}
       />
     </Grid.Col>

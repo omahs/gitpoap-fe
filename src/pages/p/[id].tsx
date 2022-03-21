@@ -12,37 +12,35 @@ import { ProfileSidebar } from '../../components/profile/ProfileSidebar';
 import { FeaturedPOAPs } from '../../components/profile/FeaturedPOAPs';
 import { useWeb3Context } from '../../components/wallet/Web3ContextProvider';
 import { FeaturedPOAPsProvider } from '../../components/profile/FeaturedPOAPsContext';
-import { EditProfileModal } from '../../components/profile/EditProfileModal';
-import { useFeatures } from '../../components/FeaturesContext';
+import { ProfileProvider } from '../../components/profile/ProfileContext';
+import { truncateAddress } from '../../helpers';
 
 const Profile: Page = () => {
   const router = useRouter();
-  const [address, setAddress] = useState<string>('');
+  const [profileAddress, setProfileAddress] = useState<string>('');
   const [ensName, setEnsName] = useState<string>('');
-  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState<boolean>(false);
-  const { hasTwitterIntegration } = useFeatures();
   const { web3Provider } = useWeb3Context();
 
   const nameOrAddress = router.query.id as string;
 
-  /* This hook is used to set the name */
+  /* This hook is used to set the address and/or ENS name resolved from the URL */
   useEffect(() => {
     const lookupName = async () => {
       if (isAddress(nameOrAddress)) {
-        const address = nameOrAddress;
-        setAddress(address);
-        const ensName = await web3Provider?.lookupAddress(address);
+        const profileAddress = nameOrAddress;
+        setProfileAddress(profileAddress);
+        const ensName = await web3Provider?.lookupAddress(profileAddress);
 
         if (ensName) {
           setEnsName(ensName);
         }
       } else if (nameOrAddress.includes('.eth')) {
         const name = nameOrAddress;
-        const address = await web3Provider?.resolveName(name);
+        const profileAddress = await web3Provider?.resolveName(name);
 
-        if (address) {
+        if (profileAddress) {
           setEnsName(name);
-          setAddress(address);
+          setProfileAddress(profileAddress);
         }
       }
     };
@@ -52,47 +50,40 @@ const Profile: Page = () => {
     }
   }, [nameOrAddress, web3Provider, router]);
 
-  if (!(router.isReady && address)) {
+  if (!(router.isReady && profileAddress)) {
     return null;
   }
 
   return (
     <>
       <Head>
-        <title>{'Profile | GitPOAP'}</title>
+        <title>{`${ensName ?? truncateAddress(profileAddress, 4)} | GitPOAP`}</title>
         <meta name="description" content="GitPOAP Frontend App" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <FeaturedPOAPsProvider address={address}>
-        <div style={{ color: 'white' }}>{'The Banner goes here'}</div>
-        <Grid style={{ color: 'white' }} justify="center">
-          <Grid justify="center">
-            <Grid.Col span={10}>
-              <ProfileSidebar
-                address={address}
-                ensName={ensName}
-                onClickEditProfile={() => setIsUpdateModalOpen(true)}
-              />
-            </Grid.Col>
+      <ProfileProvider address={profileAddress}>
+        <FeaturedPOAPsProvider address={profileAddress}>
+          <div style={{ color: 'white' }}>{'The Banner goes here'}</div>
+          <Grid style={{ color: 'white' }} justify="center">
+            <Grid justify="center">
+              <Grid.Col span={10}>
+                <ProfileSidebar address={profileAddress} ensName={ensName} />
+              </Grid.Col>
+            </Grid>
+            <Grid justify="center">
+              <Grid.Col span={10}>
+                <FeaturedPOAPs />
+              </Grid.Col>
+              <Grid.Col span={10}>
+                <GitPOAPs address={nameOrAddress} />
+              </Grid.Col>
+              <Grid.Col span={10} style={{ marginBottom: rem(150) }}>
+                <AllPOAPs address={nameOrAddress} />
+              </Grid.Col>
+            </Grid>
           </Grid>
-          <Grid justify="center">
-            <Grid.Col span={10}>
-              <FeaturedPOAPs />
-            </Grid.Col>
-            <Grid.Col span={10}>
-              <GitPOAPs address={nameOrAddress} />
-            </Grid.Col>
-            <Grid.Col span={10} style={{ marginBottom: rem(150) }}>
-              <AllPOAPs address={nameOrAddress} />
-            </Grid.Col>
-          </Grid>
-        </Grid>
-        <EditProfileModal
-          isOpen={isUpdateModalOpen}
-          onClose={() => setIsUpdateModalOpen(false)}
-          hasTwitterIntegration={hasTwitterIntegration}
-        />
-      </FeaturedPOAPsProvider>
+        </FeaturedPOAPsProvider>
+      </ProfileProvider>
     </>
   );
 };

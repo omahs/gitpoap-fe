@@ -134,7 +134,7 @@ export const GitHub = ({ className }: Props) => {
 
   return (
     <Content className={className}>
-      {renderGitHubButton()}
+      {authState.hasLoadedLocalStorage && renderGitHubButton()}
 
       <ClaimModal
         claims={userClaims ?? []}

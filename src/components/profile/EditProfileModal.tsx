@@ -9,11 +9,17 @@ import { TextArea as TextAreaUI } from '../shared/elements/TextArea';
 import { Text } from '../shared/elements/Text';
 import { MidnightBlue } from '../../colors';
 import { useAuthContext } from '../github/AuthContext';
+import { ProfileData } from './ProfileContext';
+import { isValidURL } from '../../helpers';
 
 type Props = {
   isOpen: boolean;
   onClose: () => void;
   hasTwitterIntegration: boolean;
+  bio: string;
+  personalSiteUrl?: string;
+  onClickSave: (newProfileData: Partial<Pick<ProfileData, 'bio' | 'personalSiteUrl'>>) => void;
+  isSaveLoading: boolean;
 };
 
 const StyledModal = styled(Modal)`
@@ -44,6 +50,7 @@ const ProfileFields = styled.div`
   border: ${rem(1)} solid ${BackgroundPanel2};
   border-radius: ${rem(10)};
   margin-bottom: ${rem(30)};
+  min-width: ${rem(600)};
 `;
 
 const Setting = styled.div`
@@ -74,10 +81,24 @@ const TextArea = styled(TextAreaUI)`
   flex: 1;
 `;
 
-export const EditProfileModal = ({ isOpen, onClose, hasTwitterIntegration }: Props) => {
+export const SettingsText = styled(Text)`
+  padding-right: ${rem(30)};
+`;
+
+export const EditProfileModal = ({
+  isOpen,
+  onClose,
+  hasTwitterIntegration,
+  bio,
+  personalSiteUrl,
+  onClickSave,
+  isSaveLoading,
+}: Props) => {
   const { authState, handleLogout, authorizeGitHub } = useAuthContext();
-  const [websiteValue, setWebsiteValue] = useState<string>('');
-  const [bioValue, setBioValue] = useState<string>('');
+  const [personSiteUrlValue, setPersonalSiteUrlValue] =
+    useState<string | undefined>(personalSiteUrl);
+  const [bioValue, setBioValue] = useState<string | undefined>(bio);
+  const canSave = personSiteUrlValue !== personalSiteUrl || bioValue !== bio;
 
   return (
     <StyledModal
@@ -94,9 +115,9 @@ export const EditProfileModal = ({ isOpen, onClose, hasTwitterIntegration }: Pro
             <ConnectTwitter>
               <FieldLabel>{'Twitter'}</FieldLabel>
               <Setting>
-                <Text style={{ paddingRight: rem(30) }}>
+                <SettingsText>
                   {'Connect your Twitter account to display it on your profile'}
-                </Text>
+                </SettingsText>
                 <Button onClick={authorizeGitHub} variant="outline">
                   {'Connect'}
                 </Button>
@@ -107,7 +128,7 @@ export const EditProfileModal = ({ isOpen, onClose, hasTwitterIntegration }: Pro
             <FieldLabel>{'GitHub'}</FieldLabel>
             {authState.isLoggedIntoGitHub ? (
               <Setting>
-                <Text>{`You're connected as @${authState.user?.githubHandle}`}</Text>
+                <SettingsText>{`You're connected as @${authState.user?.githubHandle}`}</SettingsText>
                 <Button onClick={handleLogout} variant="outline">
                   {'Disconnect'}
                 </Button>
@@ -125,24 +146,29 @@ export const EditProfileModal = ({ isOpen, onClose, hasTwitterIntegration }: Pro
             <Input
               placeholder="https://gitpoap.io"
               label={'Website Url'}
-              value={websiteValue}
-              onChange={(e) => setWebsiteValue(e.target.value)}
+              value={personSiteUrlValue ?? ''}
+              onChange={(e) => setPersonalSiteUrlValue(e.target.value)}
+              error={personSiteUrlValue && !isValidURL(personSiteUrlValue)}
             />
           </PersonalWebsite>
           <ProfileBio>
             <TextArea
               placeholder="web3 developer, aspiring dao contributor"
               label={'Profile Bio'}
-              value={bioValue}
+              value={bioValue ?? ''}
               onChange={(e) => setBioValue(e.target.value)}
+              autosize
+              minRows={4}
+              maxRows={4}
             />
           </ProfileBio>
         </ProfileFields>
 
         <Button
-          onClick={() => {
-            console.log('saving profile');
-          }}
+          onClick={() => onClickSave({ bio: bioValue, personalSiteUrl: personSiteUrlValue })}
+          disabled={!canSave}
+          loading={isSaveLoading}
+          style={{ minWidth: rem(100) }}
         >
           {'Save'}
         </Button>
