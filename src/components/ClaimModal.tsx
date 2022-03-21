@@ -53,7 +53,7 @@ const ClaimText = styled.div`
   text-align: center;
   letter-spacing: ${rem(0.5)};
   color: ${TextGray};
-  margin-bottom: ${rem(12)};
+  margin-top: ${rem(12)};
 `;
 
 const getClaimText = (numClaims: number): string => {
@@ -74,7 +74,8 @@ export const ClaimModal = ({ isOpen, claims, onClose, onClickClaim }: Props) => 
   const start = (page - 1) * perPage;
   const end = start + perPage;
 
-  const allClaimIds = claims.map((userClaim) => userClaim.claim.id);
+  /* All claimIds in view, not all */
+  const allClaimIds = claims.slice(start, end).map((userClaim) => userClaim.claim.id);
 
   return (
     <StyledModal
@@ -104,10 +105,12 @@ export const ClaimModal = ({ isOpen, claims, onClose, onClickClaim }: Props) => 
           <Pagination style={{ padding: rem(5) }} page={page} onChange={setPage} total={numPages} />
         )}
 
-        <ClaimAll>
-          <Button onClick={() => onClickClaim(allClaimIds)}>{'Claim all'}</Button>
-          <ClaimText>{'Claiming is free, no transaction fee required'}</ClaimText>
-        </ClaimAll>
+        {claims.length > 1 && (
+          <ClaimAll>
+            <Button onClick={() => onClickClaim(allClaimIds)}>{'Claim all'}</Button>
+          </ClaimAll>
+        )}
+        <ClaimText>{'Claiming is free, no transaction fee required'}</ClaimText>
       </Content>
     </StyledModal>
   );
