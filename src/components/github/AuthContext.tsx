@@ -26,7 +26,7 @@ type AuthContextData = {
   tokens: Tokens | null;
   setAuthState: (authState: AuthState) => void;
   handleLogout: () => void;
-  authorize: () => void;
+  authorizeGitHub: () => void;
 };
 
 type Tokens = {
@@ -94,7 +94,7 @@ export const AuthProvider = ({ children }: Props) => {
   }, []);
 
   /* Redirect to github to authorize if not connected / logged in */
-  const authorize = useCallback(() => router.push(githubAuthURL), [githubAuthURL, router]);
+  const authorizeGitHub = useCallback(() => router.push(githubAuthURL), [githubAuthURL, router]);
 
   /* Load values from localStorage into state on page load */
   useEffect(() => {
@@ -217,7 +217,9 @@ export const AuthProvider = ({ children }: Props) => {
   }, [tokens?.accessToken, tokens?.refreshToken, performRefresh]);
 
   return (
-    <AuthContext.Provider value={{ authState, tokens, setAuthState, handleLogout, authorize }}>
+    <AuthContext.Provider
+      value={{ authState, tokens, setAuthState, handleLogout, authorizeGitHub }}
+    >
       {children}
     </AuthContext.Provider>
   );

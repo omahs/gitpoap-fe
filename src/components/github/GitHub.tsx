@@ -55,7 +55,7 @@ const ConnectedButton = styled(Button)`
 
 export const GitHub = ({ className }: Props) => {
   const { web3Provider } = useWeb3Context();
-  const { tokens, authState, handleLogout, authorize } = useAuthContext();
+  const { tokens, authState, handleLogout, authorizeGitHub } = useAuthContext();
   const signer = web3Provider?.getSigner();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [result, refetch] = useQuery<UserOpenClaimsRes>({
@@ -72,7 +72,7 @@ export const GitHub = ({ className }: Props) => {
     /* Not connected to GitHub */
     if (!authState.isLoggedIntoGitHub) {
       return (
-        <Button onClick={authorize} leftIcon={<GoMarkGithub size={16} />}>
+        <Button onClick={authorizeGitHub} leftIcon={<GoMarkGithub size={16} />}>
           {'CLAIM POAPS'}
         </Button>
       );
@@ -100,7 +100,7 @@ export const GitHub = ({ className }: Props) => {
         {authState.user?.githubHandle}
       </ConnectedButton>
     );
-  }, [authState.isLoggedIntoGitHub, userClaims, authState.user, handleLogout, authorize]);
+  }, [authState.isLoggedIntoGitHub, userClaims, authState.user, handleLogout, authorizeGitHub]);
 
   const claimGitPOAP = useCallback(
     async (claimIds: number[]) => {
