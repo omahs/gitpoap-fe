@@ -7,6 +7,7 @@ import {
   TextLight,
   BackgroundPanel2,
   ExtraRed,
+  TextDarkGray,
 } from '../../../colors';
 import { TextInput } from '@mantine/core';
 
@@ -56,7 +57,7 @@ const StyledInputBase = styled(TextInput)<{ disabled?: boolean }>`
       border: ${rem(1)} solid ${DarkGray} !important;
     }
     &::placeholder {
-      color: ${TextGray};
+      color: ${TextDarkGray};
     }
     &.mantine-TextInput-invalid {
       color: ${ExtraRed};

@@ -7,7 +7,7 @@ import { Loader } from '@mantine/core';
 import { rem } from 'polished';
 import { Input } from '../shared/elements/Input';
 import { SearchItem } from './SearchItem';
-import { BackgroundPanel } from '../../colors';
+import { BackgroundPanel, TextGray } from '../../colors';
 import { useOnClickOutside } from '../../hooks/useOnClickOutside';
 
 type Props = {
@@ -59,6 +59,14 @@ export type SearchQueryRes = {
 
 const Container = styled.div`
   position: relative;
+`;
+
+const SearchInput = styled(Input)`
+  .mantine-TextInput-input {
+    &::placeholder {
+      color: ${TextGray};
+    }
+  }
 `;
 
 const Results = styled.div`
@@ -137,7 +145,7 @@ export const SearchBox = ({ className }: Props) => {
 
   return (
     <Container className={className} onFocus={() => setAreResultsVisible(true)}>
-      <Input
+      <SearchInput
         inputRef={inputRef}
         placeholder={'SEARCH...'}
         value={query}
