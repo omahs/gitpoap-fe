@@ -11,6 +11,7 @@ type Props = {
   isOpen: boolean;
   claims: UserClaim[];
   onClose: () => void;
+  onClickClaim: (claimIds: number[]) => void;
 };
 
 const StyledModal = styled(Modal)`
@@ -65,13 +66,15 @@ const getClaimText = (numClaims: number): string => {
   return `You have ${numClaims} new POAPs to claim!`;
 };
 
-export const ClaimModal = ({ isOpen, claims, onClose }: Props) => {
+export const ClaimModal = ({ isOpen, claims, onClose, onClickClaim }: Props) => {
   const [page, setPage] = useState(1);
   const claimText = getClaimText(claims.length);
   const perPage = 3;
   const numPages = Math.ceil(claims.length / perPage);
   const start = (page - 1) * perPage;
   const end = start + perPage;
+
+  const allClaimIds = claims.map((userClaim) => userClaim.claim.id);
 
   return (
     <StyledModal
@@ -92,6 +95,7 @@ export const ClaimModal = ({ isOpen, claims, onClose }: Props) => {
                 name={userClaim.event.name}
                 orgName={userClaim.claim.gitPOAP.repo.organization.name}
                 description={userClaim.event.description}
+                onClickClaim={() => onClickClaim([userClaim.claim.id])}
               />
             );
           })}
@@ -101,8 +105,8 @@ export const ClaimModal = ({ isOpen, claims, onClose }: Props) => {
         )}
 
         <ClaimAll>
+          <Button onClick={() => onClickClaim(allClaimIds)}>{'Claim all'}</Button>
           <ClaimText>{'Claiming is free, no transaction fee required'}</ClaimText>
-          <Button>{'Claim all'}</Button>
         </ClaimAll>
       </Content>
     </StyledModal>

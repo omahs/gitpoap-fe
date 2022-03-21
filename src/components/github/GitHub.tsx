@@ -8,6 +8,8 @@ import { Button } from '../shared/elements/Button';
 import { ClaimCircle } from '../shared/elements/ClaimCircle';
 import { ClaimModal } from '../ClaimModal';
 import { UserClaim } from '../../types';
+import { useWeb3Context } from '../wallet/Web3ContextProvider';
+import { GITPOAP_API_URL } from '../../constants';
 
 type Props = {
   className?: string;
@@ -52,9 +54,11 @@ const ConnectedButton = styled(Button)`
 `;
 
 export const GitHub = ({ className }: Props) => {
-  const { authState, handleLogout, authorize } = useAuthContext();
+  const { web3Provider } = useWeb3Context();
+  const { tokens, authState, handleLogout, authorize } = useAuthContext();
+  const signer = web3Provider?.getSigner();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [result] = useQuery<UserOpenClaimsRes>({
+  const [result, refetch] = useQuery<UserOpenClaimsRes>({
     query: OpenClaimsQuery,
     variables: {
       githubId: authState.user?.githubId,
@@ -64,7 +68,7 @@ export const GitHub = ({ className }: Props) => {
 
   const userClaims = result.data?.userClaims;
 
-  const getGitHubButton = useCallback(() => {
+  const renderGitHubButton = useCallback(() => {
     /* Not connected to GitHub */
     if (!authState.isLoggedIntoGitHub) {
       return (
@@ -98,13 +102,52 @@ export const GitHub = ({ className }: Props) => {
     );
   }, [authState.isLoggedIntoGitHub, userClaims, authState.user, handleLogout, authorize]);
 
+  const claimGitPOAP = useCallback(
+    async (claimIds: number[]) => {
+      const address = await signer?.getAddress();
+      const signature = await signer?.signMessage(JSON.stringify(claimIds));
+
+      try {
+        const res = await fetch(`${GITPOAP_API_URL}/claims`, {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${tokens?.accessToken}`,
+          },
+          body: JSON.stringify({
+            claimIds,
+            address,
+            signature,
+          }),
+        });
+
+        if (res.status === 200) {
+          refetch();
+        }
+      } catch (err) {
+        console.warn(err);
+      }
+    },
+    [signer, tokens?.accessToken, refetch],
+  );
+
   return (
     <Content className={className}>
-      {getGitHubButton()}
+      {renderGitHubButton()}
+
+      <ConnectedButton
+        onClick={handleLogout}
+        variant="outline"
+        leftIcon={<GoMarkGithub size={16} />}
+      >
+        {authState.user?.githubHandle}
+      </ConnectedButton>
       <ClaimModal
         claims={userClaims ?? []}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        onClickClaim={claimGitPOAP}
       />
     </Content>
   );

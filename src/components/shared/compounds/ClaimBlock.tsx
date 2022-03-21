@@ -9,6 +9,7 @@ type Props = {
   name: string;
   orgName: string;
   description: string;
+  onClickClaim: () => void;
 };
 
 const Wrapper = styled.div`
@@ -27,12 +28,12 @@ const ButtonWrapper = styled.div`
   justify-content: flex-end;
 `;
 
-export const ClaimBlock = ({ imgSrc, name, orgName, description }: Props) => {
+export const ClaimBlock = ({ imgSrc, name, orgName, description, onClickClaim }: Props) => {
   return (
     <Wrapper>
       <GitPOAP imgSrc={imgSrc} name={name} orgName={orgName} description={description} />
       <ButtonWrapper>
-        <Button onClick={() => console.warn('clicking claim')}>{'Claim'}</Button>
+        <Button onClick={onClickClaim}>{'Claim'}</Button>
       </ButtonWrapper>
     </Wrapper>
   );
