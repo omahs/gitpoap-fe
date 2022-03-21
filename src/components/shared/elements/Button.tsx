@@ -11,15 +11,10 @@ import {
   ExtraPressed,
 } from '../../../colors';
 
-type Props = {
-  children: React.ReactNode;
+type Props = SharedButtonProps & {
   className?: string;
   onClick?: React.MouseEventHandler;
   disabled?: boolean;
-  leftIcon?: SharedButtonProps['leftIcon'];
-  rightIcon?: SharedButtonProps['rightIcon'];
-  size?: SharedButtonProps['size'];
-  loading?: SharedButtonProps['loading'];
   variant?: 'filled' | 'outline';
 };
 
@@ -37,7 +32,7 @@ const StyledButton = styled(ButtonUI)<ButtonProps<'button'>>`
   transition: 150ms background ease, 150ms color ease, 150ms border ease;
   border-radius: ${rem(6)};
   padding: ${rem(8)} ${rem(14)};
-  height: auto;
+  height: fit-content;
 
   &.mantine-Button-filled {
     background-color: ${PrimaryBlue};
@@ -82,29 +77,6 @@ const StyledButton = styled(ButtonUI)<ButtonProps<'button'>>`
   }
 `;
 
-export const Button = ({
-  children,
-  className,
-  onClick,
-  disabled,
-  leftIcon,
-  rightIcon,
-  variant,
-  size,
-  loading,
-}: Props) => {
-  return (
-    <StyledButton
-      className={className}
-      size={size}
-      disabled={disabled}
-      onClick={onClick}
-      leftIcon={leftIcon}
-      rightIcon={rightIcon}
-      variant={variant}
-      loading={loading}
-    >
-      {children}
-    </StyledButton>
-  );
+export const Button = (props: Props) => {
+  return <StyledButton {...props}>{props.children}</StyledButton>;
 };
