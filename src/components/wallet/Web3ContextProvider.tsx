@@ -31,6 +31,7 @@ type onChainProvider = {
   disconnect: () => void;
   hasCachedProvider: () => boolean;
   address: string;
+  ensName: string | null;
   isConnected: boolean;
   web3Provider: JsonRpcProvider | null; // does this have to be | null? can we avoid?
   web3Modal: Web3Modal;
@@ -66,6 +67,7 @@ export const Web3ContextProvider = (props: Props) => {
   const [address, setAddress] = useState('');
   const [web3Provider, setWeb3Provider] = useState<JsonRpcProvider | null>(null);
   const [chainId, setChainId] = useState(NETWORKS[1].chainId);
+  const [ensName, setEnsName] = useState<string | null>(null);
 
   const disconnect = useCallback(async () => {
     web3Modal.clearCachedProvider();
@@ -126,6 +128,22 @@ export const Web3ContextProvider = (props: Props) => {
     }
   }, [hasCachedProvider, isConnected, connect]);
 
+  const fetchENSName = useCallback(
+    async (address: string) => {
+      const resolvedEnsName = await web3Provider?.lookupAddress(address);
+      if (resolvedEnsName) {
+        setEnsName(resolvedEnsName);
+      }
+    },
+    [web3Provider],
+  );
+
+  useEffect(() => {
+    if (address && !ensName) {
+      fetchENSName(address);
+    }
+  }, [fetchENSName, address, ensName]);
+
   const onChainProvider = useMemo(
     () => ({
       connect,
@@ -133,6 +151,7 @@ export const Web3ContextProvider = (props: Props) => {
       hasCachedProvider,
       isConnected,
       address,
+      ensName,
       web3Provider,
       web3Modal,
       chainId,
@@ -143,6 +162,7 @@ export const Web3ContextProvider = (props: Props) => {
       hasCachedProvider,
       isConnected,
       address,
+      ensName,
       web3Provider,
       web3Modal,
       chainId,
