@@ -9,6 +9,7 @@ import { GitPOAPLogo } from './shared/elements/icons/GitPOAPLogoWhite';
 import { Wallet } from './wallet/Wallet';
 import { GitHub } from './github/GitHub';
 import { SearchBox as SearchBoxUI } from './search/SearchBox';
+import { useWeb3Context } from './wallet/Web3ContextProvider';
 
 const Nav = styled(Group)`
   color: ${TextLight} !important;
@@ -77,15 +78,22 @@ const SearchBox = styled(SearchBoxUI)`
   margin-right: ${rem(25)};
 `;
 
-const NavLink = (props: { href: string; children: React.ReactNode }) => {
+type NavLinkProps = {
+  href: string;
+  children: React.ReactNode;
+};
+
+const NavLink = ({ href, children }: NavLinkProps) => {
   return (
-    <Link href="/poaps" passHref>
-      <StyledLink>{props.children}</StyledLink>
+    <Link href={href} passHref>
+      <StyledLink>{children}</StyledLink>
     </Link>
   );
 };
 
 export const Navbar = () => {
+  const { isConnected, address, ensName } = useWeb3Context();
+
   const showPOAPsPage = false;
   const showProjectsPage = false;
   const showContributorsPage = false;
@@ -107,6 +115,7 @@ export const Navbar = () => {
             {showProjectsPage && <NavLink href="/projects">{'Projects'}</NavLink>}
             {showContributorsPage && <NavLink href="/contributors">{'Contributors'}</NavLink>}
             {showDocsLink && <NavLink href="/docs">{'Docs'}</NavLink>}
+            {isConnected && <NavLink href={`/p/${ensName ?? address}`}>{'Profile'}</NavLink>}
           </Links>
           <ClaimButton />
           <Wallet />
