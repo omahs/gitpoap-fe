@@ -146,11 +146,11 @@ export const ProfileProvider = ({ children, address, ensName }: Props) => {
       }}
     >
       {children}
-      {profileData && (
+      {result.data && (
         <EditProfileModal
-          bio={profileData.bio}
-          personalSiteUrl={profileData.personalSiteUrl}
-          twitterHandle={profileData.twitterHandle}
+          bio={profileData?.bio}
+          personalSiteUrl={profileData?.personalSiteUrl}
+          twitterHandle={profileData?.twitterHandle}
           isOpen={isUpdateModalOpen}
           onClose={() => setIsUpdateModalOpen(false)}
           onClickSave={updateProfile}

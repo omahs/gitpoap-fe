@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { rem } from 'polished';
 import { Modal, Center } from '@mantine/core';
@@ -15,7 +15,7 @@ import { isValidTwitterHandle, isValidURL } from '../../helpers';
 type Props = {
   isOpen: boolean;
   onClose: () => void;
-  bio: string;
+  bio?: string;
   twitterHandle?: string;
   personalSiteUrl?: string;
   onClickSave: (
@@ -108,6 +108,12 @@ export const EditProfileModal = ({
     personSiteUrlValue !== personalSiteUrl ||
     bioValue !== bio ||
     twitterHandleValue !== twitterHandle;
+
+  useEffect(() => {
+    setPersonalSiteUrlValue(personalSiteUrl);
+    setBioValue(bio);
+    setTwitterHandleValue(twitterHandle);
+  }, [personalSiteUrl, bio, twitterHandle]);
 
   return (
     <StyledModal
