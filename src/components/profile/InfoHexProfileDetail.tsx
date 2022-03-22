@@ -188,7 +188,11 @@ export const InfoHexProfileDetail = ({
           )}
         </Social>
         {showEditProfileButton && (
-          <Button style={{ marginTop: rem(20) }} onClick={onClickEditProfile} variant="outline">
+          <Button
+            style={{ marginTop: rem(20), marginBottom: rem(20) }}
+            onClick={onClickEditProfile}
+            variant="outline"
+          >
             {'Edit Profile'}
           </Button>
         )}
