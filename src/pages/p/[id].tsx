@@ -63,24 +63,24 @@ const Profile: Page = () => {
       </Head>
       <ProfileProvider address={profileAddress}>
         <FeaturedPOAPsProvider address={profileAddress}>
-          <div style={{ color: 'white' }}>{'The Banner goes here'}</div>
-          <Grid style={{ color: 'white' }} justify="center">
-            <Grid justify="center">
-              <Grid.Col span={10}>
-                <ProfileSidebar address={profileAddress} ensName={ensName} />
-              </Grid.Col>
-            </Grid>
-            <Grid justify="center">
-              <Grid.Col span={10}>
-                <FeaturedPOAPs />
-              </Grid.Col>
-              <Grid.Col span={10}>
-                <GitPOAPs address={nameOrAddress} />
-              </Grid.Col>
-              <Grid.Col span={10} style={{ marginBottom: rem(150) }}>
-                <AllPOAPs address={nameOrAddress} />
-              </Grid.Col>
-            </Grid>
+          <Grid justify="center" style={{ marginTop: rem(40) }}>
+            <Grid.Col span={2}>
+              <ProfileSidebar address={profileAddress} ensName={ensName} />
+            </Grid.Col>
+
+            <Grid.Col span={8}>
+              <Grid justify="center">
+                <Grid.Col span={10} style={{ marginTop: rem(100) }}>
+                  <FeaturedPOAPs />
+                </Grid.Col>
+                <Grid.Col span={10}>
+                  <GitPOAPs address={nameOrAddress} />
+                </Grid.Col>
+                <Grid.Col span={10} style={{ marginBottom: rem(150) }}>
+                  <AllPOAPs address={nameOrAddress} />
+                </Grid.Col>
+              </Grid>
+            </Grid.Col>
           </Grid>
         </FeaturedPOAPsProvider>
       </ProfileProvider>
