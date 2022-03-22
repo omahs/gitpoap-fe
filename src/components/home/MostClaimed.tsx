@@ -6,6 +6,7 @@ import { Header } from '../shared/elements/Header';
 import { GitPOAP as GitPOAPUI } from '../shared/compounds/GitPOAP';
 import { Button } from '../shared/elements/Button';
 import { FaArrowRight } from 'react-icons/fa';
+import { useFeatures } from '../FeaturesContext';
 
 const Container = styled.div`
   display: inline-flex;
@@ -61,6 +62,7 @@ const MostClaimedQuery = gql`
 `;
 
 export const MostClaimed = () => {
+  const { hasGitPOAPsPage } = useFeatures();
   const [result] = useQuery<{
     mostClaimedGitPOAPs: MostClaimedItem[];
   } | null>({
@@ -87,9 +89,11 @@ export const MostClaimed = () => {
           );
         })}
       </Poaps>
-      <Button variant="outline" rightIcon={<FaArrowRight />}>
-        {'ALL GitPOAPS'}
-      </Button>
+      {hasGitPOAPsPage && (
+        <Button variant="outline" rightIcon={<FaArrowRight />}>
+          {'ALL GitPOAPS'}
+        </Button>
+      )}
     </Container>
   );
 };

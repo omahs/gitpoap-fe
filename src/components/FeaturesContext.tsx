@@ -2,23 +2,19 @@ import React, { createContext, useState, useContext } from 'react';
 
 type FeaturesState = {
   hasHomePageRecentProjects: boolean;
-  /* Placeholders */
-  hasPOAPsPage: boolean;
-  hasProfilePage: boolean;
+  hasTwitterIntegration: boolean;
+  /* Whether user should see a page showing all gitpoaps */
+  hasGitPOAPsPage: boolean;
   hasProjectsPage: boolean;
   hasDocs: boolean;
-  hasClaimsPage: boolean;
-  hasTwitterIntegration: boolean;
 };
 
 export const getInitialState = (): FeaturesState => ({
   hasHomePageRecentProjects: false,
-  hasPOAPsPage: true,
-  hasProfilePage: true,
+  hasTwitterIntegration: false,
+  hasGitPOAPsPage: true,
   hasProjectsPage: true,
   hasDocs: true,
-  hasClaimsPage: true,
-  hasTwitterIntegration: false,
 });
 
 const FeaturesContext = createContext<FeaturesState>({} as FeaturesState);
