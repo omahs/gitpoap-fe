@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { WalletStatus } from './WalletStatus';
 import { useWeb3Context } from './Web3ContextProvider';
 import { Button } from '../shared/elements/Button';
+import { Tooltip } from '../shared/elements/Tooltip';
 
 export const Wallet = () => {
   const [resolvedName, setResolvedName] = useState<string>('');
@@ -38,13 +39,15 @@ export const Wallet = () => {
     <>
       {!isWalletConnected && <Button onClick={() => connect()}>{'Connect Wallet'}</Button>}
       {isWalletConnected && (
-        <WalletStatus
-          onClick={() => {
-            disconnect();
-          }}
-          address={address}
-          name={resolvedName}
-        />
+        <Tooltip label={'Disconnect wallet'} withArrow>
+          <WalletStatus
+            onClick={() => {
+              disconnect();
+            }}
+            address={address}
+            name={resolvedName}
+          />
+        </Tooltip>
       )}
     </>
   );
