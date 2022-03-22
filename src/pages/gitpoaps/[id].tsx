@@ -10,8 +10,6 @@ const GitPOAP: Page = () => {
     <>
       <Head>
         <title>{'GitPOAP | GitPOAP'}</title>
-        <meta name="description" content="GitPOAP Frontend App" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <Grid justify="center">
         <Grid.Col span={8}>{'The GitPOAP'}</Grid.Col>

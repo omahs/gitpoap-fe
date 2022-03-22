@@ -49,9 +49,8 @@ const Home: Page = () => {
   return (
     <>
       <Head>
-        <title>{'App | GitPOAP'}</title>
+        <title>{'Home | GitPOAP'}</title>
         <meta name="description" content="GitPOAP Frontend App" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <Grid justify="center" style={{ zIndex: 0, position: 'relative' }}>
         <Background />

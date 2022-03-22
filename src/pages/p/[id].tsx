@@ -58,8 +58,6 @@ const Profile: Page = () => {
     <>
       <Head>
         <title>{`${ensName ?? truncateAddress(profileAddress, 4)} | GitPOAP`}</title>
-        <meta name="description" content="GitPOAP Frontend App" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <ProfileProvider address={profileAddress}>
         <FeaturedPOAPsProvider address={profileAddress}>
