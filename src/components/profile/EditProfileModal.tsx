@@ -10,15 +10,17 @@ import { Text } from '../shared/elements/Text';
 import { MidnightBlue } from '../../colors';
 import { useAuthContext } from '../github/AuthContext';
 import { ProfileData } from './ProfileContext';
-import { isValidURL } from '../../helpers';
+import { isValidTwitterHandle, isValidURL } from '../../helpers';
 
 type Props = {
   isOpen: boolean;
   onClose: () => void;
-  hasTwitterIntegration: boolean;
   bio: string;
+  twitterHandle?: string;
   personalSiteUrl?: string;
-  onClickSave: (newProfileData: Partial<Pick<ProfileData, 'bio' | 'personalSiteUrl'>>) => void;
+  onClickSave: (
+    newProfileData: Partial<Pick<ProfileData, 'bio' | 'personalSiteUrl' | 'twitterHandle'>>,
+  ) => void;
   isSaveLoading: boolean;
 };
 
@@ -60,14 +62,16 @@ const Setting = styled.div`
   justify-content: space-between;
 `;
 
-const ConnectTwitter = styled.div``;
-
-const ConnectGitHub = styled.div``;
-
-const PersonalWebsite = styled.div`
+const SettingSection = styled.div`
   display: flex;
   margin-bottom: ${rem(30)};
 `;
+
+const TwitterHandle = styled(SettingSection)``;
+
+const ConnectGitHub = styled.div``;
+
+const PersonalWebsite = styled(SettingSection)``;
 
 const ProfileBio = styled.div`
   display: flex;
@@ -88,7 +92,7 @@ export const SettingsText = styled(Text)`
 export const EditProfileModal = ({
   isOpen,
   onClose,
-  hasTwitterIntegration,
+  twitterHandle,
   bio,
   personalSiteUrl,
   onClickSave,
@@ -98,7 +102,12 @@ export const EditProfileModal = ({
   const [personSiteUrlValue, setPersonalSiteUrlValue] =
     useState<string | undefined>(personalSiteUrl);
   const [bioValue, setBioValue] = useState<string | undefined>(bio);
-  const canSave = personSiteUrlValue !== personalSiteUrl || bioValue !== bio;
+  const [twitterHandleValue, setTwitterHandleValue] = useState<string | undefined>(twitterHandle);
+  /* TODO: replace with mantine's useForm hook */
+  const canSave =
+    personSiteUrlValue !== personalSiteUrl ||
+    bioValue !== bio ||
+    twitterHandleValue !== twitterHandle;
 
   return (
     <StyledModal
@@ -111,19 +120,6 @@ export const EditProfileModal = ({
       <Content>
         <Header style={{ marginBottom: rem(30) }}>{'Edit profile'}</Header>
         <ProfileFields>
-          {hasTwitterIntegration && (
-            <ConnectTwitter>
-              <FieldLabel>{'Twitter'}</FieldLabel>
-              <Setting>
-                <SettingsText>
-                  {'Connect your Twitter account to display it on your profile'}
-                </SettingsText>
-                <Button onClick={authorizeGitHub} variant="outline">
-                  {'Connect'}
-                </Button>
-              </Setting>
-            </ConnectTwitter>
-          )}
           <ConnectGitHub>
             <FieldLabel>{'GitHub'}</FieldLabel>
             {authState.isLoggedIntoGitHub ? (
@@ -142,6 +138,17 @@ export const EditProfileModal = ({
               </Setting>
             )}
           </ConnectGitHub>
+
+          <TwitterHandle>
+            <Input
+              placeholder="gitpoap"
+              label={'Twitter Handle'}
+              value={twitterHandleValue ?? ''}
+              onChange={(e) => setTwitterHandleValue(e.target.value)}
+              error={twitterHandleValue && !isValidTwitterHandle(twitterHandleValue)}
+            />
+          </TwitterHandle>
+
           <PersonalWebsite>
             <Input
               placeholder="https://gitpoap.io"
@@ -165,7 +172,13 @@ export const EditProfileModal = ({
         </ProfileFields>
 
         <Button
-          onClick={() => onClickSave({ bio: bioValue, personalSiteUrl: personSiteUrlValue })}
+          onClick={() =>
+            onClickSave({
+              twitterHandle: twitterHandleValue,
+              bio: bioValue,
+              personalSiteUrl: personSiteUrlValue,
+            })
+          }
           disabled={!canSave}
           loading={isSaveLoading}
           style={{ minWidth: rem(100) }}

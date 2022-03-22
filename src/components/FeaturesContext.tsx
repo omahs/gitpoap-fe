@@ -2,7 +2,6 @@ import React, { createContext, useState, useContext } from 'react';
 
 type FeaturesState = {
   hasHomePageRecentProjects: boolean;
-  hasTwitterIntegration: boolean;
   /* Whether user should see a page showing all gitpoaps */
   hasGitPOAPsPage: boolean;
   hasProjectsPage: boolean;
@@ -11,7 +10,6 @@ type FeaturesState = {
 
 export const getInitialState = (): FeaturesState => ({
   hasHomePageRecentProjects: false,
-  hasTwitterIntegration: false,
   hasGitPOAPsPage: true,
   hasProjectsPage: true,
   hasDocs: true,

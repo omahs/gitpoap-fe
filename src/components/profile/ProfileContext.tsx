@@ -11,7 +11,6 @@ import { useQuery, gql } from 'urql';
 import { useWeb3Context } from '../../components/wallet/Web3ContextProvider';
 import { AvatarResolver } from '@ensdomains/ens-avatar';
 import { EditProfileModal } from '../../components/profile/EditProfileModal';
-import { useFeatures } from '../../components/FeaturesContext';
 import { GITPOAP_API_URL } from '../../constants';
 import { useAuthContext } from '../github/AuthContext';
 
@@ -45,7 +44,6 @@ type ProfileContext = {
   setIsUpdateModalOpen: Dispatch<SetStateAction<boolean>>;
   avatarURI?: string;
   showEditProfileButton: boolean;
-  updateProfile: (newProfileData: Partial<Pick<ProfileData, 'bio' | 'personalSiteUrl'>>) => void;
 };
 
 const ProfileContext = createContext<ProfileContext>({} as ProfileContext);
@@ -68,7 +66,6 @@ export const ProfileProvider = ({ children, address, ensName }: Props) => {
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState<boolean>(false);
   const [isSaveLoading, setIsSaveLoading] = useState<boolean>(false);
   const [avatarURI, setAvatarURI] = useState<string>();
-  const { hasTwitterIntegration } = useFeatures();
   const [result, refetch] = useQuery<UserPOAPsQueryRes>({
     query: ProfileQuery,
     variables: {
@@ -100,11 +97,14 @@ export const ProfileProvider = ({ children, address, ensName }: Props) => {
   }, [ensName, web3Provider]);
 
   const updateProfile = useCallback(
-    async (newProfileData: Partial<Pick<ProfileData, 'bio' | 'personalSiteUrl'>>) => {
+    async (
+      newProfileData: Partial<Pick<ProfileData, 'bio' | 'personalSiteUrl' | 'twitterHandle'>>,
+    ) => {
       setIsSaveLoading(true);
       const data = {
         bio: newProfileData.bio,
         personalSiteUrl: newProfileData.personalSiteUrl,
+        twitterHandle: newProfileData.twitterHandle,
       };
       const signature = await signer?.signMessage(JSON.stringify(data));
 
@@ -143,7 +143,6 @@ export const ProfileProvider = ({ children, address, ensName }: Props) => {
         avatarURI,
         showEditProfileButton,
         setIsUpdateModalOpen,
-        updateProfile,
       }}
     >
       {children}
@@ -151,9 +150,9 @@ export const ProfileProvider = ({ children, address, ensName }: Props) => {
         <EditProfileModal
           bio={profileData.bio}
           personalSiteUrl={profileData.personalSiteUrl}
+          twitterHandle={profileData.twitterHandle}
           isOpen={isUpdateModalOpen}
           onClose={() => setIsUpdateModalOpen(false)}
-          hasTwitterIntegration={hasTwitterIntegration}
           onClickSave={updateProfile}
           isSaveLoading={isSaveLoading}
         />

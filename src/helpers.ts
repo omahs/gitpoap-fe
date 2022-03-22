@@ -20,3 +20,6 @@ export const isValidURL = (str: string): boolean => {
 
   return !!pattern.test(str);
 };
+
+export const isValidTwitterHandle = (handle: string): boolean =>
+  /^[a-zA-Z0-9_]{1,15}$/.test(handle);
