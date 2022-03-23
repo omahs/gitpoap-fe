@@ -10,11 +10,14 @@ export default {
 
 const Template: ComponentStory<typeof AllPOAPs> = (args) => {
   return (
-    <FeaturedPOAPsProvider address={'0x1212423'}>
+    <FeaturedPOAPsProvider
+      ensName={'peebeejay.eth'}
+      address={'0xaE32D159BB3ABFcAdFaBE7aBB461C2AB4805596D'}
+    >
       <AllPOAPs {...args} />
     </FeaturedPOAPsProvider>
   );
 };
 
 export const Default = Template.bind({});
-Default.args = { address: 'peebeejay.eth' };
+Default.args = { address: '0xaE32D159BB3ABFcAdFaBE7aBB461C2AB4805596D' };
