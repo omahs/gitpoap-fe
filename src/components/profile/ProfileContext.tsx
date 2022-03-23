@@ -44,7 +44,7 @@ type ProfileContext = {
   profileData?: UserPOAPsQueryRes['profileData'];
   setProfileData: Dispatch<SetStateAction<UserPOAPsQueryRes['profileData'] | undefined>>;
   setIsUpdateModalOpen: Dispatch<SetStateAction<boolean>>;
-  avatarURI?: string;
+  avatarURI: string | null;
   showEditProfileButton: boolean;
 };
 
@@ -67,7 +67,7 @@ export const ProfileProvider = ({ children, address, ensName }: Props) => {
   const [profileData, setProfileData] = useState<UserPOAPsQueryRes['profileData']>();
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState<boolean>(false);
   const [isSaveLoading, setIsSaveLoading] = useState<boolean>(false);
-  const [avatarURI, setAvatarURI] = useState<string>();
+  const [avatarURI, setAvatarURI] = useState<string | null>(null);
   const [result, refetch] = useQuery<UserPOAPsQueryRes>({
     query: ProfileQuery,
     variables: {
@@ -83,6 +83,7 @@ export const ProfileProvider = ({ children, address, ensName }: Props) => {
     setProfileData(result.data?.profileData);
   }, [result.data]);
 
+  /* Hook to fetch the avatar URI record based on a ENS name */
   useEffect(() => {
     const getAvatar = async () => {
       if (web3Provider && ensName) {
@@ -95,8 +96,15 @@ export const ProfileProvider = ({ children, address, ensName }: Props) => {
       }
     };
 
-    getAvatar();
-  }, [ensName, web3Provider]);
+    if (!avatarURI) {
+      getAvatar();
+    }
+  }, [ensName, web3Provider, avatarURI]);
+
+  /* Hook to reset the avatarURI when the address changes */
+  useEffect(() => {
+    setAvatarURI(null);
+  }, [address]);
 
   const updateProfile = useCallback(
     async (

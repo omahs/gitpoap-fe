@@ -24,7 +24,7 @@ import { Button } from '../shared/elements/Button';
 import { Share } from '../shared/elements/Share';
 
 type Props = {
-  imgSrc?: string;
+  imgSrc: string | null;
   name: string;
   address: string;
   ensName?: string | null;
