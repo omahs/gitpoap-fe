@@ -103,12 +103,21 @@ export const ProfileProvider = ({ children, address, ensName }: Props) => {
       newProfileData: Partial<Pick<ProfileData, 'bio' | 'personalSiteUrl' | 'twitterHandle'>>,
     ) => {
       setIsSaveLoading(true);
+      const timestamp = Date.now();
       const data = {
         bio: newProfileData.bio,
         personalSiteUrl: newProfileData.personalSiteUrl,
         twitterHandle: newProfileData.twitterHandle,
       };
-      const signature = await signer?.signMessage(JSON.stringify(data));
+
+      const signature = await signer?.signMessage(
+        JSON.stringify({
+          site: 'gitpoap.io',
+          method: 'POST /profiles',
+          createdAt: timestamp,
+          data,
+        }),
+      );
 
       try {
         const res = await fetch(`${GITPOAP_API_URL}/profiles`, {
@@ -121,7 +130,10 @@ export const ProfileProvider = ({ children, address, ensName }: Props) => {
           body: JSON.stringify({
             address: connectedWalletAddress,
             data,
-            signature,
+            signature: {
+              data: signature,
+              createdAt: timestamp,
+            },
           }),
         });
 
