@@ -147,13 +147,16 @@ export const FeaturedPOAPsProvider = ({ children, address, ensName }: Props) => 
 
   const addFeaturedPOAP = useCallback(
     async (poapTokenId: string) => {
+      const timestamp = Date.now();
+      const address = await signer?.getAddress();
       const signature = await signer?.signMessage(
         JSON.stringify({
-          action: 'add',
+          site: 'gitpoap.io',
+          method: 'PUT /featured',
+          createdAt: timestamp,
           poapTokenId,
         }),
       );
-      const address = await signer?.getAddress();
 
       try {
         await fetch(`${GITPOAP_API_URL}/featured`, {
@@ -165,7 +168,10 @@ export const FeaturedPOAPsProvider = ({ children, address, ensName }: Props) => 
           body: JSON.stringify({
             address,
             poapTokenId,
-            signature,
+            signature: {
+              data: signature,
+              createdAt: timestamp,
+            },
           }),
         });
         refetch({ requestPolicy: 'network-only' });
@@ -178,13 +184,16 @@ export const FeaturedPOAPsProvider = ({ children, address, ensName }: Props) => 
 
   const removeFeaturedPOAP = useCallback(
     async (poapTokenId: string) => {
+      const timestamp = Date.now();
+      const address = await signer?.getAddress();
       const signature = await signer?.signMessage(
         JSON.stringify({
-          action: 'remove',
+          site: 'gitpoap.io',
+          method: 'DELETE /featured/:id',
+          createdAt: timestamp,
           poapTokenId,
         }),
       );
-      const address = await signer?.getAddress();
 
       try {
         await fetch(`${GITPOAP_API_URL}/featured/${poapTokenId}`, {
@@ -195,7 +204,10 @@ export const FeaturedPOAPsProvider = ({ children, address, ensName }: Props) => 
           },
           body: JSON.stringify({
             address,
-            signature,
+            signature: {
+              data: signature,
+              createdAt: timestamp,
+            },
           }),
         });
         refetch({ requestPolicy: 'network-only' });
