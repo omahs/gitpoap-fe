@@ -86,13 +86,17 @@ export const ProfileProvider = ({ children, address, ensName }: Props) => {
   /* Hook to fetch the avatar URI record based on a ENS name */
   useEffect(() => {
     const getAvatar = async () => {
-      if (web3Provider && ensName) {
-        const avt = new AvatarResolver(web3Provider);
-        const resolvedAvatarURI = await avt.getAvatar(ensName, {});
+      try {
+        if (web3Provider && ensName) {
+          const avt = new AvatarResolver(web3Provider);
+          const resolvedAvatarURI = await avt.getAvatar(ensName, {});
 
-        if (resolvedAvatarURI) {
-          setAvatarURI(resolvedAvatarURI);
+          if (resolvedAvatarURI) {
+            setAvatarURI(resolvedAvatarURI);
+          }
         }
+      } catch (err) {
+        console.error(err);
       }
     };
 
