@@ -21,11 +21,13 @@ import { ProjectHex } from '../shared/compounds/ProjectHex';
 import { FiGlobe } from 'react-icons/fi';
 import { IconStyles } from '../shared/elements/icons/BaseIcon';
 import { Button } from '../shared/elements/Button';
+import { Share } from '../shared/elements/Share';
 
 type Props = {
   imgSrc?: string;
   name: string;
   address: string;
+  ensName?: string | null;
   bio?: string;
   twitterHref?: string;
   githubHref?: string;
@@ -154,6 +156,7 @@ export const InfoHexProfileDetail = ({
   imgSrc,
   name,
   address,
+  ensName,
   bio,
   twitterHref,
   githubHref,
@@ -213,6 +216,7 @@ export const InfoHexProfileDetail = ({
             })}
           </>
         )}
+        <Share textToCopy={`https://gitpoap.io/p/${ensName ?? address}`} />
       </Content>
     </StyledInfoHex>
   );

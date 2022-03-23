@@ -32,7 +32,13 @@ export const Share = ({ className, textToCopy }: Props) => {
 
   return (
     <Container className={className} onClick={() => clipboard.copy(textToCopy)}>
-      <Tooltip opened={clipboard.copied} label="Copied!" withArrow position="right" placement="end">
+      <Tooltip
+        opened={clipboard.copied}
+        label="Copied!"
+        withArrow
+        position="right"
+        placement="center"
+      >
         <ShareText>
           {'Share'}
           <Icon />
