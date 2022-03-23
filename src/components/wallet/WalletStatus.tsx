@@ -7,7 +7,7 @@ import { shortenAddress } from '../../helpers';
 type Props = {
   address: string;
   onClick: React.MouseEventHandler<HTMLDivElement>;
-  name: string;
+  ensName: string | null;
 };
 
 const Container = styled(Button)`
@@ -25,11 +25,11 @@ const JazzIcon = styled(JazzIconReact)`
 `;
 
 export const WalletStatus = (props: Props) => {
-  const { address, onClick, name } = props;
+  const { address, onClick, ensName } = props;
 
   return (
     <Container leftIcon={<JazzIcon address={address} />} onClick={onClick} variant="outline">
-      {name ? name : shortenAddress(address)}
+      {ensName ? ensName : shortenAddress(address)}
     </Container>
   );
 };

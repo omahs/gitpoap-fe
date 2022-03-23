@@ -75,27 +75,52 @@ export const Web3ContextProvider = (props: Props) => {
     setIsConnected(false);
     setAddress('');
     setWeb3Provider(null);
-
-    window.location.reload(); // Necessary?
+    setEnsName(null);
   }, [web3Modal]);
+
+  const initialize = useCallback(async (provider: any): Promise<Web3Provider> => {
+    const web3Provider = new Web3Provider(provider, 'any');
+    const connectedAddress = await web3Provider?.getSigner().getAddress();
+
+    const ensName = await web3Provider?.lookupAddress(connectedAddress);
+    if (ensName) {
+      setEnsName(ensName);
+    } else {
+      setEnsName(null);
+    }
+
+    setAddress(connectedAddress);
+    setWeb3Provider(web3Provider);
+    setIsConnected(true);
+
+    return web3Provider;
+  }, []);
 
   const addListeners = useCallback(
     async (provider: JsonRpcProvider) => {
-      provider.on('accountsChanged', () => {
-        window.location.reload(); // Necessary?
+      provider.on('accountsChanged', async () => {
+        const provider = await web3Modal.connect();
+        initialize(provider);
       });
 
       provider.on('chainChanged', (chainId) => {
         setChainId(chainId);
-        window.location.reload(); // Necessary?
       });
 
       provider.on('disconnect', () => {
         disconnect();
       });
     },
-    [disconnect],
+    [disconnect, initialize, web3Modal],
   );
+
+  const connect = useCallback(async () => {
+    const provider = await web3Modal.connect();
+    const web3Provider = initialize(provider);
+    addListeners(provider);
+
+    return web3Provider;
+  }, [web3Modal, addListeners, initialize]);
 
   const hasCachedProvider = useCallback(() => {
     if (!web3Modal?.cachedProvider) {
@@ -105,20 +130,6 @@ export const Web3ContextProvider = (props: Props) => {
     return true;
   }, [web3Modal]);
 
-  const connect = useCallback(async () => {
-    const provider = await web3Modal.connect();
-    addListeners(provider);
-
-    const web3Provider = new Web3Provider(provider, 'any');
-    const connectedAddress = await web3Provider.getSigner().getAddress();
-
-    setAddress(connectedAddress);
-    setWeb3Provider(web3Provider);
-    setIsConnected(true);
-
-    return web3Provider;
-  }, [web3Modal, addListeners]);
-
   /* Hook to check whether a cached provider exists. If it does, connect to provider */
   useEffect(() => {
     const isCached = hasCachedProvider();
@@ -127,22 +138,6 @@ export const Web3ContextProvider = (props: Props) => {
       connect();
     }
   }, [hasCachedProvider, isConnected, connect]);
-
-  const fetchENSName = useCallback(
-    async (address: string) => {
-      const resolvedEnsName = await web3Provider?.lookupAddress(address);
-      if (resolvedEnsName) {
-        setEnsName(resolvedEnsName);
-      }
-    },
-    [web3Provider],
-  );
-
-  useEffect(() => {
-    if (address && !ensName) {
-      fetchENSName(address);
-    }
-  }, [fetchENSName, address, ensName]);
 
   const onChainProvider = useMemo(
     () => ({
