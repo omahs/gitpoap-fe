@@ -105,7 +105,15 @@ export const GitHub = ({ className }: Props) => {
   const claimGitPOAP = useCallback(
     async (claimIds: number[]) => {
       const address = await signer?.getAddress();
-      const signature = await signer?.signMessage(JSON.stringify(claimIds));
+      const timestamp = Date.now();
+      const signature = await signer?.signMessage(
+        JSON.stringify({
+          site: 'gitpoap.io',
+          method: 'POST /claims',
+          claimIds: claimIds,
+          createdAt: timestamp,
+        }),
+      );
 
       try {
         const res = await fetch(`${GITPOAP_API_URL}/claims`, {
@@ -118,7 +126,10 @@ export const GitHub = ({ className }: Props) => {
           body: JSON.stringify({
             claimIds,
             address,
-            signature,
+            signature: {
+              data: signature,
+              createdAt: timestamp,
+            },
           }),
         });
 
