@@ -78,6 +78,11 @@ export const GitPOAPs = ({ address }: Props) => {
     },
   });
 
+  /* If the address of the profile being looked at changes, clear the data we've saved */
+  useEffect(() => {
+    setGitPOAPItems([]);
+  }, [address]);
+
   /* Hook to append new data onto existing list of gitPOAPs */
   useEffect(() => {
     setGitPOAPItems((prev: GitPOAPGql[]) => {

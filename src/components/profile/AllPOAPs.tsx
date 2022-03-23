@@ -69,6 +69,11 @@ export const AllPOAPs = ({ address }: Props) => {
     },
   });
 
+  /* If the address of the profile being looked at changes, clear the data we've saved */
+  useEffect(() => {
+    setPoaps([]);
+  }, [address]);
+
   /* Hook to append new data onto existing list of poaps */
   useEffect(() => {
     setPoaps((prev: POAP[]) => {
