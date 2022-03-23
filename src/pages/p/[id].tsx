@@ -17,10 +17,9 @@ import { truncateAddress } from '../../helpers';
 
 const Profile: Page = () => {
   const router = useRouter();
-  const [profileAddress, setProfileAddress] = useState<string>('');
-  const [ensName, setEnsName] = useState<string>('');
+  const [profileAddress, setProfileAddress] = useState<string | null>(null);
+  const [ensName, setEnsName] = useState<string | null>(null);
   const { web3Provider } = useWeb3Context();
-
   const nameOrAddress = router.query.id as string;
 
   /* This hook is used to set the address and/or ENS name resolved from the URL */
@@ -39,9 +38,9 @@ const Profile: Page = () => {
         const profileAddress = await web3Provider?.resolveName(name);
 
         if (profileAddress) {
-          setEnsName(name);
           setProfileAddress(profileAddress);
         }
+        setEnsName(name);
       }
     };
 
@@ -50,17 +49,17 @@ const Profile: Page = () => {
     }
   }, [nameOrAddress, web3Provider, router]);
 
-  if (!(router.isReady && profileAddress)) {
+  if (!(router.isReady && (!!profileAddress || !!ensName))) {
     return null;
   }
 
   return (
     <>
       <Head>
-        <title>{`${ensName ?? truncateAddress(profileAddress, 4)} | GitPOAP`}</title>
+        <title>{`${ensName ?? truncateAddress(profileAddress ?? '', 4)} | GitPOAP`}</title>
       </Head>
-      <ProfileProvider address={profileAddress}>
-        <FeaturedPOAPsProvider address={profileAddress}>
+      <ProfileProvider address={profileAddress} ensName={ensName}>
+        <FeaturedPOAPsProvider address={profileAddress} ensName={ensName}>
           <Grid justify="center" style={{ marginTop: rem(40) }}>
             <Grid.Col span={2}>
               <ProfileSidebar address={profileAddress} ensName={ensName} />

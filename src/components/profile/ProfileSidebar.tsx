@@ -5,20 +5,27 @@ import { truncateAddress } from '../../helpers';
 import { useProfileContext } from './ProfileContext';
 
 type Props = {
-  address: string;
-  ensName?: string;
+  ensName: string | null;
+  address: string | null;
 };
 
-export const ProfileSidebar = ({ address, ensName }: Props) => {
+export const ProfileSidebar = ({ ensName }: Props) => {
   const { profileData, avatarURI, showEditProfileButton, setIsUpdateModalOpen } =
     useProfileContext();
+
+  const sidebarAddress = profileData?.address;
+
+  if (!sidebarAddress) {
+    return null;
+  }
 
   return (
     <Grid.Col span={12}>
       <InfoHexProfileDetail
         imgSrc={avatarURI}
-        name={ensName ? ensName : truncateAddress(address, 10)}
-        address={address}
+        name={ensName ?? truncateAddress(sidebarAddress, 10)}
+        ensName={ensName}
+        address={sidebarAddress}
         bio={profileData?.bio}
         twitterHref={
           profileData?.twitterHandle

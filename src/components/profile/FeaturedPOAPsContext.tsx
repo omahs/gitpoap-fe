@@ -95,10 +95,11 @@ export const useFeaturedPOAPsDispatch = () => useContext(FeaturedPOAPsDispatchCo
 /* -- The Provider -- */
 type Props = {
   children: React.ReactNode;
-  address: string;
+  address: string | null;
+  ensName: string | null;
 };
 
-export const FeaturedPOAPsProvider = ({ children, address }: Props) => {
+export const FeaturedPOAPsProvider = ({ children, address, ensName }: Props) => {
   const { web3Provider } = useWeb3Context();
   const signer = web3Provider?.getSigner();
   const { tokens } = useAuthContext();
@@ -109,7 +110,7 @@ export const FeaturedPOAPsProvider = ({ children, address }: Props) => {
   const [result, refetch] = useQuery<UserPOAPsQueryRes>({
     query: FeaturedPOAPsQuery,
     variables: {
-      address,
+      address: address ?? ensName,
     },
   });
 

@@ -22,20 +22,22 @@ const ProfileQuery = gql`
       name
       twitterHandle
       personalSiteUrl
+      address
     }
   }
 `;
 
 export type ProfileData = {
   id: string;
-  bio: string;
+  address: string | null;
+  bio?: string;
   name: string;
   twitterHandle?: string;
   personalSiteUrl?: string;
 };
 
 export type UserPOAPsQueryRes = {
-  profileData: ProfileData | null;
+  profileData: ProfileData;
 };
 
 type ProfileContext = {
@@ -54,8 +56,8 @@ export const useProfileContext = () => {
 
 type Props = {
   children: React.ReactNode;
-  address: string;
-  ensName?: string;
+  address: string | null;
+  ensName: string | null;
 };
 
 export const ProfileProvider = ({ children, address, ensName }: Props) => {
@@ -69,12 +71,12 @@ export const ProfileProvider = ({ children, address, ensName }: Props) => {
   const [result, refetch] = useQuery<UserPOAPsQueryRes>({
     query: ProfileQuery,
     variables: {
-      address,
+      address: address ?? ensName,
     },
   });
 
   const showEditProfileButton =
-    address.toLocaleLowerCase() === connectedWalletAddress?.toLocaleLowerCase();
+    address?.toLocaleLowerCase() === connectedWalletAddress?.toLocaleLowerCase();
 
   /* Hook to set profile data to state */
   useEffect(() => {

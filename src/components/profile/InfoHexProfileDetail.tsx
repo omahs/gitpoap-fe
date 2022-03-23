@@ -152,6 +152,10 @@ const FiGlobeStyled = styled(FiGlobe)`
   }
 `;
 
+const ShareStyled = styled(Share)`
+  margin-top: ${rem(20)};
+`;
+
 export const InfoHexProfileDetail = ({
   imgSrc,
   name,
@@ -191,11 +195,7 @@ export const InfoHexProfileDetail = ({
           )}
         </Social>
         {showEditProfileButton && (
-          <Button
-            style={{ marginTop: rem(20), marginBottom: rem(20) }}
-            onClick={onClickEditProfile}
-            variant="outline"
-          >
+          <Button style={{ marginTop: rem(20) }} onClick={onClickEditProfile} variant="outline">
             {'Edit Profile'}
           </Button>
         )}
@@ -216,7 +216,7 @@ export const InfoHexProfileDetail = ({
             })}
           </>
         )}
-        <Share textToCopy={`https://gitpoap.io/p/${ensName ?? address}`} />
+        <ShareStyled textToCopy={`https://gitpoap.io/p/${ensName ?? address}`} />
       </Content>
     </StyledInfoHex>
   );
