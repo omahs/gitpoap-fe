@@ -1,6 +1,13 @@
 
-## Getting Started
+## Running locally
 This is a [Next.js](https://nextjs.org/) project - view the [docs](https://nextjs.org/docs/getting-started) for more info.
+
+Example `.env`
+```
+NEXT_PUBLIC_REACT_APP_CLIENT_ID = 'xxxxxxxxxxxxxxxxxxxx';
+NEXT_PUBLIC_REACT_APP_REDIRECT_URI='http://localhost:3000';
+NEXT_PUBLIC_GITPOAP_API_URL = 'http://localhost:3001';
+```
 
 First, run the development server:
 
