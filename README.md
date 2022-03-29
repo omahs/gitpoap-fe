@@ -4,10 +4,12 @@ This is a [Next.js](https://nextjs.org/) project - view the [docs](https://nextj
 
 Example `.env`
 ```
-NEXT_PUBLIC_SENTRY_DSN='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
-NEXT_PUBLIC_REACT_APP_CLIENT_ID = 'xxxxxxxxxxxxxxxxxxxx';
-NEXT_PUBLIC_REACT_APP_REDIRECT_URI='http://localhost:3000';
-NEXT_PUBLIC_GITPOAP_API_URL = 'http://localhost:3001';
+NEXT_PUBLIC_SENTRY_DSN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+NEXT_PUBLIC_SENTRY_ENVIRONMENT='development'
+NEXT_PUBLIC_INFURA_ID=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+NEXT_PUBLIC_REACT_APP_CLIENT_ID=xxxxxxxxxxxxxxxxxxxx
+NEXT_PUBLIC_REACT_APP_REDIRECT_URI=http://localhost:3000
+NEXT_PUBLIC_GITPOAP_API_URL=http://localhost:3001
 ```
 
 First, run the development server:
