@@ -9,7 +9,6 @@ NEXT_PUBLIC_SENTRY_ENVIRONMENT='development'
 SENTRY_AUTH_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 NEXT_PUBLIC_INFURA_ID=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 NEXT_PUBLIC_REACT_APP_CLIENT_ID=xxxxxxxxxxxxxxxxxxxx
-NEXT_PUBLIC_REACT_APP_REDIRECT_URI=http://localhost:3000
 NEXT_PUBLIC_GITPOAP_API_URL=http://localhost:3001
 ```
 
