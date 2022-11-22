@@ -10,6 +10,7 @@ SENTRY_AUTH_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 NEXT_PUBLIC_INFURA_ID=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 NEXT_PUBLIC_REACT_APP_CLIENT_ID=xxxxxxxxxxxxxxxxxxxx
 NEXT_PUBLIC_GITPOAP_API_URL=http://localhost:3001
+NEXT_PUBLIC_DISCORD_CLIENT_ID=xxxxxxxxxxxxxxxxxxx
 ```
 
 First, run the development server:
