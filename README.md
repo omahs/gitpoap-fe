@@ -3,7 +3,7 @@
 This is a [Next.js](https://nextjs.org/) project - view the [docs](https://nextjs.org/docs/getting-started) for more info.
 
 Example `.env`
-```
+```bash
 NEXT_PUBLIC_SENTRY_DSN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 NEXT_PUBLIC_SENTRY_ENVIRONMENT='development'
 SENTRY_AUTH_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -11,6 +11,7 @@ NEXT_PUBLIC_INFURA_ID=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 NEXT_PUBLIC_REACT_APP_CLIENT_ID=xxxxxxxxxxxxxxxxxxxx
 NEXT_PUBLIC_GITPOAP_API_URL=http://localhost:3001
 NEXT_PUBLIC_DISCORD_CLIENT_ID=xxxxxxxxxxxxxxxxxxx
+NEXT_PUBLIC_AMPLITUDE_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
 First, run the development server:
