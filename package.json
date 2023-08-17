@@ -1,6 +1,6 @@
 {
   "name": "gitpoap-fe",
-  "private": true,
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "dev:prod-api": "NEXT_PUBLIC_GITPOAP_API_URL=https://api.gitpoap.io next dev",

@@ -72,3 +72,9 @@ All scripts can be located at [main package.json](https://github.com/gitpoap/git
 `yarn gql:generate-dev`: Generate graphql hooks and types based on a local version of `schema.graphql` found in `gitpoap-backend`
 
 `yarn gql:generate`: Generate graphql hooks and types based on the graphql schema found at `api.gitpoap.io/graphql`
+
+## Credits
+A strong token of gratitude goes out to all of the investors, contributors, and supporters who helped build GitPOAP.
+
+## License
+This project is licensed under the terms of [the MIT license](LICENSE).
